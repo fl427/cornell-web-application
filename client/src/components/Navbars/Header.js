@@ -84,6 +84,7 @@ class Header extends React.Component {
                   Diseases
                 </Link>
               </li>
+              
               <li id="navbar" className="navbar-collapse collapse">
   
                   <form ref='searchForm' className="searchbar" onSubmit={this.onSubmit}>

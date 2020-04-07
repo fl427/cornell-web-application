@@ -31,10 +31,13 @@ p {
 #sidebar {
     width: 280px;
     /* position: fixed; */
-    position: sticky;
+    /* position: sticky; */
+    position: relative;
+    min-height: 100%;
     top: 0;
     left: 0;
-    height: 100vh;
+    bottom: 0;
+    /* height: 100vh; */
     z-index: 999;
     background: #7386D5;
     color: #fff;

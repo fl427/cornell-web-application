@@ -30,25 +30,28 @@ const App = () => {
                 <Sidebar /> 
 
                 <div className="content">   
-                <Header />
-                
-                {/* Home Page's Component */}
-                <Switch>
-                    <Route path="/" exact component={Home} />
-                    <Route path="/diseases" exact component={DiseasesList} />
-                    <Route path="/about" exact component={About} />
-                    <Route path="/contact" exact component={Contact} />
-                    <Route path="/search" exact component={Search} /> 
-                </Switch> 
-                
-                {/* Diseases Page's Component */}
-                <Switch>
-                    <Route path="/diseases/edit/:id" exact component={EditDisease} />
-                    <Route path="/diseases/create" exact component={CreateDisease} />
-                </Switch> 
+                    <Header />
+                    
+                    {/* Home Page's Component */}
+                    <Switch>
+                        <Route path="/" exact component={Home} />
+                        <Route path="/diseases" exact component={DiseasesList} />
+                        <Route path="/about" exact component={About} />
+                        <Route path="/contact" exact component={Contact} />
+                        <Route path="/search" exact component={Search} /> 
+                    </Switch> 
+                    
+                    {/* Diseases Page's Component */}
+                    <Switch>
+                        <Route path="/diseases/edit/:id" exact component={EditDisease} />
+                        <Route path="/diseases/create" exact component={CreateDisease} />
+                    </Switch> 
 
+                    
+                </div>  
+                <div className="footer">
                 <Footer />
-                </div>            
+                </div>          
     
             </BrowserRouter>       
         </div>
