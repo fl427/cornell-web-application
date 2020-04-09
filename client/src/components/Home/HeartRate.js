@@ -1,22 +1,33 @@
-import React from 'react';
+import React from "react";
 import { Link } from "react-router-dom";
 
+import './HeartRate.css';
 class HeartRate extends React.Component {
-    render() {
-        return (
-            <div>
-                <div className="card" style={{width: '18rem'}}>
-                    <div className="card-body">
-                        <h5 className="card-title">Card title</h5>
-                        <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                        <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <Link to="/" className="card-link">Card link</Link>
-                        <Link to="/" className="card-link">Another link</Link>
-                    </div>
-                </div>
+  render() {
+    return (
+      <div>
+        <div className="col-md-11">
+          <div className="content-box-header">
+            <div className="panel-title">Heart Rate</div>
+            <div className="panel-options">
+              <Link to="/" data-rel="reload">
+                <i className="glyphicon glyphicon-cog"></i>
+              </Link>
+              <Link to="/" id="hr-remove" data-rel="collapse">
+                <i className="glyphicon glyphicon-remove"></i>
+              </Link>
             </div>
-        )
-    }
+          </div>
+          <div className="content-box-large box-with-header">
+            <div className="ecg-anime" id="hr"></div>
+            <div>
+              <div className="ecg-anime"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default HeartRate;
