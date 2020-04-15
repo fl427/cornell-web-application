@@ -5,6 +5,7 @@ const diseaseSchema = mongoose.Schema({
     description: {type: String, required: true},
     duration: {type: Number, required: true},
     date: {type: Date, required: true},
+    creator: {type: String}
 }, {
     timestamps: true,
 });

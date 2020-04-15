@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors')
 
 const diseasesRouter = require('./routes/diseases');
+const usersRouter = require('./routes/user');
 
 const app = express();
 app.use(cors()) // Use this after the variable declaration
@@ -19,6 +20,7 @@ connection.once('open', () => {
 app.use(bodyParser.json());
 
 app.use('/diseases', diseasesRouter);
+app.use('/users', usersRouter);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

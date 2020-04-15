@@ -38,6 +38,13 @@ router.route('/:id').get((req, res) => {
       .catch(err => res.status(400).json('Error: ' + err));
 });
 
+router.route('/user/:uid').get((req, res) => {
+  const userId = req.params.uid;
+  Disease.findById(req.params.id)
+      .then(disease => res.json(disease))
+      .catch(err => res.status(400).json('Error: ' + err));
+});
+
 // DELETE ROUTER
 router.route('/:id').delete((req, res) => {
   //destroy disease
