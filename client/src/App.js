@@ -62,13 +62,27 @@ const App = () => {
   } else {
     routes = (
       <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/about" exact component={About} />
-        <Route path="/users" exact component={Users} />
-        <Route path="/search" exact component={Search} />
-        <Route path="/:uid/diseases" exact component={UserDiseases} />
-        <Route path="/diseases" exact component={DiseasesList} />
-        <Route path="/auth" exact component={Auth} />
+        <Route path="/" exact>
+          <Home />
+        </Route>
+        <Route path="/about" exact>
+          <About />
+        </Route>
+        <Route path="/users" exact>
+          <Users />
+        </Route>
+        <Route path="/search" exact>
+          <Search />
+        </Route>
+        <Route path="/:uid/diseases" exact>
+          <UserDiseases />
+        </Route>
+        <Route path="/diseases" exact>
+          <DiseasesList />
+        </Route>
+        <Route path="/auth" exact>
+          <Auth />
+        </Route>
         <Redirect to="/auth" />
       </Switch>
     );

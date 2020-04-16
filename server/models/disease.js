@@ -1,15 +1,10 @@
 const mongoose = require('mongoose');
 
 const diseaseSchema = mongoose.Schema({
-    name: {type: String, required: true},
+    title: {type: String, required: true},
     description: {type: String, required: true},
-    duration: {type: Number, required: true},
-    date: {type: Date, required: true},
-    creator: {type: String}
-}, {
-    timestamps: true,
+    image: {type: String, required: true},
+    creator: { type: mongoose.Types.ObjectId, required: true, ref: 'User'}
 });
 
-const Disease = mongoose.model("Disease", diseaseSchema)
-  
-module.exports = Disease;
+module.exports = mongoose.model("Disease", diseaseSchema);

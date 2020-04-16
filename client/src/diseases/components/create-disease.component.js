@@ -12,23 +12,20 @@ export default class CreateDisease extends Component {
     constructor(props) {
         super(props);
 
-        this.onChangeName = this.onChangeName.bind(this);
+        this.onChangeTitle = this.onChangeTitle.bind(this);
         this.onChangeDescription = this.onChangeDescription.bind(this);
-        this.onChangeDuration = this.onChangeDuration.bind(this);
-        this.onChangeDate = this.onChangeDate.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
-            name: '',
+            title: '',
             description: '',
-            duration: 0,
             date: new Date()
         }
     }
 
-    onChangeName(e) {
+    onChangeTitle(e) {
         this.setState({
-            name: e.target.value
+            title: e.target.value
         })
     }
 
@@ -38,27 +35,12 @@ export default class CreateDisease extends Component {
         })
     }
 
-    onChangeDuration(e) {
-        this.setState({
-            duration: e.target.value
-        })
-    }
-
-    onChangeDate(date) {
-        this.setState({
-            date: date
-        })
-    }
-
     onSubmit(e) {
         e.preventDefault();
 
         const disease = {
-            name: this.state.name,
+            title: this.state.title,
             description: this.state.description,
-            duration: this.state.duration,
-            date: this.state.date,
-            creator: this.getUserId()
         }
 
         console.log(disease);
@@ -79,12 +61,12 @@ export default class CreateDisease extends Component {
                 <form onSubmit={this.onSubmit}>
 
                     <div className="form-group">
-                        <label>Name: </label>
+                        <label>Title: </label>
                         <input  type="text"
                                 required
                                 className="form-control"
-                                value={this.state.name}
-                                onChange={this.onChangeName}
+                                value={this.state.title}
+                                onChange={this.onChangeTitle}
                         />
                     </div>
                     <div className="form-group">
@@ -96,24 +78,7 @@ export default class CreateDisease extends Component {
                                 onChange={this.onChangeDescription}
                         />
                     </div>
-                    <div className="form-group">
-                        <label>Duration (in minutes): </label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            value={this.state.duration}
-                            onChange={this.onChangeDuration}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>Date: </label>
-                        <div>
-                            <DatePicker
-                                selected={this.state.date}
-                                onChange={this.onChangeDate}
-                            />
-                        </div>
-                    </div>
+                    
 
                     <div className="form-group">
                         <input type="submit" value="Create Disease Log" className="btn btn-primary" />

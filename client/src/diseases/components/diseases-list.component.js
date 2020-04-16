@@ -5,10 +5,8 @@ import { NavLink } from "react-router-dom";
 
 const Disease = props => (
     <tr>
-      <td>{props.disease.name}</td>
+      <td>{props.disease.title}</td>
       <td>{props.disease.description}</td>
-      <td>{props.disease.duration}</td>
-      <td>{props.disease.date.substring(0,10)}</td>
       <td>
         <NavLink to={"/diseases/edit/"+props.disease._id}>edit</NavLink> | <a href="#" onClick={() => { props.deleteDisease(props.disease._id) }}>delete</a>
       </td>
@@ -25,10 +23,6 @@ export default class DiseasesList extends Component {
         this.state = {diseases: []};
     }
 
-    // getUserId() {
-    //   const userId = useParams().uid;
-    //   return userId;
-    // }
 
     componentDidMount() {
         axios.get('http://localhost:5000/diseases/')
@@ -67,10 +61,8 @@ export default class DiseasesList extends Component {
                 <table className="table">
                 <thead className="thead-light">
                     <tr>
-                    <th>Name</th>
+                    <th>Title</th>
                     <th>Description</th>
-                    <th>Duration</th>
-                    <th>Date</th>
                     <th>Actions</th>
                     </tr>
                 </thead>

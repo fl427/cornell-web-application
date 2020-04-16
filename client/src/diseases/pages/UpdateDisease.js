@@ -40,7 +40,7 @@ const UpdatePlace = () => {
     const fetchPlace = async () => {
       try {
         const responseData = await sendRequest(
-          `http://localhost:5000/api/places/${placeId}`
+          `http://localhost:5000/api/diseases/${diseaseId}`
         );
         setLoadedPlace(responseData.place);
         setFormData(
@@ -60,13 +60,13 @@ const UpdatePlace = () => {
       } catch (err) {}
     };
     fetchPlace();
-  }, [sendRequest, placeId, setFormData]);
+  }, [sendRequest, diseaseId, setFormData]);
 
   const placeUpdateSubmitHandler = async event => {
     event.preventDefault();
     try {
       await sendRequest(
-        `http://localhost:5000/api/places/${placeId}`,
+        `http://localhost:5000/api/diseases/${diseaseId}`,
         'PATCH',
         JSON.stringify({
           title: formState.inputs.title.value,
@@ -76,7 +76,7 @@ const UpdatePlace = () => {
           'Content-Type': 'application/json'
         }
       );
-      history.push('/' + auth.userId + '/places');
+      history.push('/' + auth.userId + '/diseases');
     } catch (err) {}
   };
 

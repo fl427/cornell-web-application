@@ -2,27 +2,26 @@ const router = require('express').Router();
 let Disease = require('../models/disease')
 
 
+
 router.route('/').get((req, res) => {
   Disease.find()
       .then(diseases => res.json(diseases))
       .catch(err => res.status(400).json('Error: ' + err));
 });
 
+
+
 // Create ROUTE - add new disease
 /* Students may need to upload new dog diseases*/
 router.route('/create').post((req, res) => {
   // Get dat from form and add to diseases array
 
-  const name = req.body.name;
+  const title = req.body.title;
   const description = req.body.description;
-  const duration = Number(req.body.duration);
-  const date = Date.parse(req.body.date);
 
   const newDisease = new Disease({
-    name,
+    title,
     description,
-    duration,
-    date,
   });
 
   newDisease.save()
@@ -33,13 +32,6 @@ router.route('/create').post((req, res) => {
 
 // SHOW ROUTER - Show more info about one disease
 router.route('/:id').get((req, res) => {
-  Disease.findById(req.params.id)
-      .then(disease => res.json(disease))
-      .catch(err => res.status(400).json('Error: ' + err));
-});
-
-router.route('/user/:uid').get((req, res) => {
-  const userId = req.params.uid;
   Disease.findById(req.params.id)
       .then(disease => res.json(disease))
       .catch(err => res.status(400).json('Error: ' + err));
@@ -57,10 +49,8 @@ router.route('/:id').delete((req, res) => {
 router.route('/update/:id').post((req, res) => {
   Disease.findById(req.params.id)
       .then(disease => {
-        disease.name = req.body.name;
+        disease.title = req.body.title;
         disease.description = req.body.description;
-        disease.duration = Number(req.body.duration);
-        disease.date = Date.parse(req.body.date);
 
         disease.save()
             .then(() => res.json('Disease updated!'))
@@ -72,9 +62,9 @@ router.route('/update/:id').post((req, res) => {
 // Search Disease
 router.route('/search').post((req, res, next) => {
     console.log(req.body);
-    var diseaseName = new RegExp(req.body.name, 'i');
+    var diseaseTitle = new RegExp(req.body.title, 'i');
 
-    Disease.findOne({ name: diseaseName }, function(err, disease) {
+    Disease.findOne({ title: diseaseTitle }, function(err, disease) {
         if (err) return next(err);
 
         if (!disease) {
