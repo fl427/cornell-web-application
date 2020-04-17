@@ -23,7 +23,7 @@ const DiseaseList = props => {
         <DiseaseItem
           key={disease.id}
           id={disease.id}
-          image={disease.imageUrl}
+          image={disease.image}
           title={disease.title}
           description={disease.description}
           creatorId={disease.creator}

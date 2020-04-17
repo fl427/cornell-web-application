@@ -25,7 +25,9 @@ Diseases.Component
 import DiseasesList from "./diseases/components/diseases-list.component";
 import EditDisease from "./diseases/components/edit-disease.component";
 import CreateDisease from "./diseases/components/create-disease.component";
+
 import NewDisease from "./diseases/pages/NewDisease";
+import UpdateDisease from './diseases/pages/UpdateDisease';
 import UserDiseases from "./diseases/pages/UserDiseases";
 
 import { AuthContext } from "./shared/context/auth-context";
@@ -34,13 +36,16 @@ import "./App.css";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userId, setUserId] = useState(false);
 
-  const login = useCallback(() => {
+  const login = useCallback((uid) => {
     setIsLoggedIn(true);
+    setUserId(uid);
   }, []);
 
   const logout = useCallback(() => {
     setIsLoggedIn(false);
+    setUserId(null);
   }, []);
 
   let routes;
@@ -52,10 +57,10 @@ const App = () => {
         <Route path="/about" exact component={About} />
         <Route path="/users" exact component={Users} />
         <Route path="/search" exact component={Search} />
-        <Route path="/:uid/diseases" exact component={UserDiseases} />
+        <Route path="/:userId/diseases" exact component={UserDiseases} />
         <Route path="/diseases" exact component={DiseasesList} />
-        <Route path="/diseases/edit/:id" exact component={EditDisease} />
-        <Route path="/diseases/new" exact component={CreateDisease} />
+        <Route path="/diseases/:diseaseId" exact component={UpdateDisease} />
+        <Route path="/diseases/new" exact component={NewDisease} />
         <Redirect to="/" />
       </Switch>
     );
@@ -90,7 +95,7 @@ const App = () => {
 
   return (
     <AuthContext.Provider
-      value={{ isLoggedIn: isLoggedIn, login: login, logout: logout }}
+      value={{ isLoggedIn: isLoggedIn, userId: userId, login: login, logout: logout }}
     >
       <div className="wrapper">
         <BrowserRouter>

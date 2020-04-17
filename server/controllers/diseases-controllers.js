@@ -1,5 +1,4 @@
 const HttpError = require('../models/http-error');
-const { v4: uuidv4 } = require('uuid');
 const { validationResult } = require('express-validator');
 const mongoose = require('mongoose');
 
@@ -31,15 +30,13 @@ const getDiseaseById = async (req, res, next) => {
   res.json({ disease: disease.toObject({ getters: true }) }); // => { disease } => { disease: disease }
 };
 
-// function getDiseaseById() { ... }
-// const getDiseaseById = function() { ... }
 
 const getDiseasesByUserId = async (req, res, next) => {
   const userId = req.params.uid;
 
-  let diseases;
+  let userWithDiseases;
   try {
-    diseases = await Disease.find({ creator: userId });
+    userWithDiseases = await User.findById(userId).populate('diseases');
   } catch (err) {
     const error = new HttpError(
       'Fetching diseases failed, please try again later',
@@ -48,12 +45,12 @@ const getDiseasesByUserId = async (req, res, next) => {
     return next(error);
   }
 
-  if (!diseases || diseases.length === 0) {
+  if (!userWithDiseases || userWithDiseases.length === 0) {
     return next(
       new HttpError("Could not find diseases for the provided user id.", 404)
     );
   }
-  res.json({ diseases: diseases.map(disease => disease.toObject({ getters: true })) });
+  res.json({ diseases: userWithDiseases.diseases.map(disease => disease.toObject({ getters: true })) });
 };
 
 const createDisease = async (req, res, next) => {
@@ -63,7 +60,6 @@ const createDisease = async (req, res, next) => {
   }
 
   const { title, description, creator } = req.body;
-  // const title = req.body.title;
 
   const createdDisease = new Disease({
     title,
@@ -155,6 +151,11 @@ const deleteDisease = async (req, res, next) => {
       'Something went wrong, could not delete disease.',
       500
     );
+    return next(error);
+  }
+
+  if (!disease) {
+    const error = new HttpError('Could not find disease for this id.', 404);
     return next(error);
   }
 

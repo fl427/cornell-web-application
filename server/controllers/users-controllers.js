@@ -1,18 +1,8 @@
-const { v4: uuidv4 } = require('uuid');
 const { validationResult } = require('express-validator');
 const mongoose = require('mongoose');
 
 const HttpError = require('../models/http-error');
 const User = require('../models/user');
-
-const DUMMY_USERS = [
-  {
-    id: 'u1',
-    name: 'Fan Lu',
-    email: 'test@test.com',
-    password: 'testers'
-  }
-];
 
 const getUsers = async (req, res, next) => {
   let users;
@@ -100,7 +90,7 @@ const login = async (req, res, next) => {
     return next(error);
   }
 
-  res.json({message: 'Logged in!'});
+  res.json({message: 'Logged in!', user: existingUser.toObject({getters: true})});
 };
 
 exports.getUsers = getUsers;

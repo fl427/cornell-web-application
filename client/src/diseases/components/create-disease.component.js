@@ -45,7 +45,7 @@ export default class CreateDisease extends Component {
 
         console.log(disease);
 
-        axios.post('http://localhost:5000/diseases/create', disease)
+        axios.post('http://localhost:5000/api/diseases', disease)
             .then(res => {
                 console.log(res.data);
                 window.location = '/';
