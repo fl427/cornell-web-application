@@ -9,7 +9,7 @@ router.get("/:pid", diseasesControllers.getDiseaseById);
 
 router.get("/user/:uid", diseasesControllers.getDiseasesByUserId);
 
-// router.use(checkAuth);
+router.use(checkAuth);
 
 router.post(
   "/",

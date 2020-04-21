@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import axios from 'axios';
 
 import Card from "../../shared/components/UIElements/Card";
 import Button from "../../shared/components/FormElements/Button";
@@ -16,21 +17,58 @@ const DiseaseItem = props => {
   const auth = useContext(AuthContext);
 
   const [showDiseaseDetail, setShowDiseaseDetail] = useState(false);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   const openDiseaseHandler = () => setShowDiseaseDetail(true);
 
   const closeDiseaseHandler = () => setShowDiseaseDetail(false);
+
+  const showDeleteWarningHandler = () => {
+    setShowConfirmModal(true);
+  };
+
+  const cancelDeleteHandler = () => {
+    setShowConfirmModal(false);
+  };
 
   const confirmDeleteHandler = async () => {
     setShowDiseaseDetail(false);
     try {
       await sendRequest(
         `http://localhost:5000/api/diseases/${props.id}`,
-        'DELETE'
+        'DELETE',
+        null,
+        {
+          Authorization: 'Bearer ' + auth.token
+        }
       );
       props.onDelete(props.id);
     } catch (err) {}
   };
+
+  const deleteDisease = async () => {
+
+
+
+    try {
+      await sendRequest(
+        `http://localhost:5000/api/diseases/${props.id}`,
+        'DELETE',
+        null,
+        {
+          Authorization: 'Bearer ' + auth.token
+        }
+      );
+      // props.onDelete(props.id);
+    } catch (err) {}
+
+    // axios.delete(`http://localhost:5000/api/diseases/${props.id}`, {
+      // headers: {
+      //   Authorization: 'Bearer ' + auth.token
+      // }
+    // })
+      // .then(response => { console.log(response.data)});
+  }
 
   return (
     <React.Fragment>
@@ -64,8 +102,7 @@ const DiseaseItem = props => {
 
             {auth.userId === props.creatorId && <Button to={`/diseases/${props.id}`}>EDIT</Button>}
               
-            {auth.isLoggedIn && <Button danger onClick={confirmDeleteHandler} >DELETE</Button>}
-            
+            {auth.isLoggedIn && <Button danger onClick={deleteDisease} >DELETE</Button>} 
 
           </div>
         </Card>

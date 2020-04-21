@@ -67,12 +67,12 @@ const createDisease = async (req, res, next) => {
     title,
     description,
     image: req.file.path,
-    creator
+    creator: req.userData.userId
   });
 
   let user;
   try {
-    user = await User.findById(creator);
+    user = await User.findById(req.userData.userId);
   } catch (err) {
     const error = new HttpError('Creating disease failed, please try again', 500);
     return next(error);
@@ -125,6 +125,14 @@ const updateDisease = async (req, res, next) => {
     return next(error);
   }
 
+  if (disease.creator.toString() !== req.userData.userId) {
+    const error = new HttpError(
+      'You are not allowed to edit this disease',
+      401
+    );
+    return next(error);
+  }
+
   disease.title = title;
   disease.description = description;
 
@@ -157,6 +165,14 @@ const deleteDisease = async (req, res, next) => {
 
   if (!disease) {
     const error = new HttpError('Could not find disease for this id.', 404);
+    return next(error);
+  }
+
+  if (disease.creator.id !== req.userData.userId) {
+    const error = new HttpError(
+      'You are not allowed to delete this disease',
+      401
+    );
     return next(error);
   }
 
