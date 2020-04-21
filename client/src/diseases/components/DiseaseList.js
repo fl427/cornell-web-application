@@ -27,7 +27,7 @@ const DiseaseList = props => {
           title={disease.title}
           description={disease.description}
           creatorId={disease.creator}
-          onDelete={props.onDeletedisease}
+          onDelete={props.onDeleteDisease}
         />
       ))}
     </ul>

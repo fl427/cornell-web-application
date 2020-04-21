@@ -20,6 +20,7 @@ const UpdateDisease = () => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [loadedDisease, setLoadedDisease] = useState();
   const diseaseId = useParams().diseaseId;
+  console.log(diseaseId);
   const history = useHistory();
 
   const [formState, inputHandler, setFormData] = useForm(

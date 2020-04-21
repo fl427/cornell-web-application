@@ -8,7 +8,7 @@ const Disease = props => (
       <td>{props.disease.title}</td>
       <td>{props.disease.description}</td>
       <td>
-        <NavLink to={"/diseases/edit/"+props.disease._id}>edit</NavLink> | <a href="#" onClick={() => { props.deleteDisease(props.disease._id) }}>delete</a>
+        <NavLink to={"/diseases/"+props.disease._id}>edit</NavLink> | <a href="#" onClick={() => { props.deleteDisease(props.disease._id) }}>delete</a>
       </td>
     </tr>
   )

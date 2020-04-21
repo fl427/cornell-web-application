@@ -51,8 +51,9 @@ const DiseaseItem = props => {
 
       <li className="disease-item">
         <Card className="disease-item__content">
+        {isLoading && <LoadingSpinner asOverlay />}
           <div className="disease-item__image">
-            <img src={props.image} alt={props.title} />
+            <img src={`http://localhost:5000/${props.image}`} alt={props.title} />
           </div>
           <div className="disease-item__info">
             <h2>{props.title}</h2>
@@ -61,7 +62,7 @@ const DiseaseItem = props => {
           <div className="disease-item__actions">
             <Button inverse onClick={openDiseaseHandler}>VIEW</Button>
 
-            {auth.isLoggedIn && <Button to={`/diseases/${props.id}`}>EDIT</Button>}
+            {auth.userId === props.creatorId && <Button to={`/diseases/${props.id}`}>EDIT</Button>}
               
             {auth.isLoggedIn && <Button danger onClick={confirmDeleteHandler} >DELETE</Button>}
             

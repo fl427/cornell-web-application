@@ -27,7 +27,7 @@ import EditDisease from "./diseases/components/edit-disease.component";
 import CreateDisease from "./diseases/components/create-disease.component";
 
 import NewDisease from "./diseases/pages/NewDisease";
-import UpdateDisease from './diseases/pages/UpdateDisease';
+import UpdateDisease from "./diseases/pages/UpdateDisease";
 import UserDiseases from "./diseases/pages/UserDiseases";
 
 import { AuthContext } from "./shared/context/auth-context";
@@ -35,32 +35,38 @@ import { AuthContext } from "./shared/context/auth-context";
 import "./App.css";
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [token, setToken] = useState(false);
   const [userId, setUserId] = useState(false);
 
-  const login = useCallback((uid) => {
-    setIsLoggedIn(true);
+  const login = useCallback((uid, token) => {
+    setToken(token);
     setUserId(uid);
   }, []);
 
   const logout = useCallback(() => {
-    setIsLoggedIn(false);
+    setToken(null);
     setUserId(null);
   }, []);
 
   let routes;
 
-  if (isLoggedIn) {
+  if (token) {
     routes = (
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/about" exact component={About} />
         <Route path="/users" exact component={Users} />
         <Route path="/search" exact component={Search} />
-        <Route path="/:userId/diseases" exact component={UserDiseases} />
         <Route path="/diseases" exact component={DiseasesList} />
-        <Route path="/diseases/:diseaseId" exact component={UpdateDisease} />
-        <Route path="/diseases/new" exact component={NewDisease} />
+        <Route path="/:userId/diseases" exact>
+          <UserDiseases />
+        </Route>
+        <Route path="/diseases/new" exact>
+          <NewDisease />
+        </Route>
+        <Route path="/diseases/:diseaseId">
+          <UpdateDisease />
+        </Route>
         <Redirect to="/" />
       </Switch>
     );
@@ -95,7 +101,13 @@ const App = () => {
 
   return (
     <AuthContext.Provider
-      value={{ isLoggedIn: isLoggedIn, userId: userId, login: login, logout: logout }}
+      value={{
+        isLoggedIn: !!token,
+        token: token,
+        userId: userId,
+        login: login,
+        logout: logout,
+      }}
     >
       <div className="wrapper">
         <BrowserRouter>
@@ -105,9 +117,7 @@ const App = () => {
             {/* <Header /> */}
             <MainNavigation />
 
-            <main style={{ margin: "0" }}>
-              {routes}
-            </main>
+            <main style={{ margin: "0" }}>{routes}</main>
           </div>
           <div className="footer">
             <Footer />

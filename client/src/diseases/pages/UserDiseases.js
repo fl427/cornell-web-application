@@ -13,6 +13,7 @@ const UserDiseases = () => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
   const userId = auth.userId;
+  // console.log(userId);
   
   useEffect(() => {
     const fetchDiseases = async () => {
