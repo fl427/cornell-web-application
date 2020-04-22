@@ -1,10 +1,10 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-var logSchema = mongoose.Schema({
-    content: String,
-    auther: String,
-    created: {type: Date, default: Date.now}
+const logSchema = mongoose.Schema({
+    title: {type: String, required: true},
+    description: {type: String, required: true},
+    createDate: {type: Date, default: Date.now()},
+    creator: { type: mongoose.Types.ObjectId, required: true, ref: 'User'}
 });
-
 
 module.exports = mongoose.model("Log", logSchema);

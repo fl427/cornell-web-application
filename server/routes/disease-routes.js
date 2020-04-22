@@ -1,9 +1,9 @@
 const router = require("express").Router();
 const { check } = require("express-validator");
 
-const diseasesControllers = require("../../controllers/diseases-controllers");
-const checkAuth = require('../../middleware/check-auth');
-const fileUpload = require('../../middleware/file-upload');
+const diseasesControllers = require("../controllers/diseases-controllers");
+const checkAuth = require('../middleware/check-auth');
+const fileUpload = require('../middleware/file-upload');
 
 router.get("/:pid", diseasesControllers.getDiseaseById);
 

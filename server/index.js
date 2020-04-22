@@ -7,9 +7,9 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors')
 
-const diseasesRouter = require('./routes/diseases-routes');
-const diseasesRoutes = require('./routes/api/disease-routes');
-const usersRoutes = require('./routes/api/users-routes');
+const diseasesRouter = require('./routes/backup/diseases-routes');
+const diseasesRoutes = require('./routes/disease-routes');
+const usersRoutes = require('./routes/users-routes');
 
 const HttpError = require('./models/http-error');
 
@@ -38,7 +38,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/diseases', diseasesRouter);
 app.use('/api/diseases', diseasesRoutes);
 app.use('/api/users', usersRoutes);
 

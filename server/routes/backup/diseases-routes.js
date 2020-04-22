@@ -1,5 +1,5 @@
 const router = require('express').Router();
-let Disease = require('../models/disease')
+let Disease = require('../../models/disease')
 
 
 

@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const User = require('../models/user');
+const User = require('../../models/user');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const passportLocalMongoose = require('passport-local-mongoose');
