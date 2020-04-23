@@ -1,42 +1,24 @@
-/*!*@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap');*!*/
+/*!Source:
+ * Start Bootstrap - Simple Sidebar (https://startbootstrap.com/template-overviews/simple-sidebar)
+ * Copyright 2013-2019 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-simple-sidebar/blob/master/LICENSE)
+ */
 
-/** {*/
-/*    box-sizing: border-box;*/
-/*}*/
+#page-content-wrapper {
+    min-width: 100vw;
+}
 
-/*html {*/
-/*    font-family: 'Open Sans', sans-serif;*/
-/*}*/
+@media (min-width: 768px) {
+    #sidebar-wrapper {
+        margin-left: 0;
+    }
 
-/*!*body {*!*/
-/*!*    margin: 0;*!*/
-/*!*    background: #4d4d4d;*!*/
-/*!*}*!*/
+    #page-content-wrapper {
+        min-width: 0;
+        width: 100%;
+    }
 
-/*.slide-in-left-enter {*/
-/*    transform: translateX(-100%);*/
-/*}*/
-
-/*.slide-in-left-enter-active {*/
-/*    transform: translateX(0);*/
-/*    opacity: 1;*/
-/*    transition: all 200ms;*/
-/*}*/
-
-/*.slide-in-left-exit {*/
-/*    transform: translateX(0%);*/
-/*    opacity: 1;*/
-/*}*/
-
-/*.slide-in-left-exit-active {*/
-/*    transform: translateX(-100%);*/
-/*    opacity: 0;*/
-/*    transition: all 200ms;*/
-/*}*/
-
-/*.center {*/
-/*    text-align: center;*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-/*}*/
+    #wrapper.toggled #sidebar-wrapper {
+        margin-left: -15rem;
+    }
+}

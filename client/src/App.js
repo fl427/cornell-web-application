@@ -1,122 +1,66 @@
+// @Reference: https://startbootstrap.com/templates/simple-sidebar/
+// @Reference: https://stackoverflow.com/questions/20557912/creating-a-fixed-sidebar-alongside-a-centered-bootstrap-3-grid
 import React from "react";
-import {BrowserRouter, Route, Switch, Redirect} from "react-router-dom";
+import { BrowserRouter} from "react-router-dom";
 
-import Home from "./home/components/Home";
-import About from "./home/components/About";
-import Contact from "./home/components/Contact";
-import Search from "./home/components/Search";
-
-/*
-Navbars.Component
-*/
+// Navigation
 import Sidebar from "./shared/components/Sidebar/Sidebar";
-import Footer from "./shared/components/Sidebar/Footer";
-import MainNavigation from "./shared/components/Navigation/MainNavigation";
+import Navigator from "./shared/components/Navigator/Navigator";
 
-/*
-Users.Components
-*/
-import Auth from "./user/pages/Auth";
-import Users from "./user/pages/Users";
+class App extends React.Component {
 
-/*
-Diseases.Component
-*/
-import NewDisease from "./diseases/pages/NewDisease";
-import NewDiseaseII from "./diseases/pages/NewDiseaseII";
-import UpdateDisease from "./diseases/pages/UpdateDisease";
-import UserDiseases from "./diseases/pages/UserDiseases";
-import AllDiseases from "./diseases/pages/AllDiseases";
+    constructor(props) {
+        super(props);
 
-import {AuthContext} from "./shared/context/auth-context";
-import {useAuth} from "./shared/hooks/auth-hook";
+        // Bind action handlers to the current instance
+        this.handleToggle = this.handleToggle.bind(this);
 
+        // Initialise the state
+        this.state = {
+            isToggled: false,
+        };
+    }
 
-const App = () => {
+    // Define action handlers
+    handleToggle() {
+        if (this.state.isToggled) {
+            this.setState({ isToggled: false });
+        } else {
+            this.setState({ isToggled: true });
+        }
+    }
 
-    const {token, login, logout, userId} = useAuth()
+    render() {
+        let wrapperClassName = 'd-flex'
+        if (this.state.isToggled) {
+            wrapperClassName += ' toggled'
+        }
+        return (
+            <BrowserRouter>
 
-    let routes;
+                <div id="wrapper" className={wrapperClassName}>
+                    <Sidebar/>
 
-    if (token) {
-        routes = (
-            <Switch>
-                <Route path="/" exact component={Home}/>
-                <Route path="/about" exact component={About}/>
-                <Route path="/users" exact component={Users}/>
-                <Route path="/search" exact component={Search}/>
-
-                <Route path="/diseases" exact>
-                    <AllDiseases/>
-                </Route>
-
-                <Route path="/:userId/diseases" exact>
-                    <UserDiseases/>
-                </Route>
-                <Route path="/diseases/new" exact>
-                    <NewDisease/>
-                </Route>
-                <Route path="/diseases/:diseaseId">
-                    <UpdateDisease/>
-                </Route>
-                <Redirect to="/"/>
-            </Switch>
-        );
-    } else {
-        routes = (
-            <Switch>
-                <Route path="/" exact>
-                    <Home/>
-                </Route>
-                <Route path="/about" exact>
-                    <About/>
-                </Route>
-                <Route path="/users" exact>
-                    <Users/>
-                </Route>
-                <Route path="/search" exact>
-                    <Search/>
-                </Route>
-                <Route path="/:uid/diseases" exact>
-                    <UserDiseases/>
-                </Route>
-                <Route path="/diseases" exact>
-                    <AllDiseases/>
-                </Route>
-                <Route path="/auth" exact>
-                    <Auth/>
-                </Route>
-                <Redirect to="/auth"/>
-            </Switch>
+                    <div id="page-content-wrapper">
+                        <Navigator
+                            isToggle={this.state.isToggled}
+                            onToggle={this.handleToggle}
+                        />
+                        <div className="container-fluid">
+                            <h1 className="mt-4">Simple Sidebar</h1>
+                            <p>The starting state of the menu will appear collapsed on smaller screens, and will appear
+                                non-collapsed on larger screens. When toggled using the button below, the menu will
+                                change.</p>
+                            <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>. The top
+                                navbar is optional, and just for demonstration. Just create an element with
+                                the <code>#menu-toggle</code> ID which will toggle the menu when clicked.</p>
+                        </div>
+                    </div>
+                </div>
+            </BrowserRouter>
         );
     }
 
-    return (
-        <AuthContext.Provider
-            value={{
-                isLoggedIn: !!token,
-                token: token,
-                userId: userId,
-                login: login,
-                logout: logout,
-            }}
-        >
-            <div className="wrapper">
-                <BrowserRouter>
-                    <Sidebar/>
-
-                    <div className="content">
-                        <MainNavigation/>
-
-                        <main style={{marginTop:'10px'}}>{routes}</main>
-                    </div>
-                    <div className="footer">
-                        <Footer/>
-                    </div>
-                </BrowserRouter>
-            </div>
-        </AuthContext.Provider>
-    );
 };
 
 export default App;
