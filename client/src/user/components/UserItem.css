@@ -48,8 +48,9 @@
     margin: 0;
 }
 
-li::marker {
-    color: #00b7a8;
-    content: "#" counter(counter) ":";
-    font-size: 200%;
+li {
+    color: white;
+}
+.user-item::marker {
+    color: blue;
 }

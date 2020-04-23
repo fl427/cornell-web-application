@@ -11,6 +11,24 @@ const Users = () => {
                 'r1',
                 'r2'
             ]
+        },
+        {
+            id: 'u2',
+            name: 'gao',
+            image: 'https://images.unsplash.com/photo-1587583770025-32851bad462e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80',
+            records: [
+                'r3'
+            ]
+        },
+        {
+            id: 'u3',
+            name: 'liu',
+            image: 'https://images.unsplash.com/photo-1587583770025-32851bad462e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80',
+            records: [
+                'r4',
+                'r5',
+                'r6'
+            ]
         }
     ]
     return (
