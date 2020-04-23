@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import {NavLink} from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 import "./Navigator.css";
 
@@ -21,21 +21,33 @@ const Navigator = props => {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
                         <li className="nav-item active">
-                            <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
+                            <Link to="/" className="nav-link">Home <span className="sr-only">(current)</span></Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Link</a>
+                            <Link to="/users" className="nav-link">Users</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/" className="nav-link">Dogs</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/:userId/records" className="nav-link">My Records</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/" className="nav-link">Add Dog</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/" className="nav-link">Auth</Link>
                         </li>
                         <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            <Link to="/" className="nav-link dropdown-toggle" id="navbarDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Dropdown
-                            </a>
+                            </Link>
                             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a className="dropdown-item" href="#">Action</a>
-                                <a className="dropdown-item" href="#">Another action</a>
+                                <Link to="/" className="dropdown-item">Action</Link>
+                                <Link to="/" className="dropdown-item">Another action</Link>
                                 <div className="dropdown-divider"></div>
-                                <a className="dropdown-item" href="#">Something else here</a>
+                                <Link to="/" className="dropdown-item">Something else here</Link>
                             </div>
                         </li>
                     </ul>

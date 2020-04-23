@@ -1,7 +1,13 @@
 // @Reference: https://startbootstrap.com/templates/simple-sidebar/
 // @Reference: https://stackoverflow.com/questions/20557912/creating-a-fixed-sidebar-alongside-a-centered-bootstrap-3-grid
 import React from "react";
-import { BrowserRouter} from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+
+// Home
+import Home from "./home/pages/Home";
+
+// User
+import Users from "./user/pages/Users";
 
 // Navigation
 import Sidebar from "./shared/components/Sidebar/Sidebar";
@@ -46,15 +52,17 @@ class App extends React.Component {
                             isToggle={this.state.isToggled}
                             onToggle={this.handleToggle}
                         />
-                        <div className="container-fluid">
-                            <h1 className="mt-4">Simple Sidebar</h1>
-                            <p>The starting state of the menu will appear collapsed on smaller screens, and will appear
-                                non-collapsed on larger screens. When toggled using the button below, the menu will
-                                change.</p>
-                            <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>. The top
-                                navbar is optional, and just for demonstration. Just create an element with
-                                the <code>#menu-toggle</code> ID which will toggle the menu when clicked.</p>
-                        </div>
+                        <Switch>
+                            <Route path="/" exact>
+                                <Home />
+                            </Route>
+                            <Route path="/users" exact>
+                                <Users />
+                            </Route>
+                            <Route path="/:userId/records" exact>
+                                <Users />
+                            </Route>
+                        </Switch>
                     </div>
                 </div>
             </BrowserRouter>
