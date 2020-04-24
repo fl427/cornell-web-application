@@ -13,6 +13,10 @@ import Users from "./user/pages/Users";
 import Sidebar from "./shared/components/Sidebar/Sidebar";
 import Navigator from "./shared/components/Navigator/Navigator";
 
+// Dog
+import Dogs from "./dogs/pages/Dogs";
+import NewDog from "./dogs/pages/NewDog";
+
 class App extends React.Component {
 
     constructor(props) {
@@ -59,8 +63,14 @@ class App extends React.Component {
                             <Route path="/users" exact>
                                 <Users />
                             </Route>
+                            <Route path="/dogs" exact>
+                                <Dogs />
+                            </Route>
                             <Route path="/:userId/records" exact>
                                 <Users />
+                            </Route>
+                            <Route path="/dogs/new" exact>
+                                <NewDog />
                             </Route>
                         </Switch>
                     </div>

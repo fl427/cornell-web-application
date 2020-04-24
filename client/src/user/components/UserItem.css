@@ -48,9 +48,6 @@
     margin: 0;
 }
 
-li {
+li.user-item {
     color: white;
-}
-.user-item::marker {
-    color: blue;
 }

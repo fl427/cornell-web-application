@@ -1,5 +1,5 @@
-import React, { useRef, useState } from "react";
-import { NavLink, Link } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 
 import "./Navigator.css";
 
@@ -27,13 +27,13 @@ const Navigator = props => {
                             <Link to="/users" className="nav-link">Users</Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/" className="nav-link">Dogs</Link>
+                            <Link to="/dogs" className="nav-link">Dogs</Link>
                         </li>
                         <li className="nav-item">
                             <Link to="/:userId/records" className="nav-link">My Records</Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/" className="nav-link">Add Dog</Link>
+                            <Link to="/dogs/new" className="nav-link">Add Dog</Link>
                         </li>
                         <li className="nav-item">
                             <Link to="/" className="nav-link">Auth</Link>
