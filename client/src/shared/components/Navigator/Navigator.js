@@ -1,11 +1,14 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, {useContext} from "react";
+import {Link} from "react-router-dom";
+import {AuthContext} from '../../context/auth-context';
 
 import "./Navigator.css";
 
 const Navigator = props => {
 
-    const { isToggled, onToggle } = props;
+    const {isToggled, onToggle} = props;
+    const auth = useContext(AuthContext);
+    console.log("Navigator:" + auth);
 
     return (
         <React.Fragment>
@@ -29,18 +32,30 @@ const Navigator = props => {
                         <li className="nav-item">
                             <Link to="/dogs" className="nav-link">Dogs</Link>
                         </li>
+                        {auth.isLoggedIn && (
                         <li className="nav-item">
-                            <Link to="/:userId/records" className="nav-link">My Records</Link>
+                            <Link to="/:userId/dogs" className="nav-link">My Dogs</Link>
                         </li>
-                        <li className="nav-item">
-                            <Link to="/dogs/new" className="nav-link">Add Dog</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link to="/" className="nav-link">Auth</Link>
-                        </li>
+                        )}
+                        {auth.isLoggedIn && (
+                            <li className="nav-item">
+                                <Link to="/dogs/new" className="nav-link">Add Dog</Link>
+                            </li>
+                        )}
+                        {!auth.isLoggedIn && (
+                            <li className="nav-item">
+                                <Link to="/auth" className="nav-link">Auth</Link>
+                            </li>
+                        )}
+                        {auth.isLoggedIn && (
+                            <li className="nav-item">
+                                <Link to="/" className="nav-link" onClick={auth.logout}>Logout</Link>
+                                {/*<button className="nav-link" onClick={auth.logout}>LOGOUT</button>*/}
+                            </li>
+                        )}
                         <li className="nav-item dropdown">
                             <Link to="/" className="nav-link dropdown-toggle" id="navbarDropdown" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Dropdown
                             </Link>
                             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

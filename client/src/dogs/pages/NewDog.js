@@ -1,18 +1,22 @@
-import React from 'react';
-// import { useHistory } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
+
 import Input from "../../shared/components/FormElements/Input";
 import Button from "../../shared/components/FormElements/Button";
 
 import {
     VALIDATOR_REQUIRE,
     VALIDATOR_MINLENGTH
-} from '../../shared/util/validators';
+} from '../../shared/util/validator';
 import { useForm } from '../../shared/hooks/form-hook';
+import { useHttpClient } from '../../shared/hooks/http-hook';
+import { AuthContext } from '../../shared/context/auth-context';
 
 import './DogForm.css';
 
 const NewDog = () => {
-
+    const auth = useContext(AuthContext);
+    const { isLoading, error, sendRequest, clearError } = useHttpClient();
     const [formState, inputHandler] = useForm(
         {
             name: {
@@ -22,14 +26,41 @@ const NewDog = () => {
             description: {
                 value: '',
                 isValid: false
-            }
+            },
         },
         false
     );
 
+    const history = useHistory();
+
+
+    const dogSubmitHandler = async event => {
+        event.preventDefault();
+
+        try {
+            console.log(auth.token);
+            const formData = new FormData();
+            formData.append('name', formState.inputs.name.value);
+            formData.append('description', formState.inputs.description.value);
+            formData.append("test", "test");
+            console.log(formState.inputs.name.value)
+            console.log(formData)
+            for (var key of formData.entries()) {
+                console.log(key[0] + ', ' + key[1])
+            }
+            const responseData = await sendRequest('http://localhost:5000/api/dogs', 'POST', formData, {
+                Authorization: 'Bearer ' + auth.token
+            });
+
+            history.push('/dogs');
+        } catch (e) {
+            // console.log(e.message || "Something went wrong, please try again.")
+        }
+    }
+
     return (
         <React.Fragment>
-            <form className="dog-form">
+            <form className="dog-form" onSubmit={dogSubmitHandler}>
                 <ul>
                     <li>
                         <Input
@@ -52,27 +83,15 @@ const NewDog = () => {
                             onInput={inputHandler}
                         />
                     </li>
-                </ul>
-
-
-            </form>
-
-            {/*@reference: https://www.sanwebe.com/2014/08/css-html-forms-designs*/}
-            <form className="form-style-9">
-                <ul>
                     <li>
-                        <label>Name <span className="required">*</span></label>
-                        <input type="text" name="field3" className="field-style field-full align-none"
-                               placeholder="Name"/>
-                    </li>
-                    <li>
-                        <textarea name="field5" className="field-style" placeholder="Description"></textarea>
-                    </li>
-                    <li>
-                        <input type="submit" value="Create Dog"/>
+                        <Button type="submit" disabled={!formState.isValid}>
+                            ADD DOG
+                        </Button>
                     </li>
                 </ul>
             </form>
+
+            {/*CSS DESIGN@reference: https://www.sanwebe.com/2014/08/css-html-forms-designs*/}
 
         </React.Fragment>
     );

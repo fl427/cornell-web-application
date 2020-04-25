@@ -1,13 +1,4 @@
 .dog-form {
-    /*position: relative;*/
-    /*list-style: none;*/
-    /*margin: 1rem auto;*/
-    /*padding: 1rem;*/
-    /*width: 90%;*/
-    /*max-width: 40rem;*/
-    /*box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);*/
-    /*border-radius: 6px;*/
-    /*background: white;*/
     max-width: 450px;
     background: #FAFAFA;
     padding: 30px;
@@ -26,6 +17,39 @@
     display: block;
     margin-bottom: 10px;
     min-height: 35px;
+}
+
+.dog-form ul li  .field-style label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+.dog-form ul li  .field-style input,
+.dog-form ul li  .field-style textarea{
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    padding: 8px;
+    outline: none;
+    border: 1px solid #B0CFE0;
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+
+    /*铺满*/
+    width: 100%;
+}
+
+.dog-form ul li  .field-style--invalid label,
+.dog-form ul li  .field-style--invalid p {
+    color: red;
+}
+
+.dog-form ul li  .field-style--invalid input,
+.dog-form ul li  .field-style--invalid textarea {
+    border-color: red;
+    background: #ffd1d1;
 }
 
 /*-------------*/

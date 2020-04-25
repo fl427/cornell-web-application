@@ -1,13 +1,16 @@
 // @Reference: https://startbootstrap.com/templates/simple-sidebar/
 // @Reference: https://stackoverflow.com/questions/20557912/creating-a-fixed-sidebar-alongside-a-centered-bootstrap-3-grid
-import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import React, { useState } from "react";
+import {BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
 // Home
 import Home from "./home/pages/Home";
 
 // User
 import Users from "./user/pages/Users";
+import Auth from "./user/pages/Auth";
+import { AuthContext } from './shared/context/auth-context';
+import { useAuth } from "./shared/hooks/auth-hook";
 
 // Navigation
 import Sidebar from "./shared/components/Sidebar/Sidebar";
@@ -16,68 +19,97 @@ import Navigator from "./shared/components/Navigator/Navigator";
 // Dog
 import Dogs from "./dogs/pages/Dogs";
 import NewDog from "./dogs/pages/NewDog";
+import UpdateDog from "./dogs/pages/UpdateDog";
 
-class App extends React.Component {
+const App = () => {
 
-    constructor(props) {
-        super(props);
+    const {token, login, logout, userId} = useAuth()
+    const [toggle, setToggle] = useState(false);
 
-        // Bind action handlers to the current instance
-        this.handleToggle = this.handleToggle.bind(this);
-
-        // Initialise the state
-        this.state = {
-            isToggled: false,
-        };
-    }
-
-    // Define action handlers
-    handleToggle() {
-        if (this.state.isToggled) {
-            this.setState({ isToggled: false });
+    const handleToggle = () => {
+        if (toggle) {
+            setToggle(false);
         } else {
-            this.setState({ isToggled: true });
+            setToggle(true);
         }
     }
 
-    render() {
-        let wrapperClassName = 'd-flex'
-        if (this.state.isToggled) {
-            wrapperClassName += ' toggled'
-        }
-        return (
-            <BrowserRouter>
+    let wrapperClassName = 'd-flex'
+    if (toggle) {
+        wrapperClassName += ' toggled'
+    }
 
+    let routes;
+
+    if (token) {
+        routes = (
+            <Switch>
+                <Route path="/" exact>
+                    <Home/>
+                </Route>
+                <Route path="/users" exact>
+                    <Users/>
+                </Route>
+                <Route path="/dogs" exact>
+                    <Dogs/>
+                </Route>
+                <Route path="/:userId/dogs" exact>
+                    <Users/>
+                </Route>
+                <Route path="/dogs/new" exact>
+                    <NewDog/>
+                </Route>
+                <Route path="/dogs/:dogId">
+                    <UpdateDog/>
+                </Route>
+                <Redirect to="/" />
+            </Switch>
+        )
+    } else {
+        routes = (
+            <Switch>
+                <Route path="/" exact>
+                    <Home/>
+                </Route>
+                <Route path="/users" exact>
+                    <Users/>
+                </Route>
+                <Route path="/dogs" exact>
+                    <Dogs/>
+                </Route>
+                <Route path="/auth" exact>
+                    <Auth/>
+                </Route>
+                <Redirect to="/auth" />
+            </Switch>
+        )
+
+    }
+
+    return (
+        <AuthContext.Provider
+            value={{
+                isLoggedIn: !!token,
+                token: token,
+                userId: userId,
+                login: login,
+                logout: logout
+            }}
+        >
+            <BrowserRouter>
                 <div id="wrapper" className={wrapperClassName}>
                     <Sidebar/>
-
                     <div id="page-content-wrapper">
                         <Navigator
-                            isToggle={this.state.isToggled}
-                            onToggle={this.handleToggle}
+                            isToggle={toggle}
+                            onToggle={handleToggle}
                         />
-                        <Switch>
-                            <Route path="/" exact>
-                                <Home />
-                            </Route>
-                            <Route path="/users" exact>
-                                <Users />
-                            </Route>
-                            <Route path="/dogs" exact>
-                                <Dogs />
-                            </Route>
-                            <Route path="/:userId/records" exact>
-                                <Users />
-                            </Route>
-                            <Route path="/dogs/new" exact>
-                                <NewDog />
-                            </Route>
-                        </Switch>
+                        {routes}
                     </div>
                 </div>
             </BrowserRouter>
-        );
-    }
+        </AuthContext.Provider>
+    );
 
 };
 

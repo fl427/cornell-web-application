@@ -1,6 +1,6 @@
 import React, { useReducer, useEffect } from 'react';
 
-import { validate } from '../../util/validators';
+import { validate } from '../../util/validator';
 import './Input.css';
 
 const inputReducer = (state, action) => {
@@ -55,6 +55,7 @@ const Input = props => {
             <input
                 id={props.id}
                 type={props.type}
+                autoComplete="off"
                 placeholder={props.placeholder}
                 onChange={changeHandler}
                 onBlur={touchHandler}
@@ -74,9 +75,10 @@ const Input = props => {
         <div
             // className={`form-control ${!inputState.isValid && inputState.isTouched &&
             // 'form-control--invalid'}`}
-            className="field-style"
+            className={`field-style ${!inputState.isValid && inputState.isTouched &&
+            'field-style--invalid'}`}
         >
-            {/*<label htmlFor={props.id}>{props.label}</label>*/}
+            <label htmlFor={props.id}>{props.label}</label>
             {element}
             {!inputState.isValid && inputState.isTouched && <p>{props.errorText}</p>}
         </div>

@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 
 import Card from "../../shared/components/UIElements/Card";
 import Button from "../../shared/components/FormElements/Button";
+
+import { AuthContext } from '../../shared/context/auth-context';
+import { useHttpClient } from '../../shared/hooks/http-hook';
 import "./DogItem.css";
 
 const DogItem = props => {
+    const auth = useContext(AuthContext);
 
     return (
         <React.Fragment>
