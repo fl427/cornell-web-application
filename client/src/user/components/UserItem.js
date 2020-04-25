@@ -9,14 +9,14 @@ const UserItem = props => {
     return (
         <li className="user-item">
             <Card className="user-item__content">
-                <Link to={`/${props.id}/records`}>
+                <Link to={`/${props.id}/dogs`}>
                     <div className="user-item__image">
-                        <Avatar image={props.image} alt={props.name} className="user-item__image"/>
+                        <Avatar image={`http://localhost:5000/${props.image}`} alt={props.name} className="user-item__image"/>
                     </div>
                     <div className="user-item__info">
                         <h2>{props.name}</h2>
                         <h3>
-                            {props.recordCount} {props.recordCount === 1 ? 'Record' : 'Records'}
+                            {props.dogCount} {props.dogCount === 1 ? 'Record' : 'Records'}
                         </h3>
                     </div>
                 </Link>

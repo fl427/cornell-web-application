@@ -34,7 +34,7 @@ const Navigator = props => {
                         </li>
                         {auth.isLoggedIn && (
                         <li className="nav-item">
-                            <Link to="/:userId/dogs" className="nav-link">My Dogs</Link>
+                            <Link to={`/${auth.userId}/dogs`} className="nav-link">My Dogs</Link>
                         </li>
                         )}
                         {auth.isLoggedIn && (

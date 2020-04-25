@@ -20,12 +20,11 @@ const UpdateDog = () => {
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
     const [loadedDog, setLoadedDog] = useState();
     const dogId = useParams().dogId;
-    console.log("This dog's ID", dogId);
     const history = useHistory();
 
     const [formState, inputHandler, setFormData] = useForm(
         {
-            title: {
+            name: {
                 value: '',
                 isValid: false
             },
@@ -46,7 +45,7 @@ const UpdateDog = () => {
                 setLoadedDog(responseData.dog);
                 setFormData(
                     {
-                        title: {
+                        name: {
                             value: responseData.dog.name,
                             isValid: true
                         },

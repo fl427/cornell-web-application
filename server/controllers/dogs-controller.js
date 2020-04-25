@@ -89,10 +89,8 @@ const createDog = async (req, res, next) => {
     const createdDog = new Dog({
         name,
         description,
-        image: 'https://images.unsplash.com/photo-1587583770025-32851bad462e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80',
-        // image: req.file.path,
-        // creator: req.userData.userId
-        creator: 'u1'
+        image: req.file.path,
+        creator: req.userData.userId
     });
 
     let user;
@@ -201,7 +199,7 @@ const deleteDog = async (req, res, next) => {
         return next(error);
     }
 
-    const imagePath = place.image;
+    const imagePath = dog.image;
 
     try {
         const sess = await mongoose.startSession();

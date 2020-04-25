@@ -18,6 +18,7 @@ import Navigator from "./shared/components/Navigator/Navigator";
 
 // Dog
 import Dogs from "./dogs/pages/Dogs";
+import UserDogs from "./dogs/pages/UserDogs";
 import NewDog from "./dogs/pages/NewDog";
 import UpdateDog from "./dogs/pages/UpdateDog";
 
@@ -54,7 +55,7 @@ const App = () => {
                     <Dogs/>
                 </Route>
                 <Route path="/:userId/dogs" exact>
-                    <Users/>
+                    <UserDogs/>
                 </Route>
                 <Route path="/dogs/new" exact>
                     <NewDog/>
@@ -83,7 +84,6 @@ const App = () => {
                 <Redirect to="/auth" />
             </Switch>
         )
-
     }
 
     return (

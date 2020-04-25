@@ -3,7 +3,8 @@ const { check } = require("express-validator");
 
 const dogsControllers = require("../controllers/dogs-controller");
 const checkAuth = require('../middleware/check-auth');
-// const fileUpload = require('../middleware/file-upload');
+const fileUpload = require('../middleware/file-upload');
+
 router.get("/", dogsControllers.getDogs);
 
 router.get("/:did", dogsControllers.getDogById);
@@ -14,7 +15,7 @@ router.use(checkAuth);
 
 router.post(
     "/",
-    // fileUpload.single('image'),
+    fileUpload.single('image'),
     [check("name").not().isEmpty(), check("description").isLength({ min: 5 })],
     dogsControllers.createDog
 );

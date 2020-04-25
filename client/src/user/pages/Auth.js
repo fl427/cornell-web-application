@@ -5,7 +5,7 @@ import Input from "../../shared/components/FormElements/Input";
 import Button from "../../shared/components/FormElements/Button";
 // import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 // import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
-// import ImageUpload from "../../shared/components/FormElements/ImageUpload";
+import ImageUpload from "../../shared/components/FormElements/ImageUpload";
 
 import {
     VALIDATOR_EMAIL,
@@ -64,64 +64,6 @@ const Auth = () => {
         setIsLoginMode(prevMode => !prevMode);
     };
 
-    // const authSubmitHandler = async (event) => {
-    //     event.preventDefault();
-    //     setIsLoading(true);
-    //
-    //     if (isLoginMode) {
-    //         try {
-    //             const response = await fetch("http://localhost:5000/api/users/login", {
-    //                 method: "POST",
-    //                 headers: {
-    //                     "Content-Type": "application/json",
-    //                 },
-    //                 body: JSON.stringify({
-    //                     email: formState.inputs.email.value,
-    //                     password: formState.inputs.password.value,
-    //                 }),
-    //             });
-    //
-    //             const responseData = await response.json();
-    //             if (!response.ok) {
-    //                 throw new Error(responseData.message);
-    //             }
-    //             console.log("Logged-User", responseData);
-    //             setIsLoading(false);
-    //             auth.login(responseData.userId, responseData.token);
-    //         } catch (err) {
-    //             setIsLoading(false);
-    //             console.log(err.message || "Something went wrong, please try again.");
-    //         }
-    //     } else {
-    //         const formData = new FormData();
-    //         formData.append("email", formState.inputs.email.value);
-    //         formData.append("name", formState.inputs.name.value);
-    //         formData.append("password", formState.inputs.password.value);
-    //
-    //         try {
-    //             setIsLoading(true);
-    //             const response = await fetch("http://localhost:5000/api/users/signup", {
-    //                 method: "POST",
-    //                 // headers: {
-    //                 //   "Content-Type": "application/json",
-    //                 // },
-    //                 body: formData,
-    //             });
-    //
-    //             const responseData = await response.json();
-    //             if (!response.ok) {
-    //                 throw new Error(responseData.message);
-    //             }
-    //             console.log("Registered User", responseData);
-    //             setIsLoading(false);
-    //             auth.login(responseData.userId, responseData.token);
-    //         } catch (err) {
-    //             console.log(err.message || "Something went wrong, please try again");
-    //         }
-    //     }
-    // };
-    //
-
     const authSubmitHandler = async event => {
         event.preventDefault();
 
@@ -146,7 +88,7 @@ const Auth = () => {
                 formData.append('email', formState.inputs.email.value);
                 formData.append('name', formState.inputs.name.value);
                 formData.append('password', formState.inputs.password.value);
-                // formData.append('image', formState.inputs.image.value);
+                formData.append('image', formState.inputs.image.value);
                 const responseData = await sendRequest(
                     'http://localhost:5000/api/users/signup',
                     'POST',
@@ -179,6 +121,7 @@ const Auth = () => {
                                 />
                             )}
                         </li>
+
                         <li>
                             <Input
                                 element="input"
@@ -200,6 +143,16 @@ const Auth = () => {
                                 errorText="Please enter a valid password, at least 6 characters."
                                 onInput={inputHandler}
                             />
+                        </li>
+                        <li>
+                            {!isLoginMode && (
+                                <ImageUpload
+                                    center
+                                    id="image"
+                                    onInput={inputHandler}
+                                    errorText="Please provide an image."
+                                />
+                            )}
                         </li>
                         <li>
                             <Button type="submit" disabled={!formState.isValid}>

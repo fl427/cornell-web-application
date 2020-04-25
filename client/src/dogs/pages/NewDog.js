@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 import Input from "../../shared/components/FormElements/Input";
 import Button from "../../shared/components/FormElements/Button";
+import ImageUpload from '../../shared/components/FormElements/ImageUpload';
 
 import {
     VALIDATOR_REQUIRE,
@@ -27,6 +28,10 @@ const NewDog = () => {
                 value: '',
                 isValid: false
             },
+            image: {
+                value: null,
+                isValid: false
+            }
         },
         false
     );
@@ -38,16 +43,10 @@ const NewDog = () => {
         event.preventDefault();
 
         try {
-            console.log(auth.token);
             const formData = new FormData();
             formData.append('name', formState.inputs.name.value);
             formData.append('description', formState.inputs.description.value);
-            formData.append("test", "test");
-            console.log(formState.inputs.name.value)
-            console.log(formData)
-            for (var key of formData.entries()) {
-                console.log(key[0] + ', ' + key[1])
-            }
+            formData.append('image', formState.inputs.image.value);
             const responseData = await sendRequest('http://localhost:5000/api/dogs', 'POST', formData, {
                 Authorization: 'Bearer ' + auth.token
             });
@@ -81,6 +80,13 @@ const NewDog = () => {
                             validators={[VALIDATOR_MINLENGTH(5)]}
                             errorText="Please enter a valid description (at least 5 characters)."
                             onInput={inputHandler}
+                        />
+                    </li>
+                    <li>
+                        <ImageUpload
+                            id="image"
+                            onInput={inputHandler}
+                            errorText="Please provide an image."
                         />
                     </li>
                     <li>

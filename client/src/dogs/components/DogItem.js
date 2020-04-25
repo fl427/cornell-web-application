@@ -16,7 +16,7 @@ const DogItem = props => {
             <li className="dog-item">
                 <Card className="dog-item__content">
                     <div className="dog-item__image">
-                        <img src={props.image} alt={props.name} />
+                        <img src={`http://localhost:5000/${props.image}`} alt={props.name} />
                     </div>
                     <div className="dog-item__info">
                         <h2>{props.name}</h2>
@@ -25,9 +25,13 @@ const DogItem = props => {
                     <div className="dog-item__actions">
                         <Button inverse onClick={() => console.log("Click View Button")}>VIEW</Button>
 
+                        {auth.userId === props.creatorId && (
                         <Button to={`/dogs/${props.id}`}>EDIT</Button>
+                        )}
 
+                        {auth.userId === props.creatorId && (
                         <Button danger onClick={() => console.log("Click Delete Button")}>DELETE</Button>
+                        )}
 
                     </div>
                 </Card>
