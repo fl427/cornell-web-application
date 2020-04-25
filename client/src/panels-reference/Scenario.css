@@ -1,0 +1,62 @@
+.content-box, .content-box-large {
+    margin-bottom:12px;
+    background:#fff;
+    border-radius:10px;
+    padding:10px;
+    border-left:1px solid #eee;
+    border-top:1px solid #eee;
+    border-right:2px solid #eee;
+    border-bottom:2px solid #eee; 
+ }
+ 
+ .content-box-large {
+   padding: 14px;
+ }
+
+
+ .panel-heading>.panel-title, .content-box-header .panel-title {
+    float: left;
+    padding: 0 0;
+    padding-top: 0px;
+}
+
+.panel-heading>.panel-title>*, .content-box-header .panel-title>* {
+    margin: 0;
+}
+
+.panel-heading>.panel-title>span, .content-box-header .panel-title>span {
+    font-weight: normal;
+}
+
+.panel-heading>.panel-options, .content-box-header .panel-options {
+    float: right;
+    padding-right:3px;
+}
+
+.panel-heading>.panel-options>a, .content-box-header .panel-options>a {
+    margin-top: 10px;
+}
+
+.panel-options>a{
+    color:#514D58;
+    padding-right:2px;
+}
+
+.icon-dog {
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.large-icon-dog{
+    border-radius: 7px;
+}
+
+.large-icon-dog:hover {
+
+    opacity: 0.85;}
+
+.icon-dog:hover {
+    x:2px;
+    y:2px;
+    opacity: 0.7;}
