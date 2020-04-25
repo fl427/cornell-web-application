@@ -34,28 +34,16 @@ const Home = props => {
 
     return (
         <div className="container-fluid">
-            {/*HeartRate*/}
-            {/*Monitor 01*/}
-            {/*Monitor 02*/}
-            {/*ScenarioItem*/}
             <div className="row">
                 {/*HeartRate*/}
                 {/*Monitor 01*/}
                 {/*Monitor 02*/}
-                <div className="col-md-7">
-                    {/*HeartRate*/}
+                <div className="col-md-8">
                     <div id="panel0" className="row">
-                        <h2>HeartRate</h2>:<h5>The starting state of the menu will appear collapsed on smaller screens,
-                        and will appear
-                        non-collapsed on larger screens. When toggled using the button below, the menu will
-                        change.</h5>
+                        <HeartRate />
                     </div>
-                    {/*Monitor 01*/}
                     <div id="panel1" className="row">
-                        <h2>Monitor 01</h2>:<h5>The starting state of the menu will appear collapsed on smaller screens,
-                        and will appear
-                        non-collapsed on larger screens. When toggled using the button below, the menu will
-                        change.</h5>
+                        <Monitor />
                     </div>
                     {/*Monitor 02*/}
                     <div id="panel2" className="row">
@@ -76,7 +64,7 @@ const Home = props => {
 
             {/*Logs*/}
             <div className="row">
-                <div className="col-md-11 panel-warning">
+                <div className="col-md-12 panel-warning">
                     <Logs/>
                 </div>
             </div>

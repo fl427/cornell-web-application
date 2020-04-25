@@ -8,7 +8,7 @@
     min-width: 100vw;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1007px) {
     #sidebar-wrapper {
         margin-left: 0;
     }

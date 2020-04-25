@@ -28,8 +28,7 @@ const ScenerioList = props => {
 
     return (
         <React.Fragment>
-
-            <div className="content-box-large">
+            <div className="content-box-large" style={{marginTop:'1rem'}}>
                 <div className="panel-heading">
                     <div className="panel-title">Scenario</div>
 
