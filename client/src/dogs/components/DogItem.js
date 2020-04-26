@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 
+
 import Card from "../../shared/components/UIElements/Card";
 import Button from "../../shared/components/FormElements/Button";
 
@@ -9,6 +10,7 @@ import "./DogItem.css";
 
 const DogItem = props => {
     const auth = useContext(AuthContext);
+
 
     return (
         <React.Fragment>
@@ -23,10 +25,10 @@ const DogItem = props => {
                         <p>{props.description}</p>
                     </div>
                     <div className="dog-item__actions">
-                        <Button inverse onClick={() => console.log("Click View Button")}>VIEW</Button>
+                        <Button inverse to={`/dogs/${props.id}`}>VIEW</Button>
 
                         {auth.userId === props.creatorId && (
-                        <Button to={`/dogs/${props.id}`}>EDIT</Button>
+                        <Button to={`/dogs/edit/${props.id}`}>EDIT</Button>
                         )}
 
                         {auth.userId === props.creatorId && (

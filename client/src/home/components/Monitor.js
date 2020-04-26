@@ -21,12 +21,11 @@ const Monitor = props => {
                 <div className="content-box-header">
                     <div className="panel-title">Monitor 1</div>
                     <div className="panel-options">
-                        <a id="setting-btn" data-rel="reload"><FontAwesomeIcon icon={faCog}/></a>
+                        <Link to="/" id="setting-btn" data-rel="reload"><FontAwesomeIcon icon={faCog}/></Link>
                         <Link to="/" id="monitor-remove" data-rel="collapse"><FontAwesomeIcon icon={faTimes}/></Link>
                     </div>
                 </div>
                 <div className="content-box-large box-with-header">
-
 
                     {/*ETCO_2*/}
                     <div id="panel-etco2" className="row">

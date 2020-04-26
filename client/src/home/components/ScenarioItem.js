@@ -35,7 +35,9 @@ const ScenarioItem = props => {
     const auth = useContext(AuthContext);
     return (
         <React.Fragment>
-            <img className="icon-dog" src={`http://localhost:5000/${props.image}`} alt={props.name} />
+            <Link to={`/dogs/${props.id}`}>
+            <img className="icon-dog" src={`http://localhost:5000/${props.image}` } alt={props.name} />
+            </Link>
         </React.Fragment>
     );
 };

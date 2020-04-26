@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import {Link} from "react-router-dom";
 
-import Logs from "../components/Logs";
+import Logs from "./Logs";
 import ScenarioItem from "../components/ScenarioItem";
 import Monitor from "../components/Monitor";
 import HeartRate from "../components/HeartRate";
 
 import { useHttpClient } from '../../shared/hooks/http-hook';
 
-import '../components/Logs.css'
+import './Logs.css'
 import ScenerioList from "../components/ScenerioList";
 
 const Home = props => {

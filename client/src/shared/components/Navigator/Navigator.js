@@ -1,14 +1,31 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import {AuthContext} from '../../context/auth-context';
 
 import "./Navigator.css";
+import {useHttpClient} from "../../hooks/http-hook";
 
 const Navigator = props => {
 
     const {isToggled, onToggle} = props;
     const auth = useContext(AuthContext);
-    console.log("Navigator:" + auth);
+    const [loadedUser, setLoadedUser] = useState();
+    const { isLoading, error, sendRequest, clearError } = useHttpClient();
+
+    // No, The page need to reload, so loadedUser is undefined, the code is not correct
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const responseData = await sendRequest(
+                    `http://localhost:5000/api/users${auth.userId}`
+                );
+
+                setLoadedUser(responseData.users);
+            } catch (err) {}
+        };
+        fetchUser();
+    }, [sendRequest]);
+
 
     return (
         <React.Fragment>
@@ -53,6 +70,15 @@ const Navigator = props => {
                                 {/*<button className="nav-link" onClick={auth.logout}>LOGOUT</button>*/}
                             </li>
                         )}
+
+                        {/*Check whether this user is admin, this checking method is not good, since we only check the
+                        unique admin, there can not have multiple admin if using this method*/}
+                        {auth.isLoggedIn && auth.userId === '5ea511f240200368a4fe8d41' && (
+                        <li className="nav-item">
+                            <Link to="/logs/new" className="nav-link">Add Log</Link>
+                        </li>
+                        )}
+
                         <li className="nav-item dropdown">
                             <Link to="/" className="nav-link dropdown-toggle" id="navbarDropdown" role="button"
                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

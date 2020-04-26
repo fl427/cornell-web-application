@@ -6,13 +6,13 @@ const Users = () => {
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
     const [loadedUsers, setLoadedUsers] = useState();
 
+
     useEffect(() => {
         const fetchUsers = async () => {
             try {
                 const responseData = await sendRequest(
                     'http://localhost:5000/api/users'
                 );
-
                 setLoadedUsers(responseData.users);
             } catch (err) {}
         };

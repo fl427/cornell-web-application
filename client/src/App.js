@@ -21,6 +21,10 @@ import Dogs from "./dogs/pages/Dogs";
 import UserDogs from "./dogs/pages/UserDogs";
 import NewDog from "./dogs/pages/NewDog";
 import UpdateDog from "./dogs/pages/UpdateDog";
+import DogDetail from "./dogs/pages/DogDetail";
+
+// Log
+import NewLog from "./home/pages/NewLog";
 
 const App = () => {
 
@@ -60,9 +64,16 @@ const App = () => {
                 <Route path="/dogs/new" exact>
                     <NewDog/>
                 </Route>
-                <Route path="/dogs/:dogId">
+                <Route path="/dogs/edit/:dogId">
                     <UpdateDog/>
                 </Route>
+                <Route path="/dogs/:dogId">
+                    <DogDetail/>
+                </Route>
+                <Route path="/logs/new">
+                    <NewLog/>
+                </Route>
+
                 <Redirect to="/" />
             </Switch>
         )
@@ -81,6 +92,7 @@ const App = () => {
                 <Route path="/auth" exact>
                     <Auth/>
                 </Route>
+
                 <Redirect to="/auth" />
             </Switch>
         )
