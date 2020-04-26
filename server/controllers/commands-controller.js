@@ -53,7 +53,7 @@ const getCommandById = async (req, res, next) => {
 
 const createCommand = async (req, res, next) => {
     const errors = validationResult(req);
-    console.log(errors);
+    console.log("error", errors);
     if (!errors.isEmpty()) {
         return next (
             new HttpError('Invalid inputs passed, please check your data.', 422)
@@ -64,11 +64,11 @@ const createCommand = async (req, res, next) => {
     console.log(req.body)
 
     const createdCommand = new Command({
-        content
+        content: content
     });
 
     try {
-        createdCommand.save({ session: sess });
+        createdCommand.save();
     } catch (err) {
         const error = new HttpError(
             'Creating Command failed, try again.',

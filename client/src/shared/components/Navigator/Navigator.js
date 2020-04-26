@@ -13,18 +13,18 @@ const Navigator = props => {
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
     // No, The page need to reload, so loadedUser is undefined, the code is not correct
-    useEffect(() => {
-        const fetchUser = async () => {
-            try {
-                const responseData = await sendRequest(
-                    `http://localhost:5000/api/users${auth.userId}`
-                );
-
-                setLoadedUser(responseData.users);
-            } catch (err) {}
-        };
-        fetchUser();
-    }, [sendRequest]);
+    // useEffect(() => {
+    //     const fetchUser = async () => {
+    //         try {
+    //             const responseData = await sendRequest(
+    //                 `http://localhost:5000/api/users/${auth.userId}`
+    //             );
+    //
+    //             setLoadedUser(responseData.users);
+    //         } catch (err) {}
+    //     };
+    //     fetchUser();
+    // }, [sendRequest]);
 
 
     return (

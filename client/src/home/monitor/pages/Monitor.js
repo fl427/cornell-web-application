@@ -16,31 +16,38 @@ const Monitor = props => {
     const auth = useContext(AuthContext);
     const {isLoading, error, sendRequest, clearError} = useHttpClient();
 
-    const [formState, inputHandler] = useForm(
-        {
-            part1: {
-                value: '',
-                isValid: false
-            },
-            part2: {
-                value: '',
-                isValid: false
-            }
-        },
-        true
-    );
+    // Temp : Just Temp
+    // Need some time to figure out the command, so this part is just try to represent the two part of inputs table
+    const [part1, setPart1] = useState();
+
+    const part1SubmitHandler = (event) => {
+        setPart1(event.target.value)
+    }
+
+    const [part2, setPart2] = useState();
+
+    const part2SubmitHandler = (event) => {
+        setPart2(event.target.value)
+    }
+
+    const [name, setName] = useState();
+
+    const nameSubmitHandler = (name) => {
+        setPart2(name)
+    }
 
     const history = useHistory();
 
-    const commandSubmitHandler = async event => {
+    const commandSubmitHandler = async (event) => {
         event.preventDefault();
-        console.log("Hello")
+        console.log(part1)
+        console.log(part2)
         try {
             const responseData = await sendRequest(
                 'http://localhost:5000/api/commands',
                 'POST',
                 JSON.stringify({
-                    content: "Name&" + formState.inputs.part1.value + '&' + formState.inputs.part2.value,
+                    content: name + "&" + part1 + "&" + part2,
                 }),
                 {
                     'Content-Type': 'application/json',
@@ -87,14 +94,16 @@ const Monitor = props => {
                                             <td>
                                                 <div className="input-group form setting-select">
                                                     <form onSubmit={commandSubmitHandler}>
-                                                    <input id="etco2-value" type="text" className="panel-input"
-                                                           placeholder="34mmHg" onInput={inputHandler} />
-                                                    <input id="etco2-period" type="text" className="panel-input"
-                                                           placeholder="60s" onInput={inputHandler}/>
+                                                        {/*<input type="hidden" name="name" value="ECTO" onSubmit={nameSubmitHandler}/>*/}
 
-                                                    <button id="etco2-set" className="btn btn-primary panel-btn" type="button">
-                                                        set
-                                                    </button>
+                                                        <input id="etco2-value" type="text" className="panel-input"
+                                                               placeholder="34mmHg" onChange={event => part1SubmitHandler(event)} />
+                                                        <input id="etco2-period" type="text" className="panel-input"
+                                                               placeholder="60s" onInput={event => part2SubmitHandler(event)}/>
+
+                                                        <button id="etco2-set" className="btn btn-primary panel-btn" type="submit">
+                                                            set
+                                                        </button>
                                                     </form>
                                                 </div>
                                             </td>
