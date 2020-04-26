@@ -1,19 +1,19 @@
 import React from 'react';
 
 import ScenerioItem from "./ScenarioItem";
-import Card from "../../shared/components/UIElements/Card";
+import Card from "../../../shared/components/UIElements/Card";
 import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBackward, faSync} from "@fortawesome/free-solid-svg-icons";
-import icon0 from "../../common/images/icon0.jpg";
-import icon1 from "../../common/images/icon1.jpg";
-import icon2 from "../../common/images/icon2.jpg";
-import icon3 from "../../common/images/icon3.jpg";
-import icon4 from "../../common/images/icon4.jpg";
-import icon5 from "../../common/images/icon5.jpg";
-import icon6 from "../../common/images/icon6.jpg";
-import icon7 from "../../common/images/icon7.jpg";
-import icon8 from "../../common/images/icon8.jpg";
+import icon0 from "../../../common/images/icon0.jpg";
+import icon1 from "../../../common/images/icon1.jpg";
+import icon2 from "../../../common/images/icon2.jpg";
+import icon3 from "../../../common/images/icon3.jpg";
+import icon4 from "../../../common/images/icon4.jpg";
+import icon5 from "../../../common/images/icon5.jpg";
+import icon6 from "../../../common/images/icon6.jpg";
+import icon7 from "../../../common/images/icon7.jpg";
+import icon8 from "../../../common/images/icon8.jpg";
 
 const ScenerioList = props => {
     if (props.items.length === 0) {

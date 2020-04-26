@@ -24,7 +24,7 @@ import UpdateDog from "./dogs/pages/UpdateDog";
 import DogDetail from "./dogs/pages/DogDetail";
 
 // Log
-import NewLog from "./home/pages/NewLog";
+import NewLog from "./home/log/pages/NewLog";
 
 const App = () => {
 

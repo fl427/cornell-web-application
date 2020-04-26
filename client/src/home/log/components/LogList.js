@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Card from "../../shared/components/UIElements/Card";
+import Card from "../../../shared/components/UIElements/Card";
 import LogItem from "./LogItem";
-import Button from "../../shared/components/FormElements/Button";
+import Button from "../../../shared/components/FormElements/Button";
 import './LogList.css';
 import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";

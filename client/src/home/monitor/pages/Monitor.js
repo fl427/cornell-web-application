@@ -1,25 +1,64 @@
 import React, {useState, useContext} from "react";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faCoffee, faSync, faCog, faTimes} from '@fortawesome/free-solid-svg-icons'
 
-import Card from "../../shared/components/UIElements/Card";
-import Button from "../../shared/components/FormElements/Button";
-import Input from "../../shared/components/FormElements/Input";
+import Card from "../../../shared/components/UIElements/Card";
+import Button from "../../../shared/components/FormElements/Button";
+import Input from "../../../shared/components/FormElements/Input";
 
-import {AuthContext} from '../../shared/context/auth-context';
-import {useHttpClient} from '../../shared/hooks/http-hook';
+import {AuthContext} from '../../../shared/context/auth-context';
+import {useHttpClient} from '../../../shared/hooks/http-hook';
+import { useForm } from '../../../shared/hooks/form-hook';
 import './Monitor.css';
 
 const Monitor = props => {
     const auth = useContext(AuthContext);
     const {isLoading, error, sendRequest, clearError} = useHttpClient();
 
+    const [formState, inputHandler] = useForm(
+        {
+            part1: {
+                value: '',
+                isValid: false
+            },
+            part2: {
+                value: '',
+                isValid: false
+            }
+        },
+        true
+    );
+
+    const history = useHistory();
+
+    const commandSubmitHandler = async event => {
+        event.preventDefault();
+        console.log("Hello")
+        try {
+            const responseData = await sendRequest(
+                'http://localhost:5000/api/commands',
+                'POST',
+                JSON.stringify({
+                    content: "Name&" + formState.inputs.part1.value + '&' + formState.inputs.part2.value,
+                }),
+                {
+                    'Content-Type': 'application/json',
+                    Authorization: 'Bearer ' + auth.token
+                }
+            );
+            history.push('/');
+        } catch (err) {
+            console.log(err.message || "Something went wrong, please try again.")
+        }
+    }
+
+
     return (
         <React.Fragment>
             <div className="col-md-12">
                 <div className="content-box-header">
-                    <div className="panel-title">Monitor 1</div>
+                    <div className="panel-title">Monitor</div>
                     <div className="panel-options">
                         <Link to="/" id="setting-btn" data-rel="reload"><FontAwesomeIcon icon={faCog}/></Link>
                         <Link to="/" id="monitor-remove" data-rel="collapse"><FontAwesomeIcon icon={faTimes}/></Link>
@@ -41,30 +80,33 @@ const Monitor = props => {
                                     </div>
                                 </td>
                                 <td className="panel-setting">
+
                                     <table>
                                         <tbody>
                                         <tr>
                                             <td>
                                                 <div className="input-group form setting-select">
+                                                    <form onSubmit={commandSubmitHandler}>
                                                     <input id="etco2-value" type="text" className="panel-input"
-                                                           placeholder="34mmHg"/>
+                                                           placeholder="34mmHg" onInput={inputHandler} />
                                                     <input id="etco2-period" type="text" className="panel-input"
-                                                           placeholder="60s"/>
-                                                    <span className="input-group-btn">
-	                         				<button id="etco2-set" className="btn btn-primary panel-btn"
-                                                    type="button">set</button>
-	                       					</span>
+                                                           placeholder="60s" onInput={inputHandler}/>
+
+                                                    <button id="etco2-set" className="btn btn-primary panel-btn" type="button">
+                                                        set
+                                                    </button>
+                                                    </form>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div className="panel-options setting-select">
-                                                    <a id="etco2-remove" data-rel="collapse"><FontAwesomeIcon
-                                                        icon={faTimes}/></a>
+                                                    <a id="etco2-remove" data-rel="collapse"><FontAwesomeIcon icon={faTimes}/></a>
                                                 </div>
                                             </td>
                                         </tr>
                                         </tbody>
                                     </table>
+
 
                                 </td>
                             </tr>
@@ -190,7 +232,8 @@ const Monitor = props => {
                                         <tr>
                                             <td>
                                                 <div className="input-group form setting-select">
-                                                    <input id="temp-value" type="text" className="panel-input" placeholder="xxx"/>
+                                                    <input id="temp-value" type="text" className="panel-input"
+                                                           placeholder="xxx"/>
                                                     <input id="temp-period" type="text" className="panel-input"
                                                            placeholder="60s"/>
                                                     <span className="input-group-btn">
@@ -201,7 +244,8 @@ const Monitor = props => {
                                             </td>
                                             <td>
                                                 <div className="panel-options setting-select">
-                                                    <a id="temp-remove" data-rel="collapse"><FontAwesomeIcon icon={faTimes}/></a>
+                                                    <a id="temp-remove" data-rel="collapse"><FontAwesomeIcon
+                                                        icon={faTimes}/></a>
                                                 </div>
                                             </td>
                                         </tr>

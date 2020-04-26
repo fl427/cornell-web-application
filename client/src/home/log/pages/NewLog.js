@@ -1,18 +1,18 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import Input from "../../shared/components/FormElements/Input";
-import Button from "../../shared/components/FormElements/Button";
+import Input from "../../../shared/components/FormElements/Input";
+import Button from "../../../shared/components/FormElements/Button";
 
-import { useForm } from '../../shared/hooks/form-hook';
-import { useHttpClient } from '../../shared/hooks/http-hook';
+import { useForm } from '../../../shared/hooks/form-hook';
+import { useHttpClient } from '../../../shared/hooks/http-hook';
 
 
 import {
     VALIDATOR_REQUIRE
-} from '../../shared/util/validator';
+} from '../../../shared/util/validator';
 import './NewLog.css';
-import {AuthContext} from "../../shared/context/auth-context";
+import {AuthContext} from "../../../shared/context/auth-context";
 
 
 const NewLog = () => {
