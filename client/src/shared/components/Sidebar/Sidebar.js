@@ -12,7 +12,7 @@ const Sidebar = props => {
                     <Link to="/" className="list-group-item list-group-item-action bg-light">Dashboard</Link>
                     <Link to="/" className="list-group-item list-group-item-action bg-light">Signals</Link>
                     <Link to="/" className="list-group-item list-group-item-action bg-light">Monitor</Link>
-                    <Link to="/" className="list-group-item list-group-item-action bg-light">Videos</Link>
+                    <Link to="/media" className="list-group-item list-group-item-action bg-light">Media</Link>
                     <Link to="/" className="list-group-item list-group-item-action bg-light">Editors</Link>
                     <Link to="/" className="list-group-item list-group-item-action bg-light">Events</Link>
                 </div>

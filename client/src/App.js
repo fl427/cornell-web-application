@@ -29,6 +29,9 @@ import NewLogcomment from "./home/logcommand/pages/NewLogcomment";
 import Logs from "./home/log/pages/Logs";
 import Logcomments from "./home/logcommand/pages/Logcomments";
 
+// Media
+import Media from "./media/pages/Media";
+
 const App = () => {
 
     const {token, login, logout, userId} = useAuth()
@@ -82,7 +85,9 @@ const App = () => {
                 <Route path="/logcomments/new">
                     <NewLogcomment/>
                 </Route>
-
+                <Route path="/media">
+                    <Media />
+                </Route>
                 <Redirect to="/" />
             </Switch>
         )
