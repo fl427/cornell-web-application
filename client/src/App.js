@@ -26,6 +26,70 @@ import DogDetail from "./dogs/pages/DogDetail";
 // Log
 import NewLog from "./home/log/pages/NewLog";
 
+import HomeIcon from "@material-ui/icons/Home";
+import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
+import NotificationsIcon from "@material-ui/icons/Notifications";
+import DesktopWindowsIcon from '@material-ui/icons/DesktopWindows';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import SettingsIcon from "@material-ui/icons/Settings";
+// import Sidebar from "./Sidebar";
+
+function onClick(e, item) {
+  window.alert(JSON.stringify(item, null, 2));
+}
+
+const items = [
+  { name: "home", label: "Dashboard", Icon: HomeIcon },
+  "divider",
+  {
+    name: "billing",
+    label: "Signals",
+    Icon: RadioButtonCheckedIcon,
+    items: [
+      { name: "statements", label: "Statements", onClick },
+      { name: "reports", label: "Reports", onClick }
+    ]
+  },
+  "divider",
+  {
+      name:"monitor",
+      label: "Monitor",
+      Icon: VisibilityIcon,
+      items:[
+      { name: "heartrate", label: "HeartRate", onClick}
+      ]
+  },
+  "divider",
+  {
+    name: "settings",
+    label: "Settings",
+    Icon: SettingsIcon,
+    items: [
+      { name: "profile", label: "Profile" },
+      { name: "insurance", label: "Insurance", onClick },
+      "divider",
+      {
+        name: "notifications",
+        label: "Notifications",
+        Icon: NotificationsIcon,
+        items: [
+          { name: "email", label: "Email", onClick },
+          {
+            name: "desktop",
+            label: "Desktop",
+            Icon: DesktopWindowsIcon,
+            items: [
+              { name: "schedule", label: "Schedule" },
+              { name: "frequency", label: "Frequency" }
+            ]
+          },
+          { name: "sms", label: "SMS" }
+        ]
+      }
+    ]
+  }
+];
+
 const App = () => {
 
     const {token, login, logout, userId} = useAuth()
@@ -110,7 +174,7 @@ const App = () => {
         >
             <BrowserRouter>
                 <div id="wrapper" className={wrapperClassName}>
-                    <Sidebar/>
+                    <Sidebar items={items}/>
                     <div id="page-content-wrapper">
                         <Navigator
                             isToggle={toggle}
