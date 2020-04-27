@@ -73,7 +73,7 @@ const Navigator = props => {
 
                         {/*Check whether this user is admin, this checking method is not good, since we only check the
                         unique admin, there can not have multiple admin if using this method*/}
-                        {auth.isLoggedIn && auth.userId === '5ea511f240200368a4fe8d41' && (
+                        {auth.isLoggedIn && auth.userId === '5ea62c47e9a2207c62c4148d' && (
                         <li className="nav-item">
                             <Link to="/logs/new" className="nav-link">Add Log</Link>
                         </li>

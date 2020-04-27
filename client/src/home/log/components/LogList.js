@@ -13,8 +13,8 @@ const LogList = props => {
         return (
             <div className="dog-list center">
                 <Card>
-                    <h2>No dog found. Maybe create one?</h2>
-                    <Button to="/dogs/new">Create New Dog</Button>
+                    <h2>No Log found. Maybe create one?</h2>
+                    <Button to="/logs/new">Create New Log</Button>
                 </Card>
             </div>
         );
@@ -25,6 +25,7 @@ const LogList = props => {
             <div className="content-box-header panel-heading">
                 <div className="panel-title ">Logs</div>
                 <div className="panel-options">
+                    <Link to="/logcomments" data-rel="collapse">See Log Comments</Link>
                     <Link to="/" data-rel="collapse"><FontAwesomeIcon icon={faSync} /></Link>
                     <Link to="/" data-rel="reload"><FontAwesomeIcon icon={faCog} /></Link>
                 </div>

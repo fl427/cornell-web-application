@@ -5,6 +5,7 @@ import Logs from "../log/pages/Logs";
 import Scenerios from "../scenerio/pages/Scenerios";
 import Monitor from "../monitor/pages/Monitor";
 import HeartRate from "../heartrate/pages/HeartRate";
+import NewLogcomment from "../logcommand/pages/NewLogcomment";
 
 import { useHttpClient } from '../../shared/hooks/http-hook';
 
@@ -55,6 +56,12 @@ const Home = props => {
             <div className="row">
                 <div className="col-md-12 panel-warning">
                     <Logs/>
+                </div>
+            </div>
+
+            <div className="row">
+                <div className="col-md-12 panel-warning">
+                    <NewLogcomment/>
                 </div>
             </div>
         </div>

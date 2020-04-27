@@ -25,6 +25,9 @@ import DogDetail from "./dogs/pages/DogDetail";
 
 // Log
 import NewLog from "./home/log/pages/NewLog";
+import NewLogcomment from "./home/logcommand/pages/NewLogcomment";
+import Logs from "./home/log/pages/Logs";
+import Logcomments from "./home/logcommand/pages/Logcomments";
 
 const App = () => {
 
@@ -72,6 +75,12 @@ const App = () => {
                 </Route>
                 <Route path="/logs/new">
                     <NewLog/>
+                </Route>
+                <Route path="/logcomments">
+                    <Logcomments/>
+                </Route>
+                <Route path="/logcomments/new">
+                    <NewLogcomment/>
                 </Route>
 
                 <Redirect to="/" />

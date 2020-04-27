@@ -21,10 +21,11 @@ const getUsers = async (req, res, next) => {
 
 
 const getUserById = async (req, res, next) => {
+  console.log(req.params)
   const userId = req.params.uid;
   let user;
   try {
-    user = await User.findById({}, '-password');
+    user = await User.findById(userId, '-password');
   } catch (err) {
     const error = new HttpError(
         'Fetching users failed, please try again later.',
