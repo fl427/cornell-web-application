@@ -25,9 +25,9 @@ import DogDetail from "./dogs/pages/DogDetail";
 
 // Log
 import NewLog from "./home/log/pages/NewLog";
-import NewLogcomment from "./home/logcommand/pages/NewLogcomment";
+import NewLogcomment from "./home/logcomment/pages/NewLogcomment";
 import Logs from "./home/log/pages/Logs";
-import Logcomments from "./home/logcommand/pages/Logcomments";
+import Logcomments from "./home/logcomment/pages/Logcomments";
 
 // Media
 import Media from "./media/pages/Media";

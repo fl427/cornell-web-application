@@ -13,6 +13,10 @@ import './ScenarioItem.css';
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Avatar from "../../../shared/components/UIElements/Avatar";
+import Input from "../../../shared/components/FormElements/Input";
+import {VALIDATOR_MINLENGTH, VALIDATOR_REQUIRE} from "../../../shared/util/validator";
+import ImageUpload from "../../../shared/components/FormElements/ImageUpload";
+import {useForm} from "../../../shared/hooks/form-hook";
 
 const ScenarioItem = props => {
     const auth = useContext(AuthContext);
@@ -22,24 +26,24 @@ const ScenarioItem = props => {
 
     const closeScenerioHandler = () => setShowScenerio(false);
 
+    const [formState, inputHandler] = useForm(
+        {
+            name: {
+                value: '',
+                isValid: false
+            },
+            description: {
+                value: '',
+                isValid: false
+            }
+        },
+        false
+    );
+
 
 
     return (
         <React.Fragment>
-            {/*<Modal*/}
-            {/*    show={showScenerio}*/}
-            {/*    onCancel={closeScenerioHandler}*/}
-            {/*    header={props.name}*/}
-            {/*    className="scenerio-item__modal"*/}
-            {/*    headerClass="scenerio-item__modal-header"*/}
-            {/*    contentClass="scenerio-item__modal-content"*/}
-            {/*    footerClass="scenerio-item__modal-actions"*/}
-            {/*    footer={<Button onClick={closeScenerioHandler}>CLOSE</Button>}*/}
-            {/*>*/}
-            {/*    <div className="scenerio-container">*/}
-            {/*        <h2>The Scenerio</h2>*/}
-            {/*    </div>*/}
-            {/*</Modal>*/}
 
             <Modal show={showScenerio} onHide={closeScenerioHandler}>
                 <Modal.Header closeButton>
@@ -47,17 +51,50 @@ const ScenarioItem = props => {
                 </Modal.Header>
                 <Modal.Body>
                     <div>Modal content here </div>
+
+                    <form className="scenerio-form">
+                        <ul>
+                            <li>
+                                <Input
+                                    id="name"
+                                    element="input"
+                                    type="text"
+                                    label="Name"
+                                    validators={[VALIDATOR_REQUIRE()]}
+                                    errorText="Please enter a valid title."
+                                    onInput={inputHandler}
+                                />
+                            </li>
+                            <li>
+                                <Input
+                                    id="description"
+                                    element="textarea"
+                                    label="Description"
+                                    validators={[VALIDATOR_MINLENGTH(5)]}
+                                    errorText="Please enter a valid description (at least 5 characters)."
+                                    onInput={inputHandler}
+                                />
+                            </li>
+                            <li>
+                                <Button type="submit" disabled={!formState.isValid}>
+                                    ADD DOG
+                                </Button>
+                            </li>
+                        </ul>
+                    </form>
+
+
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={closeScenerioHandler}>Close</Button>
                 </Modal.Footer>
             </Modal>
 
-            <Button inverse onClick={openScenerioHandler}>VIEW Scenerio</Button>
-            <Link to={`/dogs/${props.id}`}>
-            {/*<Link to={openScenerioHandler}>*/}
-            <img className="icon-dog" src={`http://localhost:5000/${props.image}` } alt={props.name} />
-            </Link>
+            {/*<Button inverse onClick={openScenerioHandler}>VIEW Scenerio</Button>*/}
+            <img className="icon-dog" src={`http://localhost:5000/${props.image}` } alt={props.name} onClick={openScenerioHandler}/>
+            {/*<Link to={`/dogs/${props.id}`}>*/}
+            {/*<img className="icon-dog" src={`http://localhost:5000/${props.image}` } alt={props.name} onClick={openScenerioHandler}/>*/}
+            {/*</Link>*/}
         </React.Fragment>
     );
 };

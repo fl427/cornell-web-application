@@ -36,6 +36,60 @@
     width: 100%;
 }
 
+.scenerio-form {
+    max-width: 450px;
+    background: #FAFAFA;
+    padding: 30px;
+    margin: 50px auto;
+    box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);
+    border-radius: 10px;
+    border: 6px solid #305A72;
+}
+
+.scenerio-form ul{
+    padding:0;
+    margin:0;
+    list-style:none;
+}
+.scenerio-form ul li{
+    display: block;
+    margin-bottom: 10px;
+    min-height: 35px;
+}
+
+.scenerio-form ul li  .field-style label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+.scenerio-form ul li  .field-style input,
+.scenerio-form ul li  .field-style textarea{
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    padding: 8px;
+    outline: none;
+    border: 1px solid #B0CFE0;
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+
+    /*铺满*/
+    width: 100%;
+}
+
+.scenerio-form ul li  .field-style--invalid label,
+.scenerio-form ul li  .field-style--invalid p {
+    color: red;
+}
+
+.scenerio-form ul li  .field-style--invalid input,
+.scenerio-form ul li  .field-style--invalid textarea {
+    border-color: red;
+    background: #ffd1d1;
+}
+
 
 /* Sidebar navigation */
 
