@@ -23,6 +23,19 @@
     opacity: 0.7;
 }
 
+.scenerio-item__modal-content {
+    padding: 0;
+}
+
+.scenerio-item__modal-actions {
+    text-align: right;
+}
+
+.scenerio-container {
+    height: 15rem;
+    width: 100%;
+}
+
 
 /* Sidebar navigation */
 
