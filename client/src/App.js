@@ -46,15 +46,15 @@ function onClick(e, item) {
 }
 
 const items = [
-    { name: "", label: "Dashboard", Icon: HomeIcon },
+    { name: "home", label: "Dashboard", Icon: HomeIcon },
     "divider",
     {
-        name: "signal", // 这里用name作为路由。传入Sidebar.js里面的ListItem component={Link} to={`/${item.name}`}
+        name: "billing",
         label: "Signals",
         Icon: RadioButtonCheckedIcon,
         items: [
             { name: "media", label: "Statements", onClick },
-            { name: "media", label: "Reports", onClick }
+            { name: "reports", label: "Reports", onClick }
         ]
     },
     "divider",
@@ -63,7 +63,12 @@ const items = [
         label: "Monitor",
         Icon: VisibilityIcon,
         items:[
-            { name: "heartrate", label: "HeartRate", onClick}
+            { name: "heartrate", label: "HeartRate", onClick},
+            { name: "etco2", label: "ETCO2", onClick},
+            { name: "awrr", label: "awRR", onClick},
+            { name: "spo2", label: "SpO2", onClick},
+            { name: "temp", label: "Temp", onClick},
+            { name: "nibp", label: "NIBP", onClick}
         ]
     },
     "divider",
@@ -96,6 +101,8 @@ const items = [
         ]
     }
 ];
+
+
 
 
 const App = () => {

@@ -5,6 +5,9 @@ import {AuthContext} from '../../context/auth-context';
 import "./Navigator.css";
 import {useHttpClient} from "../../hooks/http-hook";
 
+import { Button, Form, FormControl, Navbar, Nav, NavDropdown, Container } from 'react-bootstrap';
+
+
 const Navigator = props => {
 
     const {isToggled, onToggle} = props;
@@ -12,23 +15,27 @@ const Navigator = props => {
     const [loadedUser, setLoadedUser] = useState();
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
-    // No, The page need to reload, so loadedUser is undefined, the code is not correct
-    // useEffect(() => {
-    //     const fetchUser = async () => {
-    //         try {
-    //             const responseData = await sendRequest(
-    //                 `http://localhost:5000/api/users/${auth.userId}`
-    //             );
-    //
-    //             setLoadedUser(responseData.users);
-    //         } catch (err) {}
-    //     };
-    //     fetchUser();
-    // }, [sendRequest]);
 
 
     return (
         <React.Fragment>
+
+            {/*<Navbar bg="light" variant="light">*/}
+            {/*    <Nav className="mr-auto">*/}
+            {/*        <Button variant="primary" onClick={onToggle}>Toggle Menu</Button>*/}
+            {/*        <Nav.Link href="/">Home</Nav.Link>*/}
+            {/*        <Nav.Link href="/users">Users</Nav.Link>*/}
+            {/*        <Nav.Link href="/dogs">Dogs</Nav.Link>*/}
+            {/*        {auth.isLoggedIn && (*/}
+            {/*            <Nav.Link href={`/${auth.userId}/dogs`}>My Dogs</Nav.Link>*/}
+            {/*        )}*/}
+            {/*    </Nav>*/}
+            {/*    <Form inline>*/}
+            {/*        <FormControl type="text" placeholder="Search" className="mr-sm-2" />*/}
+            {/*        <Button variant="outline-primary">Search</Button>*/}
+            {/*    </Form>*/}
+            {/*</Navbar>*/}
+
             <nav className="navbar navbar-expand-lg navbar-light bg-light border-bottom">
                 <button className="btn btn-primary" id="menu-toggle" onClick={onToggle}>Toggle Menu</button>
 
@@ -79,21 +86,14 @@ const Navigator = props => {
                         </li>
                         )}
 
-                        <li className="nav-item dropdown">
-                            <Link to="/" className="nav-link dropdown-toggle" id="navbarDropdown" role="button"
-                                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Dropdown
-                            </Link>
-                            <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <Link to="/" className="dropdown-item">Action</Link>
-                                <Link to="/" className="dropdown-item">Another action</Link>
-                                <div className="dropdown-divider"></div>
-                                <Link to="/" className="dropdown-item">Something else here</Link>
-                            </div>
-                        </li>
+                        {/*<Form inline>*/}
+                        {/*    <FormControl type="text" placeholder="Search" className="md-sm-2" />*/}
+                        {/*    <Button variant="outline-primary">Search</Button>*/}
+                        {/*</Form>*/}
                     </ul>
                 </div>
             </nav>
+
         </React.Fragment>
     );
 };
