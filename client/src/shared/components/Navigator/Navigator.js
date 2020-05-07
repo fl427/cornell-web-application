@@ -36,8 +36,8 @@ const Navigator = props => {
     <Nav className="mr-auto">
       <Button variant="primary" onClick={onToggle}>Toggle Menu</Button>
       <Nav.Link href="/">Home</Nav.Link>
-      <Nav.Link href="#features">Features</Nav.Link>
-      <Nav.Link href="#pricing">Pricing</Nav.Link>
+      <Nav.Link href="/dogs">Dogs</Nav.Link>
+      <Nav.Link href="/scenario">Scenario</Nav.Link>
     </Nav>
     <Form inline>
       <FormControl type="text" placeholder="Search" className="mr-sm-2" />
