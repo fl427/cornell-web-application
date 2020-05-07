@@ -56,7 +56,12 @@ const items = [
       label: "Monitor",
       Icon: VisibilityIcon,
       items:[
-      { name: "heartrate", label: "HeartRate", onClick}
+      { name: "heartrate", label: "HeartRate", onClick},
+      { name: "etco2", label: "ETCO2", onClick},
+      { name: "awrr", label: "awRR", onClick},
+      { name: "spo2", label: "SpO2", onClick},
+      { name: "temp", label: "Temp", onClick},
+      { name: "nibp", label: "NIBP", onClick}
       ]
   },
   "divider",
