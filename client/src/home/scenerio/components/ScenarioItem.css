@@ -41,9 +41,9 @@
     background: #FAFAFA;
     padding: 30px;
     margin: 50px auto;
-    box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);
+    box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.15);
     border-radius: 10px;
-    border: 6px solid #305A72;
+    /*border: 6px solid #305A72;*/
 }
 
 .scenerio-form ul{
@@ -94,6 +94,7 @@
 /* Sidebar navigation */
 
 .content-box, .content-box-large {
+    box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.18);
     margin-bottom: 12px;
     background: #fff;
     border-radius: 10px;

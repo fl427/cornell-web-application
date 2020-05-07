@@ -29,7 +29,7 @@
     min-height: 32px;
     font-size: 16px;
     background:#f5f5f5;
-    background-image: linear-gradient(to bottom right,white, #FBFBFB,#F9F9F9, #F0F0F0,#ECECEC,#D9D9D9);
+    /*background-image: linear-gradient(to bottom right,white, #FBFBFB,#F9F9F9, #F0F0F0,#ECECEC,#D9D9D9);*/
     border-top-left-radius:5px;
     border-top-right-radius:5px;
     padding:7px 13px;

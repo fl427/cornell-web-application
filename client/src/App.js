@@ -1,7 +1,7 @@
 // @Reference: https://startbootstrap.com/templates/simple-sidebar/
 // @Reference: https://stackoverflow.com/questions/20557912/creating-a-fixed-sidebar-alongside-a-centered-bootstrap-3-grid
 import React, { useState } from "react";
-import {BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import {BrowserRouter, Route, Switch, Redirect, Link} from "react-router-dom";
 
 // Home
 import Home from "./home/pages/Home";
@@ -31,6 +31,72 @@ import Logcomments from "./home/logcomment/pages/Logcomments";
 
 // Media
 import Media from "./media/pages/Media";
+
+// New Sidebar Setting
+import HomeIcon from "@material-ui/icons/Home";
+import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
+import NotificationsIcon from "@material-ui/icons/Notifications";
+import DesktopWindowsIcon from '@material-ui/icons/DesktopWindows';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import SettingsIcon from "@material-ui/icons/Settings";
+
+function onClick(e, item) {
+    // window.alert(JSON.stringify(item, null, 2));
+    // return <Link to="/media">Media</Link>
+}
+
+const items = [
+    { name: "", label: "Dashboard", Icon: HomeIcon },
+    "divider",
+    {
+        name: "signal", // 这里用name作为路由。传入Sidebar.js里面的ListItem component={Link} to={`/${item.name}`}
+        label: "Signals",
+        Icon: RadioButtonCheckedIcon,
+        items: [
+            { name: "media", label: "Statements", onClick },
+            { name: "media", label: "Reports", onClick }
+        ]
+    },
+    "divider",
+    {
+        name:"monitor",
+        label: "Monitor",
+        Icon: VisibilityIcon,
+        items:[
+            { name: "heartrate", label: "HeartRate", onClick}
+        ]
+    },
+    "divider",
+    {
+        name: "settings",
+        label: "Settings",
+        Icon: SettingsIcon,
+        items: [
+            { name: "profile", label: "Profile" },
+            { name: "insurance", label: "Insurance", onClick },
+            "divider",
+            {
+                name: "notifications",
+                label: "Notifications",
+                Icon: NotificationsIcon,
+                items: [
+                    { name: "email", label: "Email", onClick },
+                    {
+                        name: "desktop",
+                        label: "Desktop",
+                        Icon: DesktopWindowsIcon,
+                        items: [
+                            { name: "schedule", label: "Schedule" },
+                            { name: "frequency", label: "Frequency" }
+                        ]
+                    },
+                    { name: "sms", label: "SMS" }
+                ]
+            }
+        ]
+    }
+];
+
 
 const App = () => {
 
@@ -124,7 +190,7 @@ const App = () => {
         >
             <BrowserRouter>
                 <div id="wrapper" className={wrapperClassName}>
-                    <Sidebar/>
+                    <Sidebar items={items}/>
                     <div id="page-content-wrapper">
                         <Navigator
                             isToggle={toggle}

@@ -1,12 +1,111 @@
+// @reference: https://medium.com/better-programming/create-a-modern-dynamic-sidebar-menu-in-react-using-recursion-f757135045bc
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
 
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import Divider from "@material-ui/core/Divider";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import ExpandLessIcon from "@material-ui/icons/ExpandLess";
+import Collapse from "@material-ui/core/Collapse";
+
 import "./Sidebar.css";
 
-const Sidebar = props => {
+function SidebarItem({ depthStep = 10, depth = 0, expanded, item, ...rest }) {
+    const [collapsed, setCollapsed] = React.useState(true);
+    const { label, items, Icon, onClick: onClickProp } = item;
+
+    function toggleCollapse() {
+        setCollapsed(prevValue => !prevValue);
+    }
+
+    function onClick(e) {
+        if (Array.isArray(items)) {
+            toggleCollapse();
+        }
+        if (onClickProp) {
+            onClickProp(e, item);
+        }
+    }
+
+    let expandIcon;
+
+    if (Array.isArray(items) && items.length) {
+        expandIcon = !collapsed ? (
+            <ExpandLessIcon
+                className={
+                    "sidebar-item-expand-arrow" + " sidebar-item-expand-arrow-expanded"
+                }
+            />
+        ) : (
+            <ExpandMoreIcon className="sidebar-item-expand-arrow" />
+        );
+    }
+
+    return (
+        <>
+            <ListItem
+                className="sidebar-item"
+                onClick={onClick}
+                button
+                component={Link} to={`/${item.name}`}
+                dense
+                {...rest}
+            >
+                <div
+                    style={{ paddingLeft: depth * depthStep }}
+                    className="sidebar-item-content"
+                >
+                    {Icon && <Icon className="sidebar-item-icon" fontSize="small" />}
+                    <div className="sidebar-item-text">{label}</div>
+                </div>
+                {expandIcon}
+            </ListItem>
+            <Collapse in={!collapsed} timeout="auto" unmountOnExit>
+                {Array.isArray(items) ? (
+                    <List disablePadding dense>
+                        {items.map((subItem, index) => (
+                            <React.Fragment key={`${subItem.name}${index}`}>
+                                {subItem === "divider" ? (
+                                    <Divider style={{ margin: "6px 0" }} />
+                                ) : (
+                                    <SidebarItem
+                                        depth={depth + 1}
+                                        depthStep={depthStep}
+                                        item={subItem}
+                                    />
+                                )}
+                            </React.Fragment>
+                        ))}
+                    </List>
+                ) : null}
+            </Collapse>
+        </>
+    );
+}
+
+
+const Sidebar = ({ props, items, depthStep, depth, expanded }) => {
         return (
             <React.Fragment>
-            <div className="bg-light border-right sidebar" id="sidebar-wrapper">
+                {/*className="bg-light border-right sidebar"*/}
+                <div className="sidebar" id="sidebar-wrapper">
+                <List disablePadding dense>
+                    {items.map((sidebarItem, index) => (
+                        <React.Fragment key={`${sidebarItem.name}${index}`}>
+                            {sidebarItem === "divider" ? (
+                                <Divider style={{ margin: "6px 0" }} />
+                            ) : (
+                                <SidebarItem
+                                    depthStep={depthStep}
+                                    depth={depth}
+                                    expanded={expanded}
+                                    item={sidebarItem}
+                                />
+                            )}
+                        </React.Fragment>
+                    ))}
+                </List>
                 <div className="sidebar-heading">Simulation</div>
                 <div className="list-group list-group-flush">
                     <Link to="/" className="list-group-item list-group-item-action bg-light">Dashboard</Link>
@@ -17,91 +116,6 @@ const Sidebar = props => {
                     <Link to="/" className="list-group-item list-group-item-action bg-light">Events</Link>
                 </div>
             </div>
-
-
-
-
-                {/*<div className="sidebar content-box" style={{display: 'block'}}>*/}
-                {/*    <ul className="nav">*/}
-                {/*        <li className="current"><a href="index.html"><i*/}
-                {/*            className="glyphicon glyphicon-home"></i> Dashboard</a></li>*/}
-
-                        {/*<li className="submenu">*/}
-                        {/*    <a href="#">*/}
-                        {/*        <i className="glyphicon glyphicon-record"></i> Signals*/}
-                        {/*        <span className="caret pull-right"></span>*/}
-                        {/*    </a>*/}
-                        {/*    <ul>*/}
-                        {/*        <li><a id="sk" href="index.html">Shock</a></li>*/}
-                        {/*        <li><a id="do" href="index.html">Low Dose Epi</a></li>*/}
-
-                        {/*    </ul>*/}
-                        {/*</li>*/}
-
-                {/*        <li className="submenu submenu-item">*/}
-                {/*            <a id="monitor">*/}
-                {/*                <i className="glyphicon glyphicon-eye-open"></i> Monitor*/}
-                {/*                <span className="caret pull-right"></span>*/}
-                {/*            </a>*/}
-                {/*            <ul>*/}
-                {/*                <li><a id="monitor-hr" className="submenu-item">Heart Rate </a></li>*/}
-                {/*                <li><a id="monitor-etco2" className="submenu-item">ETCO<sub>2</sub></a></li>*/}
-                {/*                <li><a id="monitor-awrr" className="submenu-item">awRR</a></li>*/}
-                {/*                <li><a id="monitor-spo2" className="submenu-item">SpO<sub>2</sub></a></li>*/}
-                {/*                <li><a id="monitor-temp" className="submenu-item">Temp</a></li>*/}
-                {/*                <li><a id="monitor-nibp" className="submenu-item">NIBP</a></li>*/}
-
-                {/*            </ul>*/}
-                {/*        </li>*/}
-
-
-                {/*        <li className="submenu">*/}
-                {/*            <a href="#">*/}
-                {/*                <i className="glyphicon glyphicon-cog"></i> Settings*/}
-                {/*                <span className="caret pull-right"></span>*/}
-                {/*            </a>*/}
-                {/*            <ul>*/}
-                {/*                <li><a id="set-ecg" href="index.html">ECG</a></li>*/}
-                {/*                <li><a id="set-hr" href="index.html">Heart Rate</a></li>*/}
-
-
-                {/*            </ul>*/}
-                {/*        </li>*/}
-
-
-                {/*        <li><a href="calendar.html"><i className="glyphicon glyphicon-facetime-video"></i> Videos</a>*/}
-                {/*        </li>*/}
-                {/*        <li><a href="buttons.html"><i className="glyphicon glyphicon-record"></i> Buttons</a></li>*/}
-                {/*        <li><a href="editors.html"><i className="glyphicon glyphicon-pencil"></i> Editors</a></li>*/}
-                {/*        <li><a href="forms.html"><i className="glyphicon glyphicon-tasks"></i> Forms</a></li>*/}
-
-                {/*        <li className="submenu">*/}
-                {/*            <a href="#">*/}
-                {/*                <i className="glyphicon glyphicon-list"></i> Events*/}
-                {/*                <span className="caret pull-right"></span>*/}
-                {/*            </a>*/}
-
-                {/*            <ul>*/}
-                {/*                <li><a id="shock" href="index.html">Shock</a></li>*/}
-                {/*                <li><a id="lowdo" href="index.html">Low Dose Epi</a></li>*/}
-                {/*                <li><a id="vasop" href="index.html">Vasoperssin</a></li>*/}
-                {/*                <li><a id="reversal" href="index.html">Reversal</a></li>*/}
-                {/*                <li><a id="defib" href="index.html">Defib</a></li>*/}
-                {/*                <li><a id="terminal" href="index.html">Terminal</a></li>*/}
-                {/*            </ul>*/}
-                {/*        </li>*/}
-                {/*    </ul>*/}
-                {/*</div>*/}
-
-
-
-
-
-
-
-
-
-
 
             </React.Fragment>
         );

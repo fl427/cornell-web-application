@@ -67,6 +67,7 @@ const NewLog = () => {
                             errorText="The robot didn't give a log."
                             onInput={inputHandler}
                         />
+
                     </li>
 
                     <li>

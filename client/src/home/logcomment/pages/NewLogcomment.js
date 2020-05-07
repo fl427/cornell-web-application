@@ -63,7 +63,8 @@ const NewLogcomment = () => {
                             type="text"
                             label="Logcomment"
                             validators={[VALIDATOR_REQUIRE()]}
-                            errorText="The user didn't give a logcomment."
+                            errorText=""
+                            // errorText="The user didn't give a logcomment."
                             onInput={inputHandler}
                         />
                     </li>
