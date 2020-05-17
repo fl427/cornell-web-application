@@ -1,0 +1,51 @@
+.sidebar-body{
+    background-color: #363636;
+    font-size: 0.9rem;
+    font-weight: bold;
+    font-family: sans-serif;
+}
+
+.profile-box{
+    margin: auto;
+    text-align: center;
+}
+
+.leave-for-profile{
+    height: 6rem;
+}
+
+.toggle{
+    width:100%;
+    margin: 0.7rem 2rem 0.7rem 2rem;
+}
+
+.toggle, .toggle:visited{
+    color: #DADADA;
+}
+
+.toggle:active, .toggle:hover{
+    color: white;
+}
+
+
+.subtoggle{
+    margin: auto;
+    margin-top: 0.2rem;
+    margin-bottom: 0.6rem;
+    text-align: left;
+}
+
+.subtoggle-group{
+    margin: auto;
+    margin-left: 4.3rem;
+    margin-bottom: 0.3rem;
+}
+
+.grey-line{
+    margin-top:0.6rem;
+    margin-bottom: 0.3rem;
+    margin-left:-0.5rem;
+    margin-right:-0.5rem;
+    height:1px;
+    background-color: #B5B5B5;
+}

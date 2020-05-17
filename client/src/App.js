@@ -2,9 +2,12 @@
 // @Reference: https://stackoverflow.com/questions/20557912/creating-a-fixed-sidebar-alongside-a-centered-bootstrap-3-grid
 import React, { useState } from "react";
 import {BrowserRouter, Route, Switch, Redirect, Link} from "react-router-dom";
-
+import {MDBContainer, MDBRow, MDBCol, MDBMask, MDBView} from "mdbreact";
+import Navibar2 from "./shared/components/Navigator/Navibar2";
+import bg from './bg2.png';
 // Home
 import Home from "./home/pages/Home";
+import Home2 from "./containers/Home2";
 
 // User
 import Users from "./user/pages/Users";
@@ -39,6 +42,12 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import DesktopWindowsIcon from '@material-ui/icons/DesktopWindows';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import SettingsIcon from "@material-ui/icons/Settings";
+
+//Error Page
+import Errorpage from "./containers/Errorpage";
+
+//css
+import './App.css';
 
 function onClick(e, item) {
     // window.alert(JSON.stringify(item, null, 2));
@@ -129,24 +138,29 @@ const App = () => {
         routes = (
             <Switch>
                 <Route path="/" exact>
-                    <Home/>
+                    <Home2/>
                 </Route>
                 <Route path="/users" exact>
                     <Users/>
                 </Route>
                 <Route path="/dogs" exact>
+
                     <Dogs/>
                 </Route>
                 <Route path="/:userId/dogs" exact>
+
                     <UserDogs/>
                 </Route>
                 <Route path="/dogs/new" exact>
+
                     <NewDog/>
                 </Route>
                 <Route path="/dogs/edit/:dogId">
+
                     <UpdateDog/>
                 </Route>
                 <Route path="/dogs/:dogId">
+
                     <DogDetail/>
                 </Route>
                 <Route path="/logs/new">
@@ -161,14 +175,17 @@ const App = () => {
                 <Route path="/media">
                     <Media />
                 </Route>
-                <Redirect to="/" />
+                <Route path="/error">
+                    <Errorpage />
+                </Route>
+                <Redirect to="/error" />
             </Switch>
         )
     } else {
         routes = (
-            <Switch>
+            /*<Switch>
                 <Route path="/" exact>
-                    <Home/>
+                    <Home2/>
                 </Route>
                 <Route path="/users" exact>
                     <Users/>
@@ -181,6 +198,25 @@ const App = () => {
                 </Route>
 
                 <Redirect to="/auth" />
+            </Switch>*/
+
+            <Switch>
+                <Route path="/" exact>
+                    <Home2/>
+                </Route>
+                <Route path="/users" exact>
+                    <Users/>
+                </Route>
+                <Route path="/dogs" exact>
+                    <Dogs/>
+                </Route>
+                <Route path="/auth" exact>
+                    <Auth/>
+                </Route>
+                <Route path="/error">
+                    <Errorpage />
+                </Route>
+                <Redirect to="/error" />
             </Switch>
         )
     }
@@ -196,15 +232,9 @@ const App = () => {
             }}
         >
             <BrowserRouter>
-                <div id="wrapper" className={wrapperClassName}>
-                    <Sidebar items={items}/>
-                    <div id="page-content-wrapper">
-                        <Navigator
-                            isToggle={toggle}
-                            onToggle={handleToggle}
-                        />
-                        {routes}
-                    </div>
+                <div className="App">
+                <Navibar2/>
+                {routes}
                 </div>
             </BrowserRouter>
         </AuthContext.Provider>

@@ -36,13 +36,13 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
+/*
 .sidebar {
     max-width: 260px;
     height: 100vh;
     border: 1px solid rgba(0, 0, 0, 0.1);
 }
-
+*/
 .sidebar-item {
     width: 15rem;
     display: flex;
@@ -51,7 +51,7 @@ code {
 }
 
 .sidebar-item-content {
-    width: 11.5rem;  /*这个地方很玄学，我觉得是15rem才对，不知道为什么设成11.5才基本和预想一样，总之CSS的内容要继续学习*/
+    width: 11.5rem;
     /*width: 100%;*/
     white-space: nowrap;
     text-overflow: ellipsis;
