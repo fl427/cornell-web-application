@@ -16,9 +16,11 @@ import { useForm } from "../../shared/hooks/form-hook";
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import { AuthContext } from "../../shared/context/auth-context";
 import "./Auth.css";
+import {useHistory} from "react-router-dom";
 
 const Auth = () => {
     const auth = useContext(AuthContext);
+    const history = useHistory();
     const [isLoginMode, setIsLoginMode] = useState(true);
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
     const [formState, inputHandler, setFormData] = useForm(
@@ -96,6 +98,7 @@ const Auth = () => {
                 );
 
                 auth.login(responseData.userId, responseData.token);
+                history.push('/');
             } catch (err) {}
         }
     };

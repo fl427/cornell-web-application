@@ -18,7 +18,6 @@ const DogList = props => {
     }
 
     return (
-
         <ul className="dog-list">
             {props.items.map(dog => (
                 <DogItem

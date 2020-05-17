@@ -46,12 +46,16 @@ const Navibar2 = props => {
                                     <MDBNavItem>
                                         <MDBNavLink to="/dogs/new">New scenario</MDBNavLink>
                                     </MDBNavItem>
+                                    {!auth.isLoggedIn && (
                                     <MDBNavItem>
                                         <MDBNavLink to="/auth" onClick={auth.logout}>Sign in</MDBNavLink>
                                     </MDBNavItem>
+                                    )}
+                                    {auth.isLoggedIn && (
                                     <MDBNavItem>
                                         <MDBNavLink to="#!" onClick={auth.logout}>Log out</MDBNavLink>
                                     </MDBNavItem>
+                                    )}
 
                                 </MDBNavbarNav>
                             </MDBCollapse>

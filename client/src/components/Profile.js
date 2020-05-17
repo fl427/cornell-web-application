@@ -1,13 +1,34 @@
-import React, { useState,useEffect } from "react";
+import React, {useState, useEffect, useContext} from "react";
 import { MDBView, MDBMask, MDBCol,MDBRow} from "mdbreact";
 
 import './css/Profile.css'
 import avatar_black from '../pikachu.jpeg'
 import avatar_bg from '../avatar_bg.png'
+import {AuthContext} from "../shared/context/auth-context";
+import {useHttpClient} from "../shared/hooks/http-hook";
+import {useHistory, useParams} from "react-router-dom";
 
-function Profile() {
-    const [username,setUsername] = useState("Little Black");
-    const [email,setEmail] = useState("pg477@cornell.edu");
+const Profile = () => {
+    const auth = useContext(AuthContext);
+    const userId = auth.userId
+
+    const { isLoading, error, sendRequest, clearError } = useHttpClient();
+    const [loadedUser, setLoadedUser] = useState();
+
+    useEffect(() => {
+        console.log(userId)
+        const fetchUser = async () => {
+            try {
+                const responseData = await sendRequest(
+                    `http://localhost:5000/api/users/${userId}`
+                );
+                setLoadedUser(responseData.user);
+            } catch (err) {}
+        };
+        fetchUser();
+    }, [sendRequest, userId]);
+
+    console.log(loadedUser)
 
     return (
         <div>
@@ -22,19 +43,23 @@ function Profile() {
                 <MDBCol>
                     <MDBRow className="avatar-box">
                         <div style={{height:"5.9rem",width:"5.9rem",backgroundColor:"white"}} className="rounded-circle move">
-
-                            <img className="avatar rounded-circle" src={avatar_black} alt="Avatar"/>
-
+                            {loadedUser && (
+                            <img className="avatar rounded-circle" src={`http://localhost:5000/${loadedUser.image}`} alt="Avatar"/>
+                            )}
                         </div>
                     </MDBRow>
 
                     <MDBRow style={{marginLeft:"1rem",textAlign: "left"}} >
                         <MDBCol>
                             <MDBRow>
-                                <p className="username">{username}</p>
+                                {loadedUser && (
+                                <p className="username">{loadedUser.name}</p>
+                                )}
                             </MDBRow>
                             <MDBRow>
-                                <p className="email">{email}</p>
+                                {loadedUser && (
+                                <p className="email">{loadedUser.email}</p>
+                                )}
                             </MDBRow>
 
                         </MDBCol>

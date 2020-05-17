@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import {BrowserRouter, Route, Switch, Redirect, Link} from "react-router-dom";
 import {MDBContainer, MDBRow, MDBCol, MDBMask, MDBView} from "mdbreact";
-import Navibar2 from "./shared/components/Navigator/Navibar2";
 import bg from './bg2.png';
 // Home
 import Home from "./home/pages/Home";
@@ -18,6 +17,7 @@ import { useAuth } from "./shared/hooks/auth-hook";
 // Navigation
 import Sidebar from "./shared/components/Sidebar/Sidebar";
 import Navigator from "./shared/components/Navigator/Navigator";
+import Navibar2 from "./shared/components/Navigator/Navibar2";
 
 // Dog
 import Dogs from "./dogs/pages/Dogs";
@@ -178,7 +178,7 @@ const App = () => {
                 <Route path="/error">
                     <Errorpage />
                 </Route>
-                <Redirect to="/error" />
+                <Redirect to="/" />
             </Switch>
         )
     } else {
