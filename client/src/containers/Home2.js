@@ -30,32 +30,29 @@ function Home2() {
                 <MDBMask className="text-black text-center" style={{top:"5rem",left:"-3.1rem"}}>
                     <MDBContainer>
                         <MDBRow>
-                            <MDBCol lg="3" sm="6"><Sidebar clickFunc={clickToggle}/></MDBCol>
-                            <MDBCol lg="9" sm="6">
+                            <MDBCol lg="3" md="6"><Sidebar clickFunc={clickToggle}/></MDBCol>
+                            <MDBCol lg="9" md="6">
                                 <MDBRow style={{marginRight:"-60px"}}>
-                                    <MDBCol sm="12" md="6" lg="4" style={{marginBottom: "2rem"}} >
+                                    <MDBCol md="12"  lg="4" style={{marginBottom: "2rem"}} >
+                                        {visible['ETCO2']===true?(<Card vital="ETCO2" unit="mmHg" hideFunc={hideCard}/>):null}
+                                    </MDBCol>
+                                    <MDBCol md="12"  lg="4" style={{marginBottom: "2rem"}} >
+                                        {visible['ETCO2']===true?(<Card vital="ETCO2" unit="mmHg" hideFunc={hideCard}/>):null}
+                                    </MDBCol>
+                                    <MDBCol md="12"  lg="4" style={{marginBottom: "2rem"}} >
+                                        {visible['ETCO2']===true?(<Card vital="ETCO2" unit="mmHg" hideFunc={hideCard}/>):null}
+                                    </MDBCol>
+                                    <MDBCol md="12"  lg="4" style={{marginBottom: "2rem"}} >
+                                        {visible['ETCO2']===true?(<Card vital="ETCO2" unit="mmHg" hideFunc={hideCard}/>):null}
+                                    </MDBCol>
+                                    <MDBCol md="12"  lg="4" style={{marginBottom: "2rem"}} >
+                                        {visible['ETCO2']===true?(<Card vital="ETCO2" unit="mmHg" hideFunc={hideCard}/>):null}
+                                    </MDBCol>
+                                    <MDBCol md="12"  lg="4" style={{marginBottom: "2rem"}} >
                                         {visible['ETCO2']===true?(<Card vital="ETCO2" unit="mmHg" hideFunc={hideCard}/>):null}
                                     </MDBCol>
 
-                                    <MDBCol sm="12" md="6" lg="4" style={{marginBottom: "2rem"}} >
-                                        {visible['ETCO2']===true?(<Card vital="ETCO2" unit="mmHg" hideFunc={hideCard}/>):null}
-                                    </MDBCol>
 
-                                    <MDBCol sm="12" md="6" lg="4" style={{marginBottom: "2rem"}} >
-                                        {visible['ETCO2']===true?(<Card vital="ETCO2" unit="mmHg" hideFunc={hideCard}/>):null}
-                                    </MDBCol>
-
-                                    <MDBCol sm="12" md="6" lg="4" style={{marginBottom: "2rem"}} >
-                                        {visible['ETCO2']===true?(<Card vital="ETCO2" unit="mmHg" hideFunc={hideCard}/>):null}
-                                    </MDBCol>
-
-                                    <MDBCol sm="12" md="6" lg="4" style={{marginBottom: "2rem"}} >
-                                        {visible['ETCO2']===true?(<Card vital="ETCO2" unit="mmHg" hideFunc={hideCard}/>):null}
-                                    </MDBCol>
-
-                                    <MDBCol sm="12" md="6" lg="4" style={{marginBottom: "2rem"}} >
-                                        {visible['ETCO2']===true?(<Card vital="ETCO2" unit="mmHg" hideFunc={hideCard}/>):null}
-                                    </MDBCol>
 
                                 </MDBRow>
 
