@@ -9,6 +9,7 @@ import './css/Sidebar.css';
 class Sidebar extends Component {
     static propTypes = {
         clickFunc: PropTypes.func.isRequired,
+        visibleAllFunc: PropTypes.func.isRequired,
     }
 
     state = {
@@ -47,11 +48,31 @@ class Sidebar extends Component {
                             <MDBCollapse className="flex-d flex-column subtoggle-group" id="collapse" isOpen={this.state.collapseID} >
                                 <MDBCol>
                                     <MDBRow>
+                                        <a className="toggle subtoggle" href="#!" onClick={this.props.clickFunc.bind(this,'Heart Rate')}>Heart Rate</a>
+                                    </MDBRow>
+                                    <MDBRow>
                                         <a className="toggle subtoggle" href="#!" onClick={this.props.clickFunc.bind(this,'ETCO2')}>ETCO<sub>2</sub></a>
                                     </MDBRow>
                                     <MDBRow>
-                                        <a className="toggle subtoggle" href="#!">AWRR</a>
+                                        <a className="toggle subtoggle" href="#!" onClick={this.props.clickFunc.bind(this,'AWRR')}>AWRR</a>
                                     </MDBRow>
+                                    <MDBRow>
+                                        <a className="toggle subtoggle" href="#!" onClick={this.props.clickFunc.bind(this,'SPO2')}>SpO<sub>2</sub></a>
+                                    </MDBRow>
+                                    <MDBRow>
+                                        <a className="toggle subtoggle" href="#!" onClick={this.props.clickFunc.bind(this,'TEMP')}>Temp</a>
+                                    </MDBRow>
+                                    <MDBRow>
+                                        <a className="toggle subtoggle" href="#!" onClick={this.props.clickFunc.bind(this,'NIBP')}>NIBP</a>
+                                    </MDBRow>
+                                    <MDBRow>
+                                        <a className="toggle subtoggle operate-all" href="#!"
+                                           onClick={this.props.visibleAllFunc.bind(this,['Heart Rate', 'ETCO2', 'AWRR', 'SPO2', 'TEMP', 'NIBP'])}
+                                        >
+                                            Show/Hide All
+                                        </a>
+                                    </MDBRow>
+
                                 </MDBCol>
                             </MDBCollapse>
                         </MDBRow>
@@ -80,6 +101,24 @@ class Sidebar extends Component {
                                     <MDBRow>
                                         <a className="toggle subtoggle" href="#!">Left Lung Sounds</a>
                                     </MDBRow>
+                                    <MDBRow>
+                                        <a className="toggle subtoggle" href="#!">Chest Movement</a>
+                                    </MDBRow>
+                                    <MDBRow>
+                                        <a className="toggle subtoggle" href="#!">Heart Sounds</a>
+                                    </MDBRow>
+                                    <MDBRow>
+                                        <a className="toggle subtoggle" href="#!">Left Femoral Pulse</a>
+                                    </MDBRow>
+                                    <MDBRow>
+                                        <a className="toggle subtoggle" href="#!">Right Femoral Pulse</a>
+                                    </MDBRow>
+                                    <MDBRow>
+                                        <a className="toggle subtoggle" href="#!">Left Dorsal Pulse</a>
+                                    </MDBRow>
+                                    <MDBRow>
+                                        <a className="toggle subtoggle" href="#!">Right Dorsal Pulse</a>
+                                    </MDBRow>
                                 </MDBCol>
                             </MDBCollapse>
                         </MDBRow>
@@ -87,7 +126,7 @@ class Sidebar extends Component {
                         <MDBRow>
                             <a
                                 className="toggle" href="#!"
-                                onClick={this.toggleCollapse("collapse2")}
+                                onClick={this.toggleCollapse("collapse3")}
                             >
                                 <Toggle
                                     icon="eye"
@@ -101,7 +140,7 @@ class Sidebar extends Component {
 
                             <a
                                 className="toggle" href="#!"
-                                onClick={this.toggleCollapse("collapse3")}
+                                onClick={this.toggleCollapse("collapse4")}
                             >
                                 <Toggle
                                     style={{ marginBottom: "1rem" }}
@@ -112,7 +151,7 @@ class Sidebar extends Component {
                         </MDBRow>
 
                         <MDBRow>
-                            <MDBCollapse className="flex-d flex-column subtoggle-group" id="collapse3" isOpen={this.state.collapseID}>
+                            <MDBCollapse className="flex-d flex-column subtoggle-group" id="collapse4" isOpen={this.state.collapseID}>
                                 <p>
                                     Lorsdf
                                 </p>

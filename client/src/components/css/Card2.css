@@ -1,0 +1,30 @@
+.card2-icon{
+    margin: -1rem 0 -0.8rem 0;
+    font-size: 1.1rem;
+}
+
+.card2-volume{
+    margin: -1rem 0 -0.4rem 0;
+}
+
+.card2-mode-text{
+    margin-left: 1rem;
+    text-align: left;
+}
+
+.card2-dropdown{
+    margin: 1.8rem 0rem 0 -0.8rem;
+}
+
+.card2-input{
+    margin-left: 0.2rem;
+}
+
+.card2-mode{
+    margin-top: -0.4rem;
+
+}
+
+.card2-btn{
+    margin: 0rem 0rem 0 0rem;
+}

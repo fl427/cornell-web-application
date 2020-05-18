@@ -1,6 +1,9 @@
+/*
+* Card:
+* Card component for vital panels.*/
+
 import React, {Component} from "react";
 import {
-    MDBContainer,
     MDBRow,
     MDBCol,
     MDBCard,
@@ -12,98 +15,105 @@ import {
 
 } from 'mdbreact';
 import PropTypes from "prop-types";
+import HR from "../home/heartrate/components/Hr";
+import "./css/Card.css";
 
 class Card extends Component {
     state = {
-        currentValue: 60,
+        currentValue: 100,
         targetValue: 0,
         duration: 0,
-        modal8: false
-    }
+        modal0: false,
+        historyValues: new Array(100),
+    };
 
     static propTypes = {
         vital: PropTypes.string.isRequired,
         unit: PropTypes.string.isRequired,
         hideFunc: PropTypes.func.isRequired,
-    }
+    };
 
     toggle = nr => () => {
-        let modalNumber = 'modal' + nr
+        let modalNumber = 'modal' + nr;
         this.setState({
             [modalNumber]: !this.state[modalNumber]
         });
-    }
+    };
 
     render() {
         return (
-            <div>
+            <MDBCol md="12"  lg="4" style={{marginBottom: "2rem"}} >
                         <MDBCard>
-                            <MDBCardBody className="mx-1">
-                                <MDBRow>
+                            <MDBCardBody className="mx-1" style={{marginBottom:"-0.7rem"}}>
+                                <MDBRow style={{marginTop: "-0.6rem"}}>
                                     <MDBCol size="6" className="text-center">
                                         <MDBRow style={{marginTop:"0.8rem",marginBottom:"-2.75rem"}}>
                                         <h4 className="mb-5 grey-text d-flex" style={{margin:"auto",textAlign:"left"}}>
-                                            {this.props.vital!=='ETCO2' ? (<strong>{this.props.vital}&nbsp;&nbsp;&nbsp;</strong>):(<strong>ETCO<sub>2</sub>&nbsp;&nbsp;&nbsp;</strong>)}
+                                            {(this.props.vital==='ETCO2')||(this.props.vital==='SPO2') ?
+                                                ((this.props.vital==='ETCO2')?(<strong>ETCO<sub>2</sub>&nbsp;&nbsp;&nbsp;&nbsp;</strong>) : (<strong>SpO<sub>2</sub>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>))
+                                                : (<strong style={{whiteSpace: "nowrap"}}>{this.props.vital}&nbsp;&nbsp;&nbsp;&nbsp;</strong>)}
                                         </h4>
                                         </MDBRow>
-                                        <MDBRow style={{marginBottom:"-1.9rem"}}>
-                                            <p className="text-monospace" style={{fontWeight:"bold", fontSize:"3.2rem",margin:"auto",textAlign:"left"}}>{this.state.currentValue}<p className="text-muted grey-text" style={{fontFamily:"sans-serif", fontSize:"0.9rem",margin:"auto",textAlign:"right",display:"inline"}}>{this.props.unit}</p></p>
+                                        <MDBRow style={{margin:"-0.4rem 0rem -1.9rem -1.3rem"}}>
+                                            <p className="text-monospace card-value">{this.state.currentValue}
+                                                {this.props.unit.length<=2 ? (<p className="length-less-than-2 text-muted grey-text card-unit">{this.props.unit}</p>)
+                                                : (<p className="length-more-than-2 text-muted grey-text card-unit">{this.props.unit}</p>)}
+                                            </p>
                                         </MDBRow>
 
                                     </MDBCol>
                                     <MDBCol size="6">
-                                        <MDBRow style={{margin:"0px 0px -2.5rem -1rem"}}>
-                                            <MDBCol size="8">
-
-                                            </MDBCol>
-                                            <MDBCol size="3">
-                                                <p style={{fontSize:"1.1rem"}} className=" dark-grey-text d-flex justify-content-end">
-                                                    <i className="far fa-chart-bar" onClick={this.toggle(8)}></i>&nbsp;&nbsp;
-                                                    <MDBModal isOpen={this.state.modal8} toggle={this.toggle(8)} fullHeight position="right">
-                                                        <MDBModalHeader toggle={this.toggle(8)}>History of {this.props.vital}</MDBModalHeader>
+                                        <MDBRow style={{margin:"0rem -0.1rem -2.5rem -0rem"}}>
+                                            <MDBCol size="6"></MDBCol>
+                                            <MDBCol size="6">
+                                                <p style={{fontSize:"1.1rem",marginRight:"-1.2rem"}} className=" dark-grey-text d-flex justify-content-end">
+                                                    <i className="far fa-chart-bar" onClick={this.toggle(0)}></i>&nbsp;&nbsp;
+                                                    <MDBModal isOpen={this.state.modal0} toggle={this.toggle(0)} fullHeight position="top">
+                                                        <MDBModalHeader toggle={this.toggle(0)} >
+                                                                History of {this.props.vital}
+                                                        </MDBModalHeader>
                                                         <MDBModalBody>
-                                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                                                            magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                                            consequat.
+                                                            <HR/>
                                                         </MDBModalBody>
                                                         <MDBModalFooter>
-                                                            <MDBBtn color="secondary" onClick={this.toggle(8)}>Close</MDBBtn>
-                                                            <MDBBtn color="primary">Save changes</MDBBtn>
+                                                            <div style={{margin:"auto", textAlign:"center"}}>
+                                                            <MDBBtn color="secondary" onClick={this.toggle(0)}>Close</MDBBtn>
+                                                            </div>
                                                         </MDBModalFooter>
                                                     </MDBModal>
                                                     <i className="far fa-times-circle" onClick={this.props.hideFunc.bind(this,this.props.vital)}></i>
                                                 </p>
-                                            </MDBCol>
-                                            <MDBCol size="1">
+
 
                                             </MDBCol>
                                         </MDBRow>
-                                    <MDBRow style={{margin:"-0.625rem 0px -4.7rem -0.625rem"}}>
-                                        <MDBInput
-                                            size="sm"
-                                            label="Target Value"
-                                            group
-                                            type="number"
-                                            validate
-                                            error="wrong"
-                                            success="right"
-                                        />
-                                    </MDBRow>
-                                    <MDBRow style={{margin:"-4.7rem 0px -0.625rem -0.625rem"}}>
-                                        <MDBInput
-                                            size="sm"
-                                            label="Duration (sec)"
-                                            group
-                                            type="number"
-                                            validate
-                                            containerClass="mb-0"
-                                        />
-                                    </MDBRow>
+                                        <MDBRow style={{margin:"-0.6rem -0.2rem -4.7rem -0.4rem"}}>
+                                            <MDBInput
+                                                size="sm"
+                                                label="Target Value"
+                                                group
+                                                type="number"
+                                                validate
+                                                error="wrong"
+                                                success="right"
+                                            />
+                                        </MDBRow>
+                                        <MDBRow style={{margin:"-4.7rem -0.2rem -0.6rem -0.4rem"}}>
+                                            <MDBInput
+                                                size="sm"
+                                                label="Duration (s)"
+                                                group
+                                                type="number"
+                                                validate
+                                                containerClass="mb-0"
+                                            />
+                                        </MDBRow>
+
                                     </MDBCol>
                                 </MDBRow>
 
-                                <div className="text-center mb-3">
-                                    <MDBRow>
+                                <MDBRow className="text-center mb-3" style={{marginLeft:"-0.4rem",marginRight:"-1.3rem"}}>
+
                                     <MDBCol size="5"></MDBCol>
                                     <MDBCol size="7">
                                     <MDBBtn
@@ -118,13 +128,13 @@ class Card extends Component {
                                     </MDBBtn>
                                     </MDBCol >
 
-                                    </MDBRow>
-                                </div>
+
+                                </MDBRow>
 
                             </MDBCardBody>
 
                         </MDBCard>
-            </div>
+            </MDBCol>
         );
     };
 }
