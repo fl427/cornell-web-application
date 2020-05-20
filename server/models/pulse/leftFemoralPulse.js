@@ -6,4 +6,4 @@ const leftFemoralPulseSchema = mongoose.Schema({
     timestamps: { createdAt: true, updatedAt: false }
 });
 
-module.exports = mongoose.model("LeftFemoralPulse", leftFemoralPulse);
+module.exports = mongoose.model("LeftFemoralPulse", leftFemoralPulseSchema);

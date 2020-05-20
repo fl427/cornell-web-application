@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
 
 const heartSoundSchema = mongoose.Schema({
-    part1: {type: String, required: true},
-    part2: {type: Number, required: true}
+    content: [{type: Number}]
 }, {
     timestamps: { createdAt: true, updatedAt: false }
 });

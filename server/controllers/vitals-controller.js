@@ -4,6 +4,7 @@ const HttpError = require('../models/http-error');
 const { validationResult } = require('express-validator');
 const mongoose = require('mongoose');
 
+//-------------Vital-----------//
 const Vital = require('../models/vitals/vital');
 const Awrr = require('../models/vitals/awrr');
 const Etco2 = require('../models/vitals/etco2');
@@ -19,6 +20,20 @@ const SimulatedVocalization = require('../models/sounds/simulatedVocalization');
 const HeartSound = require('../models/sounds/heartSound');
 const LeftLungSound = require('../models/sounds/leftLungSound');
 const RightLungSound = require('../models/sounds/rightLungSound');
+
+//-------------Pulse-----------//
+const RightFemoralPulse = require('../models/pulse/rightFemoralPulse');
+const LeftFemoralPulse = require('../models/pulse/leftFemoralPulse');
+const RightDorsalPulse = require('../models/pulse/rightDorsalPulse');
+const LeftDorsalPulse = require('../models/pulse/leftDorsalPulse');
+
+//-------------Prob-----------//
+const ECGProbe = require('../models/probe/ecgProbe');
+const SPO2Probe = require('../models/probe/spo2Probe');
+const TEMPProbe = require('../models/probe/tempProbe');
+const ETCO2Probe = require('../models/probe/etco2Probe');
+const CUFFProbe = require('../models/probe/cuffProbe');
+const ChestMovement = require('../models/probe/chestMovement');
 
 // const getVital = async (req, res, next) => {
 //     let vital;
@@ -80,6 +95,7 @@ const getVital = async (req, res, next) => {
         return next(error);
     }
 
+    // TODO: Error processing
     if (!awrr || awrr.length === 0) {
         console.log("There is No Vital")
     }
@@ -358,10 +374,10 @@ const getVitalSounds = async (req, res, next) => {
 
     let vitalSounds;
     vitalSounds = {
-        'simulatedVocalization': simulatedVocalization,
-        'heartSound': heartSound,
-        'leftLungSound': leftLungSound,
-        'rightLungSound': rightLungSound,
+        'simulatedVocalization': simulatedVocalization.content,
+        'heartSound': heartSound.content,
+        'leftLungSound': leftLungSound.content,
+        'rightLungSound': rightLungSound.content,
     }
     console.log(vitalSounds)
     res.json({ vitalSounds: vitalSounds});
@@ -375,33 +391,29 @@ const createVitalSounds = async (req, res, next) => {
         );
     }
 
-    const { part1, part2, sound } = req.body;
+    const { arr, category } = req.body;
     console.log(req.body)
 
     let createdVitalSound;
-    switch (sound) {
+    switch (category) {
         case 'simulatedVocalization':
             createdVitalSound = new SimulatedVocalization({
-                part1,
-                part2,
+                content: arr,
             });
             break;
         case 'heartSound':
             createdVitalSound = new HeartSound({
-                part1,
-                part2,
+                content: arr,
             });
             break;
         case 'leftLungSound':
             createdVitalSound = new LeftLungSound({
-                part1,
-                part2,
+                content: arr,
             });
             break;
         case 'rightLungSound':
             createdVitalSound = new RightLungSound({
-                part1,
-                part2,
+                content: arr,
             });
             break;
         default:
@@ -422,7 +434,196 @@ const createVitalSounds = async (req, res, next) => {
     res.status(201).json({sound: createdVitalSound});
 };
 
+const getVitalPulse = async (req, res, next) => {
+    let leftDorsalPulse;
+    let leftFemoralPulse;
+    let rightDorsalPulse;
+    let rightFemoralPulse;
+    try {
+        leftDorsalPulse = await LeftDorsalPulse.findOne().sort({createdAt: -1}).limit(1);
+        leftFemoralPulse = await LeftFemoralPulse.findOne().sort({createdAt: -1}).limit(1);
+        rightDorsalPulse = await RightDorsalPulse.findOne().sort({createdAt: -1}).limit(1);
+        rightFemoralPulse = await RightFemoralPulse.findOne().sort({createdAt: -1}).limit(1);
+    } catch (err) {
+        const error = new HttpError(
+            'Fetching vitals failed, please try again later',
+            500
+        );
+        return next(error);
+    }
+    if (!leftDorsalPulse || leftDorsalPulse.length === 0) {
+        console.log("There is No leftDorsalPulse")
+    }
+
+    let pulse;
+    pulse = {
+        'leftDorsalPulse': leftDorsalPulse.content,
+        'leftFemoralPulse': leftFemoralPulse.content,
+        'rightDorsalPulse': rightDorsalPulse.content,
+        'rightFemoralPulse': rightFemoralPulse.content,
+    }
+    console.log(pulse)
+    res.json({ pulse: pulse});
+}
+
+const createVitalPulse = async (req, res, next) => {
+    const errors = validationResult(req);
+    console.log(errors);
+    if (!errors.isEmpty()) {
+        return next (
+            new HttpError('Invalid inputs passed, please check your data.', 422)
+        );
+    }
+
+    const { arr, category } = req.body;
+    console.log(req.body)
+
+    let createdPulse;
+    switch (category) {
+        case 'leftDorsalPulse':
+            createdPulse = new LeftDorsalPulse({
+                content: arr,
+            });
+            break;
+        case 'leftFemoralPulse':
+            createdPulse = new LeftFemoralPulse({
+                content: arr,
+            });
+            break;
+        case 'rightDorsalPulse':
+            createdPulse = new RightDorsalPulse({
+                content: arr,
+            });
+            break;
+        case 'rightFemoralPulse':
+            createdPulse = new RightFemoralPulse({
+                content: arr,
+            });
+            break;
+        default:
+            console.log("Not one of sounds")
+            break;
+    }
+
+    try {
+        createdPulse.save();
+    } catch (err) {
+        const error = new HttpError(
+            'Creating vital failed, try again.',
+            500
+        );
+        return next(error);
+    }
+
+    res.status(201).json({pulse: createdPulse});
+};
+
+const getVitalProbe = async (req, res, next) => {
+    let chestMovement;
+    let cuffProbe;
+    let ecgProbe;
+    let etco2Probe;
+    let spo2Probe;
+    let tempProbe;
+    try {
+        chestMovement = await ChestMovement.findOne().sort({createdAt: -1}).limit(1);
+        cuffProbe = await CUFFProbe.findOne().sort({createdAt: -1}).limit(1);
+        ecgProbe = await ECGProbe.findOne().sort({createdAt: -1}).limit(1);
+        etco2Probe = await ETCO2Probe.findOne().sort({createdAt: -1}).limit(1);
+        spo2Probe = await SPO2Probe.findOne().sort({createdAt: -1}).limit(1);
+        tempProbe = await TEMPProbe.findOne().sort({createdAt: -1}).limit(1);
+    } catch (err) {
+        const error = new HttpError(
+            'Fetching vitals failed, please try again later',
+            500
+        );
+        return next(error);
+    }
+    // TODO: Error processing
+    if (!chestMovement || chestMovement.length === 0) {
+        console.log("There is No Sound")
+    }
+
+    let probe;
+    probe = {
+        'chestMovement': chestMovement.content,
+        'cuffProbe': cuffProbe.content,
+        'ecgProbe': ecgProbe.content,
+        'etco2Probe': etco2Probe.content,
+        'spo2Probe': spo2Probe.content,
+        'tempProbe': tempProbe.content,
+    }
+    console.log(probe)
+    res.json({ probe: probe});
+}
+
+const createVitalProbe = async (req, res, next) => {
+    const errors = validationResult(req);
+    console.log(errors);
+    if (!errors.isEmpty()) {
+        return next (
+            new HttpError('Invalid inputs passed, please check your data.', 422)
+        );
+    }
+
+    const { probe, category } = req.body;
+    console.log(req.body)
+
+    let createdProbe;
+    switch (category) {
+        case 'chestMovement':
+            createdProbe = new ChestMovement({
+                content: probe
+            });
+            break;
+        case 'cuffProbe':
+            createdProbe = new CUFFProbe({
+                content: probe
+            });
+            break;
+        case 'ecgProbe':
+            createdProbe = new ECGProbe({
+                content: probe
+            });
+            break;
+        case 'etco2Probe':
+            createdProbe = new ETCO2Probe({
+                content: probe
+            });
+            break;
+        case 'spo2Probe':
+            createdProbe = new SPO2Probe({
+                content: probe
+            });
+            break;
+        case 'tempProbe':
+            createdProbe = new TEMPProbe({
+                content: probe
+            });
+            break;
+        default:
+            console.log("Not one of sounds")
+            break;
+    }
+
+    try {
+        createdProbe.save();
+    } catch (err) {
+        const error = new HttpError(
+            'Creating vital failed, try again.',
+            500
+        );
+        return next(error);
+    }
+
+    res.status(201).json({probe: createdProbe});
+};
+
 exports.getVital = getVital;
 exports.createVital = createVital;
 exports.getVitalSounds = getVitalSounds;
 exports.createVitalSounds = createVitalSounds;
+exports.getVitalPulse = getVitalPulse;
+exports.createVitalPulse = createVitalPulse;
+exports.getVitalProbe = getVitalProbe;
+exports.createVitalProbe = createVitalProbe;

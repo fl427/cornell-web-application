@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
-const rightLungSoundSchema = mongoose.Schema({
+const leftDorsalPulseSchema = mongoose.Schema({
     content: [{type: Number}]
 }, {
     timestamps: { createdAt: true, updatedAt: false }
 });
 
-module.exports = mongoose.model("RightLungSound", rightLungSoundSchema);
+module.exports = mongoose.model("LeftDorsalPulse", leftDorsalPulseSchema);

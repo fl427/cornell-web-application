@@ -17,5 +17,17 @@ router.post(
     vitalsControllers.createVitalSounds
 );
 
+router.get("/pulse", vitalsControllers.getVitalPulse);
+router.post(
+    "/pulse",
+    vitalsControllers.createVitalPulse
+);
+
+router.get("/probe", vitalsControllers.getVitalProbe);
+router.post(
+    "/probe",
+    vitalsControllers.createVitalProbe
+);
+
 
 module.exports = router;

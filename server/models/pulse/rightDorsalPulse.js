@@ -6,4 +6,4 @@ const rightDorsalPulseSchema = mongoose.Schema({
     timestamps: { createdAt: true, updatedAt: false }
 });
 
-module.exports = mongoose.model("RightDorsalPulse", rightDorsalPulse);
+module.exports = mongoose.model("RightDorsalPulse", rightDorsalPulseSchema);
