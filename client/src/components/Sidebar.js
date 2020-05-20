@@ -1,10 +1,21 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
-import { MDBContainer,MDBRow,MDBCol, MDBBtn, MDBCollapse } from "mdbreact";
+import {
+    MDBContainer,
+    MDBRow,
+    MDBCol,
+    MDBBtn,
+    MDBCollapse,
+    MDBModal,
+    MDBModalHeader,
+    MDBModalBody,
+    MDBModalFooter
+} from "mdbreact";
 import Toggle from './Toggle';
 import Profile from "./Profile";
 
 import './css/Sidebar.css';
+import History2 from "./History2";
 
 class Sidebar extends Component {
     static propTypes = {
@@ -13,6 +24,7 @@ class Sidebar extends Component {
     }
 
     state = {
+        modal0: false,
         collapseID: "",
         probeStatus:{"ECG": true, "ETCO2": true, "SPO2": true, "TEMP": true, "Cuff": true},
     }
@@ -23,6 +35,13 @@ class Sidebar extends Component {
         }));
 
     }
+
+    toggle = nr => () => {
+        let modalNumber = 'modal' + nr;
+        this.setState({
+            [modalNumber]: !this.state[modalNumber]
+        });
+    };
 
     render() {
         let vitalList = ["Heart Rate", "ETCO2", "AWRR", "SPO2", "TEMP", "NIBP"];
@@ -149,9 +168,29 @@ class Sidebar extends Component {
 
                         <MDBRow>
                             <MDBCollapse className="flex-d flex-column subtoggle-group" id="collapse4" isOpen={this.state.collapseID}>
-                                <p>
-                                    Lorsdf
-                                </p>
+                                <MDBCol>
+                                    <MDBRow><a className="toggle subtoggle" href="#!" onClick={this.toggle(0)}>Play</a></MDBRow>
+                                </MDBCol>
+                                <MDBModal isOpen={this.state.modal0} toggle={this.toggle(0)} fullHeight position="top">
+
+                                    <MDBModalHeader toggle={this.toggle(0)} >
+                                        Video Player
+                                    </MDBModalHeader>
+                                    <MDBModalBody>
+                                        <div className="embed-responsive embed-responsive-21by9">
+                                            <iframe title="Embeds Page" className="embed-responsive-item"
+                                                    src="https://www.youtube.com/embed/fUwCSmBlJRg"
+
+                                                    allowFullScreen></iframe>
+                                            {/*https://www.youtube.com/embed/GuM8vTq0jd4*/}
+                                        </div>
+                                    </MDBModalBody>
+                                    <MDBModalFooter>
+                                        <div style={{margin:"auto", textAlign:"center"}}>
+                                            <MDBBtn color="secondary" onClick={this.toggle(0)}>Close</MDBBtn>
+                                        </div>
+                                    </MDBModalFooter>
+                                </MDBModal>
                             </MDBCollapse>
                         </MDBRow>
                     </MDBCol>

@@ -18,6 +18,8 @@ function Home2() {
         'NIBP':50, 'Simulated Vocalizations': ["Dog Bark Growl",3], 'Heart Sounds': ["Normal",8], 'Left Lung Sounds': ["Normal",6],
         'Right Lung Sounds': ["Coarse Crakeless",2]});
 
+
+
     const convertDict = {'Heart Rate':"heartRate", 'ETCO2':"etco2", 'AWRR':"awrr", 'SPO2':"spo2", 'TEMP':"temp",
         'NIBP':"nibp"};
 
@@ -94,14 +96,13 @@ function Home2() {
 
 
 
-
     return (
             <div style={{marginLeft:"-4.8rem"}}>
                     <MDBContainer >
                         <MDBRow>
                             <MDBCol lg="3" md="6" ><Sidebar clickFunc={clickToggle} visibleAllFunc={visibleAll}/></MDBCol>
                             <MDBCol lg="9" md="6">
-                                <MDBRow style={{marginRight:"-6rem"}}>
+                                <MDBRow style={{marginRight:"-7.0rem"}}>
                                     {vitalElements}
 
                                     {visible['Simulated Vocalizations']===true?(<Card2 sound="Simulated Vocalizations" items={vocalItems} hideFunc={hideCard}/>):null}
@@ -112,7 +113,13 @@ function Home2() {
 
                                     {visible['Right Lung Sounds']===true?(<Card2 sound="Right Lung Sounds" items={lungItems} hideFunc={hideCard}/>):null}
 
-                                    {visible['Left Femoral Pulse']===true?(<Card2 sound="Left Femoral Pulse" items={lungItems} hideFunc={hideCard}/>):null}
+                                    {visible[soundList[5]]===true?(<Card2 sound={soundList[5]} items={pulseItems} hideFunc={hideCard}/>):null}
+
+                                    {visible[soundList[6]]===true?(<Card2 sound={soundList[6]} items={pulseItems} hideFunc={hideCard}/>):null}
+
+                                    {visible[soundList[7]]===true?(<Card2 sound={soundList[7]} items={pulseItems} hideFunc={hideCard}/>):null}
+
+                                    {visible[soundList[8]]===true?(<Card2 sound={soundList[8]} items={pulseItems} hideFunc={hideCard}/>):null}
                                 </MDBRow>
                             </MDBCol>
                         </MDBRow>

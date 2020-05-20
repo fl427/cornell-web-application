@@ -24,6 +24,13 @@ import { postValue} from "../request/fetch";
 const arrLength = 60;
 const timeInterval = 5;
 
+const convertDict = {'Heart Rate':"heartRate", 'ETCO2':"etco2", 'AWRR':"awrr", 'SPO2':"spo2", 'TEMP':"temp",
+    'NIBP':"nibp"};
+
+const convertName = (frontendName) => {
+    return convertDict[frontendName];
+};
+
 class Card extends Component {
     state = {
         inputValue: 0,
@@ -83,7 +90,7 @@ class Card extends Component {
 
 
     handlePost = async()=>{
-        await postValue("/api/vitals",{vital:"heartRate",target:60,duration:5});
+        await postValue("/api/vitals",{vital:convertName(this.props.vital), target:this.state.inputValue, duration:this.state.inputDuration});
     };
 
     render() {
