@@ -102,7 +102,7 @@ class Card extends Component {
                                         <MDBRow style={{margin:"-0.6rem -0.2rem -4.7rem -0.4rem"}}>
                                             <MDBInput
                                                 size="sm"
-                                                label={this.state.currentValue}
+                                                label="Target Value"
                                                 group
                                                 type="number"
                                                 validate
