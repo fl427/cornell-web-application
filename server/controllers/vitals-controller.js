@@ -12,9 +12,6 @@ const Nibp = require('../models/vitals/nibp');
 const Spo2 = require('../models/vitals/spo2');
 const Temp = require('../models/vitals/temp');
 
-const SimulatedVocalization = require('../models/arraysSN/simulatedVocalization');
-const HeartSound = require('../models/arraysSN/heartSound');
-
 // const getVital = async (req, res, next) => {
 //     let vital;
 //     try {
@@ -55,7 +52,6 @@ const getVital = async (req, res, next) => {
     let nibp;
     let spo2;
     let temp;
-    let simulatedVocalization;
     try {// vital.target, vital.duration
         awrr = await Awrr.findOne().sort({createdAt: -1}).limit(1);
         etco = await Etco.findOne().sort({createdAt: -1}).limit(1);
@@ -63,7 +59,6 @@ const getVital = async (req, res, next) => {
         nibp = await Nibp.findOne().sort({createdAt: -1}).limit(1);
         spo2 = await Spo2.findOne().sort({createdAt: -1}).limit(1);
         temp = await Temp.findOne().sort({createdAt: -1}).limit(1);
-        simulatedVocalization = await SimulatedVocalization.findOne().sort({createdAt: -1}).limit(1);
     } catch (err) {
         const error = new HttpError(
             'Fetching vitals failed, please try again later',
@@ -135,7 +130,6 @@ const getVital = async (req, res, next) => {
         'nibp': nibp.previous,
         'spo2': spo2.previous,
         'temp': temp.previous,
-        'simulatedVocalization': simulatedVocalization
     }
     console.log(vital)
     res.json({ vital: vital});
@@ -221,69 +215,5 @@ const createVital = async (req, res, next) => {
 };
 
 
-const createSimulatedVocalization = async (req, res, next) => {
-    const errors = validationResult(req);
-    console.log(errors);
-    if (!errors.isEmpty()) {
-        return next (
-            new HttpError('Invalid inputs passed, please check your data.', 422)
-        );
-    }
-
-    const { part1, part2 } = req.body;
-    console.log(req.body)
-
-    let createdSimulatedVocalization;
-    createdSimulatedVocalization = new SimulatedVocalization({
-        part1,
-        part2,
-    });
-
-    try {
-        createdSimulatedVocalization.save();
-    } catch (err) {
-        const error = new HttpError(
-            'Creating vital failed, try again.',
-            500
-        );
-        return next(error);
-    }
-
-    res.status(201).json({simulatedVocalization: createdSimulatedVocalization});
-};
-
-const createHeartSound = async (req, res, next) => {
-    const errors = validationResult(req);
-    console.log(errors);
-    if (!errors.isEmpty()) {
-        return next (
-            new HttpError('Invalid inputs passed, please check your data.', 422)
-        );
-    }
-
-    const { part1, part2 } = req.body;
-    console.log(req.body)
-
-    let createdHeartSound;
-    createdHeartSound = new HeartSound({
-        part1,
-        part2,
-    });
-
-    try {
-        createdHeartSound.save();
-    } catch (err) {
-        const error = new HttpError(
-            'Creating vital failed, try again.',
-            500
-        );
-        return next(error);
-    }
-
-    res.status(201).json({heartSound: createdHeartSound});
-};
-
 exports.getVital = getVital;
 exports.createVital = createVital;
-exports.createSimulatedVocalization = createSimulatedVocalization
-exports.createHeartSoundn = createHeartSound
