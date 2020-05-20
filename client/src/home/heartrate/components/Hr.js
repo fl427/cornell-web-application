@@ -29,21 +29,50 @@ export class HR extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            reload: false
+            reload: false,
+            newValue: 0
         };
     }
 
-    randomData = () => {
+    // randomData = () => {
+    //     now = new Date(+now + oneDay);
+    //     value = value + Math.random() * 21 - 10;
+    //     return {
+    //         name: now.toString(),
+    //         value: [
+    //             [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'),
+    //             Math.round(value)
+    //         ]
+    //     };
+    // }
+
+    formatData = () => {
         now = new Date(+now + oneDay);
-        value = value + Math.random() * 21 - 10;
+        value = this.newValue;
         return {
             name: now.toString(),
-            value: [
-                [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'),
-                Math.round(value)
-            ]
+            value: this.newValue
         };
     }
+
+    fetchValue = async () => {
+        try {
+            const response = await fetch(`/api/hr`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+            const responseData = await response.json();
+            this.setState({newValue:responseData.vital.previous});
+            if (!response.ok) {
+                console.log(responseData.message);
+            }
+        } catch (e) {
+            console.log(e.message || "Something went wrong, please try again.")
+        }
+    };
 
     handleResize = () => {
         this.setState({
@@ -55,22 +84,26 @@ export class HR extends React.Component {
 
 
     componentDidMount() {
-        for (var i = 0; i < 1000; i++) {
-            data.push(this.randomData());
-        }
+        // for (var i = 0; i < 1000; i++) {
+        //     data.push(this.randomData());
+        // }
         let hrChart_instance = this.hrChart.getEchartsInstance()
         this.timer = setInterval(() => {
-            for (var i = 0; i < 5; i++) {
+            // for (var i = 0; i < 5; i++) {
+            //     data.shift();
+            //     data.push(this.randomData());
+            // }
+            if(data.length >= 1000)
                 data.shift();
-                data.push(this.randomData());
-            }
+           this.fetchValue();
+            data.push(this.formatData());
             hrChart_instance.setOption({
                 series: [{
                     data: data
                 }]
             });
             this.handleResize()
-        }, 1000);
+        }, 100);       
     }
 
     componentWillUnmount() {
