@@ -1,10 +1,18 @@
 import axios from "axios";
+
+let $axios = axios.create({
+    baseURL: "http://localhost:5000",
+    timeout: 1000,
+    headers: {"Content-Type": "application/json"}
+});
+
+
 export const fetchValue = async (url) => {
     try {
-        const response = await axios.get(url);
-        console.log(response);
+        return await $axios.get(url).then((res)=>res);
     } catch (error) {
         console.error(error);
+        return undefined;
     }
 
 };

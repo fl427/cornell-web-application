@@ -13,7 +13,8 @@ class Toggle extends Component {
         return (
 
                 <MDBRow style={{margin:"auto",textAlign: "left"}}>
-                    <MDBCol size="2"><MDBIcon far icon={this.props.icon} style={{fontSize: "0.8rem"}}/></MDBCol>
+
+                    <MDBCol size="2"><MDBIcon icon={this.props.icon} style={{fontSize: "0.8rem"}}/></MDBCol>
 
                     <MDBCol size="7" style={{fontSize: "0.875rem",fontWeight: "bold",textTransform:"capitalize", fontFamily: "Arial", textAlign: "left"}}>
                         {this.props.text}

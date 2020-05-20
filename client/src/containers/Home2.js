@@ -1,13 +1,65 @@
 import React, {useState,useEffect} from 'react';
-import {MDBContainer, MDBRow, MDBCol, MDBMask, MDBView, MDBDropdownItem, MDBDropdownMenu} from "mdbreact";
+import {MDBContainer, MDBRow, MDBCol} from "mdbreact";
 import Sidebar from "../components/Sidebar";
 import Card from "../components/Card";
 import Card2 from "../components/Card2";
+import {fetchValue, postValue} from "../request/fetch";
+
+
 
 
 function Home2() {
     const [visible,setVisible] = useState({'Heart Rate':true, 'ETCO2':true, 'AWRR':true, 'SPO2':true, 'TEMP':true,
         'NIBP':true, 'Simulated Vocalizations': true, 'Heart Sounds': true, 'Left Lung Sounds': true, 'Right Lung Sounds': true});
+
+    const [values,setValues] = useState({'Heart Rate':90, 'ETCO2':32, 'AWRR':6, 'SPO2':95, 'TEMP':102,
+        'NIBP':50, 'Simulated Vocalizations': ["Dog Bark Growl",3], 'Heart Sounds': ["Normal",8], 'Left Lung Sounds': ["Normal",6],
+        'Right Lung Sounds': ["Coarse Crakeless",2]});
+
+    const convertDict = {'Heart Rate':"heartRate", 'ETCO2':"etco2", 'AWRR':"awrr", 'SPO2':"spo2", 'TEMP':"temp",
+        'NIBP':"nibp"};
+
+    const convertName = (frontendName) => {
+        return convertDict[frontendName];
+    };
+
+    let vocalItems = ["Dog Bark Growl", "Dog big Bark", "Dog Bark Snarl"];
+    let lungItems = ["Normal","Coarse Crakeless","Fine Crakeless","Whezzes","Stridor","stertor", "Same As Right Lung"];
+    let heartItems = ["Normal","Systolic Murmur","Pansystolic Murmur","Poloystolic Murmur","Continuous Murmur",
+        "Diastolic Murmur","Gallop"];
+
+    let vitalList = ["Heart Rate", "ETCO2", "AWRR", "SPO2", "TEMP", "NIBP"];
+    let unitList = ["bpm", "mmHg", "bpm", "%", "°F", "mmHg"];
+    let soundList = ["Simulated Vocalizations", "Heart Sounds", "Left Lung Sounds", "Right Lung Sounds"];
+    let vitalElements = new Array();
+    let soundElements = new Array();
+
+
+    useEffect(() => {
+        //postValue("http://localhost:5000/",{vital:"heartRate",target:20,duration:10});
+
+        setTimeout(async() => {
+            let temp = JSON.parse(JSON.stringify(values));
+
+            let vitalValues = await fetchValue("/api/vitals");
+
+            if (vitalValues === undefined){
+                for(let i in vitalList){
+                    temp[vitalList[i]] =  "--";
+                }
+            }else{
+                for(let i in vitalList){
+                    const name = vitalList[i];
+                    const value = vitalValues.data.vital[convertName(name)];
+                    temp[name] = value!==undefined ? value : "--";
+                }
+            }
+
+            setValues(temp);
+        }, 1000);
+
+
+    });
 
     const clickToggle = (vitalLabel)=>{
         let temp = JSON.parse(JSON.stringify(visible));
@@ -29,10 +81,11 @@ function Home2() {
         setVisible(temp);
     }
 
-    let vocalItems = ["Dog Bark Growl", "Dog big Bark", "Dog Bark Snarl"];
-    let lungItems = ["Normal","Coarse Crakeless","Fine Crakeless","Whezzes","Stridor","stertor", "Same As Right Lung"];
-    let heartItems = ["Normal","Systolic Murmur","Pansystolic Murmur","Poloystolic Murmur","Continuous Murmur",
-    "Diastolic Murmur","Gallop"];
+
+
+    for (let i in vitalList){
+        vitalElements.push(visible[vitalList[i]]===true?(<Card vital={vitalList[i]} unit={unitList[i]} currentValue={values[vitalList[i]]} hideFunc={hideCard}/>):null);
+    }
 
 
     return (
@@ -42,17 +95,7 @@ function Home2() {
                             <MDBCol lg="3" md="6" ><Sidebar clickFunc={clickToggle} visibleAllFunc={visibleAll}/></MDBCol>
                             <MDBCol lg="9" md="6">
                                 <MDBRow style={{marginRight:"-6rem"}}>
-                                    {visible['Heart Rate']===true?(<Card vital="Heart Rate" unit="bpm" hideFunc={hideCard}/>):null}
-
-                                    {visible['ETCO2']===true?(<Card vital="ETCO2" unit="mmHg" hideFunc={hideCard}/>):null}
-
-                                    {visible['AWRR']===true?(<Card vital="AWRR" unit="bpm" hideFunc={hideCard}/>):null}
-
-                                    {visible['SPO2']===true?(<Card vital="SPO2" unit="%" hideFunc={hideCard}/>):null}
-
-                                    {visible['TEMP']===true?(<Card vital="TEMP" unit="°F" hideFunc={hideCard}/>):null}
-
-                                    {visible['NIBP']===true?(<Card vital="NIBP" unit="mmHg" hideFunc={hideCard}/>):null}
+                                    {vitalElements}
 
                                     {visible['Simulated Vocalizations']===true?(<Card2 sound="Simulated Vocalizations" items={vocalItems} hideFunc={hideCard}/>):null}
 

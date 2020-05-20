@@ -15,19 +15,48 @@ import {
 
 } from 'mdbreact';
 import PropTypes from "prop-types";
-import HR from "../home/heartrate/components/Hr";
+//import HR from "../home/heartrate/components/Hr";
 import "./css/Card.css";
+import History from "./History";
+import History2 from "./css/History2";
+
+const arrLength = 60;
+const timeInterval = 5;
 
 class Card extends Component {
     state = {
-        currentValue: 100,
         targetValue: 0,
         duration: 0,
         modal0: false,
-        historyValues: new Array(100),
+        historyValues: [],
+        //pointer: 0,
+        slot: 0,
     };
 
+    componentWillReceiveProps(nextProps) {
+        if(this.state.slot===0) {
+            console.log("array:");
+            console.log(this.state.historyValues);
+            let temp = JSON.parse(JSON.stringify(this.state.historyValues));
+            if (temp.length<arrLength){
+                temp.push(nextProps.currentValue);
+            }else{
+                temp.splice(0,1);
+                temp.push(nextProps.currentValue);
+            }
+
+            this.setState({
+                historyValues: temp,
+                // pointer: (this.state.pointer + 1) % arrLength,
+                slot: (this.state.slot + 1) % timeInterval
+            });
+        }else{
+            this.setState({slot: (this.state.slot + 1) % timeInterval});
+        }
+    }
+
     static propTypes = {
+        currentValue: PropTypes.number.isRequired,
         vital: PropTypes.string.isRequired,
         unit: PropTypes.string.isRequired,
         hideFunc: PropTypes.func.isRequired,
@@ -40,16 +69,16 @@ class Card extends Component {
         });
     };
 
-    componentDidMount() {
-        let step = 1;
-        this.timer = setInterval(() => {
-            if(this.state.currentValue>=120||this.state.currentValue<=80){
-                step=-step;
-                }
-            this.setState({currentValue: this.state["currentValue"]+step});
+    setVital = async function (a,b,c) {
+        await console.log(a);
+        await console.log(b);
+        await console.log(c);
+        let modalNumber = 'modal' + a;
+        this.setState({
+            [modalNumber]: !this.state[modalNumber]
+        });
+    };
 
-        }, 1000);
-    }
 
 
     render() {
@@ -67,7 +96,7 @@ class Card extends Component {
                                         </h4>
                                         </MDBRow>
                                         <MDBRow style={{margin:"-0.4rem 0rem -1.9rem -1.3rem"}}>
-                                            <p className="text-monospace card-value">{this.state.currentValue}
+                                            <p className="text-monospace card-value">{this.props.currentValue}
                                                 {this.props.unit.length<=2 ? (<p className="length-less-than-2 text-muted grey-text card-unit">{this.props.unit}</p>)
                                                 : (<p className="length-more-than-2 text-muted grey-text card-unit">{this.props.unit}</p>)}
                                             </p>
@@ -81,11 +110,12 @@ class Card extends Component {
                                                 <p style={{fontSize:"1.1rem",marginRight:"-1.2rem"}} className=" dark-grey-text d-flex justify-content-end">
                                                     <i className="far fa-chart-bar" onClick={this.toggle(0)}></i>&nbsp;&nbsp;
                                                     <MDBModal isOpen={this.state.modal0} toggle={this.toggle(0)} fullHeight position="top">
-                                                        <MDBModalHeader toggle={this.toggle(0)} >
+
+                                                        <MDBModalHeader toggle={this.toggle(0)} style={{backgourndColor:"light-grey"}}>
                                                                 History of {this.props.vital}
                                                         </MDBModalHeader>
                                                         <MDBModalBody>
-                                                            <HR />
+                                                            <History2 history={this.state.historyValues} vital={this.props.vital}/>
                                                         </MDBModalBody>
                                                         <MDBModalFooter>
                                                             <div style={{margin:"auto", textAlign:"center"}}>
@@ -135,6 +165,7 @@ class Card extends Component {
                                         gradient="peach"
                                         rounded
                                         className="btn-block z-depth-1a"
+                                        onClick={this.setVital.bind(this,"0","1","2")}
                                     >
                                         Set
                                     </MDBBtn>
