@@ -6,11 +6,19 @@ const mongoose = require('mongoose');
 
 const Vital = require('../models/vitals/vital');
 const Awrr = require('../models/vitals/awrr');
-const Etco = require('../models/vitals/etco2');
+const Etco2 = require('../models/vitals/etco2');
 const HeartRate = require('../models/vitals/heartRate');
-const Nibp = require('../models/vitals/nibp');
 const Spo2 = require('../models/vitals/spo2');
 const Temp = require('../models/vitals/temp');
+const SystolicNIBP = require('../models/vitals/systolicNIBP');
+const DiastolicNIBP = require('../models/vitals/diastolicNIBP');
+const NbpHR = require('../models/vitals/nbpHR');
+
+//-------------Sound-----------//
+const SimulatedVocalization = require('../models/sounds/simulatedVocalization');
+const HeartSound = require('../models/sounds/heartSound');
+const LeftLungSound = require('../models/sounds/leftLungSound');
+const RightLungSound = require('../models/sounds/rightLungSound');
 
 // const getVital = async (req, res, next) => {
 //     let vital;
@@ -47,16 +55,20 @@ const Temp = require('../models/vitals/temp');
 
 const getVital = async (req, res, next) => {
     let awrr;
-    let etco;
+    let etco2;
     let heartRate;
-    let nibp;
+    let systolicNIBP;
+    let diastolicNIBP;
+    let nbpHR;
     let spo2;
     let temp;
     try {// vital.target, vital.duration
         awrr = await Awrr.findOne().sort({createdAt: -1}).limit(1);
-        etco = await Etco.findOne().sort({createdAt: -1}).limit(1);
+        etco2 = await Etco2.findOne().sort({createdAt: -1}).limit(1);
         heartRate = await HeartRate.findOne().sort({createdAt: -1}).limit(1);
-        nibp = await Nibp.findOne().sort({createdAt: -1}).limit(1);
+        systolicNIBP = await SystolicNIBP.findOne().sort({createdAt: -1}).limit(1);
+        diastolicNIBP = await DiastolicNIBP.findOne().sort({createdAt: -1}).limit(1);
+        nbpHR = await NbpHR.findOne().sort({createdAt: -1}).limit(1);
         spo2 = await Spo2.findOne().sort({createdAt: -1}).limit(1);
         temp = await Temp.findOne().sort({createdAt: -1}).limit(1);
     } catch (err) {
@@ -77,10 +89,10 @@ const getVital = async (req, res, next) => {
         awrr.previous = awrr.previous + awrr.slope * 0.1;
     }
 
-    if (etco.previous === etco.target) {
-        etco.previous = etco.target;
+    if (etco2.previous === etco2.target) {
+        etco2.previous = etco2.target;
     } else {
-        etco.previous = etco.previous + etco.slope * 0.1;
+        etco2.previous = etco2.previous + etco2.slope * 0.1;
     }
 
     if (heartRate.previous === heartRate.target) {
@@ -89,10 +101,22 @@ const getVital = async (req, res, next) => {
         heartRate.previous = heartRate.previous + heartRate.slope * 0.1;
     }
 
-    if (nibp.previous === nibp.target) {
-        nibp.previous = nibp.target;
+    if (systolicNIBP.previous === systolicNIBP.target) {
+        systolicNIBP.previous = systolicNIBP.target;
     } else {
-        nibp.previous = nibp.previous + nibp.slope * 0.1;
+        systolicNIBP.previous = systolicNIBP.previous + systolicNIBP.slope * 0.1;
+    }
+
+    if (diastolicNIBP.previous === diastolicNIBP.target) {
+        diastolicNIBP.previous = diastolicNIBP.target;
+    } else {
+        diastolicNIBP.previous = diastolicNIBP.previous + diastolicNIBP.slope * 0.1;
+    }
+
+    if (nbpHR.previous === nbpHR.target) {
+        nbpHR.previous = nbpHR.target;
+    } else {
+        nbpHR.previous = nbpHR.previous + nbpHR.slope * 0.1;
     }
 
     if (spo2.previous === spo2.target) {
@@ -109,9 +133,11 @@ const getVital = async (req, res, next) => {
 
     try {
         awrr.save();
-        etco.save();
+        etco2.save();
         heartRate.save();
-        nibp.save();
+        systolicNIBP.save();
+        diastolicNIBP.save();
+        nbpHR.save();
         spo2.save();
         temp.save();
     } catch (err) {
@@ -125,9 +151,11 @@ const getVital = async (req, res, next) => {
     let vital;
     vital = {
         'awrr': awrr.previous,
-        'etco': etco.previous,
+        'etco2': etco2.previous,
         'heartRate': heartRate.previous,
-        'nibp': nibp.previous,
+        'systolicNIBP': systolicNIBP.previous,
+        'diastolicNIBP': diastolicNIBP.previous,
+        'nbpHR': nbpHR.previous,
         'spo2': spo2.previous,
         'temp': temp.previous,
     }
@@ -156,8 +184,8 @@ const createVital = async (req, res, next) => {
                 slope: (target - 0) / duration
             });
             break;
-        case 'etco':
-            createdVital = new Etco({
+        case 'etco2':
+            createdVital = new Etco2({
                 target,
                 duration,
                 slope: (target - 0) / duration
@@ -191,6 +219,27 @@ const createVital = async (req, res, next) => {
                 slope: (target - 0) / duration
             });
             break;
+        case 'systolicNIBP':
+            createdVital = new SystolicNIBP({
+                target,
+                duration,
+                slope: (target - 0) / duration
+            });
+            break;
+        case 'diastolicNIBP':
+            createdVital = new DiastolicNIBP({
+                target,
+                duration,
+                slope: (target - 0) / duration
+            });
+            break;
+        case 'nbpHR':
+            createdVital = new NbpHR({
+                target,
+                duration,
+                slope: (target - 0) / duration
+            });
+            break;
         default:
             createdVital = new Vital({
                 target,
@@ -199,7 +248,6 @@ const createVital = async (req, res, next) => {
             });
             break;
     }
-
 
     try {
         createdVital.save();
@@ -214,8 +262,38 @@ const createVital = async (req, res, next) => {
     res.status(201).json({vital: createdVital});
 };
 
+const getVitalSounds = async (req, res, next) => {
+    let simulatedVocalization;
+    let heartSound;
+    let leftLungSound;
+    let rightLungSound;
+    try {
+        simulatedVocalization = await SimulatedVocalization.findOne().sort({createdAt: -1}).limit(1);
+        heartSound = await HeartSound.findOne().sort({createdAt: -1}).limit(1);
+        leftLungSound = await LeftLungSound.findOne().sort({createdAt: -1}).limit(1);
+        rightLungSound = await RightLungSound.findOne().sort({createdAt: -1}).limit(1);
+    } catch (err) {
+        const error = new HttpError(
+            'Fetching vitals failed, please try again later',
+            500
+        );
+        return next(error);
+    }
+    if (!simulatedVocalization || simulatedVocalization.length === 0) {
+        console.log("There is No Sound")
+    }
 
-const createVitalCard2 = async (req, res, next) => {
+    let vitalSounds;
+    vitalSounds = {
+        'simulatedVocalization': simulatedVocalization,
+        'heartSound': heartSound,
+        'leftLungSound': leftLungSound,
+        'rightLungSound': rightLungSound,
+    }
+    console.log(vitalSounds)
+    res.json({ vitalSounds: vitalSounds});
+}
+const createVitalSounds = async (req, res, next) => {
     const errors = validationResult(req);
     console.log(errors);
     if (!errors.isEmpty()) {
@@ -224,65 +302,42 @@ const createVitalCard2 = async (req, res, next) => {
         );
     }
 
-    const { part1, part2 } = req.body;
+    const { part1, part2, sound } = req.body;
     console.log(req.body)
 
-    let createdVital;
-    switch (vital) {
-        case 'awrr':
-            createdVital = new Awrr({
-                target,
-                duration,
-                slope: (target - 0) / duration
+    let createdVitalSound;
+    switch (sound) {
+        case 'simulatedVocalization':
+            createdVitalSound = new SimulatedVocalization({
+                part1,
+                part2,
             });
             break;
-        case 'etco':
-            createdVital = new Etco({
-                target,
-                duration,
-                slope: (target - 0) / duration
+        case 'heartSound':
+            createdVitalSound = new HeartSound({
+                part1,
+                part2,
             });
             break;
-        case 'heartRate':
-            createdVital = new HeartRate({
-                target,
-                duration,
-                slope: (target - 0) / duration
+        case 'leftLungSound':
+            createdVitalSound = new LeftLungSound({
+                part1,
+                part2,
             });
             break;
-        case 'nibp':
-            createdVital = new Nibp({
-                target,
-                duration,
-                slope: (target - 0) / duration
-            });
-            break;
-        case 'spo2':
-            createdVital = new Spo2({
-                target,
-                duration,
-                slope: (target - 0) / duration
-            });
-            break;
-        case 'temp':
-            createdVital = new Temp({
-                target,
-                duration,
-                slope: (target - 0) / duration
+        case 'rightLungSound':
+            createdVitalSound = new RightLungSound({
+                part1,
+                part2,
             });
             break;
         default:
-            createdVital = new Vital({
-                target,
-                duration,
-                slope: (target - 0) / duration
-            });
+            console.log("Not one of sounds")
             break;
     }
 
-
     try {
-        createdVital.save();
+        createdVitalSound.save();
     } catch (err) {
         const error = new HttpError(
             'Creating vital failed, try again.',
@@ -291,10 +346,10 @@ const createVitalCard2 = async (req, res, next) => {
         return next(error);
     }
 
-    res.status(201).json({vital: createdVital});
+    res.status(201).json({sound: createdVitalSound});
 };
-
 
 exports.getVital = getVital;
 exports.createVital = createVital;
-exports.createVitalCard2 = createVitalCard2;
+exports.getVitalSounds = getVitalSounds;
+exports.createVitalSounds = createVitalSounds;
