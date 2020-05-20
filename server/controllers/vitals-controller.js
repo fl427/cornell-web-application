@@ -215,5 +215,86 @@ const createVital = async (req, res, next) => {
 };
 
 
+const createVitalCard2 = async (req, res, next) => {
+    const errors = validationResult(req);
+    console.log(errors);
+    if (!errors.isEmpty()) {
+        return next (
+            new HttpError('Invalid inputs passed, please check your data.', 422)
+        );
+    }
+
+    const { part1, part2 } = req.body;
+    console.log(req.body)
+
+    let createdVital;
+    switch (vital) {
+        case 'awrr':
+            createdVital = new Awrr({
+                target,
+                duration,
+                slope: (target - 0) / duration
+            });
+            break;
+        case 'etco':
+            createdVital = new Etco({
+                target,
+                duration,
+                slope: (target - 0) / duration
+            });
+            break;
+        case 'heartRate':
+            createdVital = new HeartRate({
+                target,
+                duration,
+                slope: (target - 0) / duration
+            });
+            break;
+        case 'nibp':
+            createdVital = new Nibp({
+                target,
+                duration,
+                slope: (target - 0) / duration
+            });
+            break;
+        case 'spo2':
+            createdVital = new Spo2({
+                target,
+                duration,
+                slope: (target - 0) / duration
+            });
+            break;
+        case 'temp':
+            createdVital = new Temp({
+                target,
+                duration,
+                slope: (target - 0) / duration
+            });
+            break;
+        default:
+            createdVital = new Vital({
+                target,
+                duration,
+                slope: (target - 0) / duration
+            });
+            break;
+    }
+
+
+    try {
+        createdVital.save();
+    } catch (err) {
+        const error = new HttpError(
+            'Creating vital failed, try again.',
+            500
+        );
+        return next(error);
+    }
+
+    res.status(201).json({vital: createdVital});
+};
+
+
 exports.getVital = getVital;
 exports.createVital = createVital;
+exports.createVitalCard2 = createVitalCard2;

@@ -18,7 +18,7 @@ import PropTypes from "prop-types";
 //import HR from "../home/heartrate/components/Hr";
 import "./css/Card.css";
 import History from "./History";
-import History2 from "./css/History2";
+import History2 from "./History2";
 
 const arrLength = 60;
 const timeInterval = 5;
