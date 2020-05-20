@@ -13,6 +13,7 @@ import Users from "./user/pages/Users";
 import Auth from "./user/pages/Auth";
 import { AuthContext } from './shared/context/auth-context';
 import { useAuth } from "./shared/hooks/auth-hook";
+import Signin from "./containers/Signin";
 
 // Navigation
 import Sidebar from "./shared/components/Sidebar/Sidebar";
@@ -212,7 +213,7 @@ const App = () => {
                     <Dogs/>
                 </Route>
                 <Route path="/auth" exact>
-                    <Auth/>
+                    <Signin/>
                 </Route>
                 <Route path="/error">
                     <Errorpage />
@@ -222,33 +223,62 @@ const App = () => {
         )
     }
 
-    return (
-        <AuthContext.Provider
-            value={{
-                isLoggedIn: !!token,
-                token: token,
-                userId: userId,
-                login: login,
-                logout: logout
-            }}
-        >
-            <BrowserRouter>
-                <img
-                    src={bg}
-                    className="img-fluid"
-                    alt=""
-                    style={{width:"calc(100vw)",height:"calc(100vh)", position: "fixed", zIndex: "-999"}}
-                />
-                <Navibar2/>
-                <div className="App">
+    if (!token){
+        return(
+            <AuthContext.Provider
+                value={{
+                    isLoggedIn: !!token,
+                    token: token,
+                    userId: userId,
+                    login: login,
+                    logout: logout
+                }}
+            >
+                <BrowserRouter>
+                    <img
+                        src={bg}
+                        className="img-fluid"
+                        alt=""
+                        style={{width: "calc(100vw)", height: "calc(100vh)", position: "fixed", zIndex: "-999"}}
+                    />
+                    <Navibar2/>
+                    <div className="App">
+                        <div style={{height: "5rem", width: "calc(100vw)"}}></div>
+                        <Auth/>
 
-                        <div style={{height:"5rem", width:"calc(100vw)"}}></div>
+                    </div>
+                </BrowserRouter>
+            </AuthContext.Provider>
+        );
+    }else {
+        return (
+            <AuthContext.Provider
+                value={{
+                    isLoggedIn: !!token,
+                    token: token,
+                    userId: userId,
+                    login: login,
+                    logout: logout
+                }}
+            >
+                <BrowserRouter>
+                    <img
+                        src={bg}
+                        className="img-fluid"
+                        alt=""
+                        style={{width: "calc(100vw)", height: "calc(100vh)", position: "fixed", zIndex: "-999"}}
+                    />
+                    <Navibar2/>
+                    <div className="App">
+
+                        <div style={{height: "5rem", width: "calc(100vw)"}}></div>
                         {routes}
 
-                </div>
-            </BrowserRouter>
-        </AuthContext.Provider>
-    );
+                    </div>
+                </BrowserRouter>
+            </AuthContext.Provider>
+        );
+    }
 
 };
 
