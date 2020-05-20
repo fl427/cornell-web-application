@@ -9,6 +9,7 @@ import bg from '../bg2.png';
 function Home2() {
     const [visible,setVisible] = useState({'Heart Rate':true, 'ETCO2':true, 'AWRR':true, 'SPO2':true, 'TEMP':true,
         'NIBP':true,});
+
     const clickToggle = (vitalLabel)=>{
         let temp = JSON.parse(JSON.stringify(visible));
         temp[vitalLabel] =! temp[vitalLabel];
