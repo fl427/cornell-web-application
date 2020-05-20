@@ -11,4 +11,10 @@ router.post(
     vitalsControllers.createVital
 );
 
+router.post(
+    "/card2",
+    vitalsControllers.createVitalCard2
+);
+
+
 module.exports = router;
