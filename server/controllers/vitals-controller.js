@@ -54,6 +54,7 @@ const RightLungSound = require('../models/sounds/rightLungSound');
 // }
 
 const getVital = async (req, res, next) => {
+    // 这段代码等有空时重写成函数，太冗长了，现在先不管
     let awrr;
     let etco2;
     let heartRate;
@@ -96,7 +97,7 @@ const getVital = async (req, res, next) => {
     } else if (etco2.slope < 0 && etco2.previous <= etco2.target) {
         etco2.previous = etco2.target;
     } else {
-        etco2.previous = (etco2.previous + etco2.slope * 0.1).toFixed(2);
+        etco2.previous = (etco2.previous + etco2.slope).toFixed(2);
     }
 
     if (heartRate.slope >= 0 && heartRate.previous >= heartRate.target) {
@@ -104,7 +105,7 @@ const getVital = async (req, res, next) => {
     } else if (heartRate.slope < 0 && heartRate.previous <= heartRate.target) {
         heartRate.previous = heartRate.target;
     } else {
-        heartRate.previous = (heartRate.previous + heartRate.slope * 0.1).toFixed(2);
+        heartRate.previous = (heartRate.previous + heartRate.slope).toFixed(2);
     }
 
     if (systolicNIBP.slope >= 0 && systolicNIBP.previous >= systolicNIBP.target) {
@@ -112,7 +113,7 @@ const getVital = async (req, res, next) => {
     } else if (systolicNIBP.slope < 0 && systolicNIBP.previous <= systolicNIBP.target) {
         systolicNIBP.previous = systolicNIBP.target;
     } else {
-        systolicNIBP.previous = (systolicNIBP.previous + systolicNIBP.slope * 0.1).toFixed(2);
+        systolicNIBP.previous = (systolicNIBP.previous + systolicNIBP.slope).toFixed(2);
     }
 
     if (diastolicNIBP.slope >= 0 && diastolicNIBP.previous >= diastolicNIBP.target) {
@@ -120,7 +121,7 @@ const getVital = async (req, res, next) => {
     } else if (diastolicNIBP.slope < 0 && diastolicNIBP.previous <= diastolicNIBP.target) {
         diastolicNIBP.previous = diastolicNIBP.target;
     } else {
-        diastolicNIBP.previous = (diastolicNIBP.previous + diastolicNIBP.slope * 0.1).toFixed(2);
+        diastolicNIBP.previous = (diastolicNIBP.previous + diastolicNIBP.slope).toFixed(2);
     }
 
     if (nbpHR.slope >= 0 && nbpHR.previous >= nbpHR.target) {
@@ -128,21 +129,15 @@ const getVital = async (req, res, next) => {
     } else if (nbpHR.slope < 0 && nbpHR.previous <= nbpHR.target) {
         nbpHR.previous = nbpHR.target;
     } else {
-        nbpHR.previous = (nbpHR.previous + nbpHR.slope * 0.1).toFixed(2);
+        nbpHR.previous = (nbpHR.previous + nbpHR.slope).toFixed(2);
     }
 
-    if (spo2.previous === spo2.target) {
+    if (spo2.slope >= 0 && spo2.previous >= spo2.target) {
+        spo2.previous = spo2.target;
+    } else if (spo2.slope < 0 && spo2.previous <= spo2.target) {
         spo2.previous = spo2.target;
     } else {
-        spo2.previous = spo2.previous + spo2.slope * 0.1;
-    }
-
-    if (nbpHR.slope >= 0 && nbpHR.previous >= nbpHR.target) {
-        nbpHR.previous = nbpHR.target;
-    } else if (nbpHR.slope < 0 && nbpHR.previous <= nbpHR.target) {
-        nbpHR.previous = nbpHR.target;
-    } else {
-        nbpHR.previous = (nbpHR.previous + nbpHR.slope * 0.1).toFixed(2);
+        spo2.previous = (spo2.previous + spo2.slope).toFixed(2);
     }
 
     if (temp.slope >= 0 && temp.previous >= temp.target) {

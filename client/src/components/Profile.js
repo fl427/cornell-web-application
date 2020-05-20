@@ -28,7 +28,7 @@ const Profile = () => {
         fetchUser();
     }, [sendRequest, userId]);
 
-    console.log(loadedUser)
+    // console.log(loadedUser)
 
     return (
         <div>
