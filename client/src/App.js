@@ -49,6 +49,7 @@ import Errorpage from "./containers/Errorpage";
 //css
 import './App.css';
 
+
 function onClick(e, item) {
     // window.alert(JSON.stringify(item, null, 2));
     // return <Link to="/media">Media</Link>
@@ -232,9 +233,18 @@ const App = () => {
             }}
         >
             <BrowserRouter>
-                <div className="App">
+                <img
+                    src={bg}
+                    className="img-fluid"
+                    alt=""
+                    style={{width:"calc(100vw)",height:"calc(100vh)", position: "fixed", zIndex: "-999"}}
+                />
                 <Navibar2/>
-                {routes}
+                <div className="App">
+
+                        <div style={{height:"5rem", width:"calc(100vw)"}}></div>
+                        {routes}
+
                 </div>
             </BrowserRouter>
         </AuthContext.Provider>

@@ -40,6 +40,18 @@ class Card extends Component {
         });
     };
 
+    componentDidMount() {
+        let step = 1;
+        this.timer = setInterval(() => {
+            if(this.state.currentValue>=120||this.state.currentValue<=80){
+                step=-step;
+                }
+            this.setState({currentValue: this.state["currentValue"]+step});
+
+        }, 1000);
+    }
+
+
     render() {
         return (
             <MDBCol md="12"  lg="4" style={{marginBottom: "2rem"}} >
@@ -73,7 +85,7 @@ class Card extends Component {
                                                                 History of {this.props.vital}
                                                         </MDBModalHeader>
                                                         <MDBModalBody>
-                                                            <HR/>
+                                                            <HR />
                                                         </MDBModalBody>
                                                         <MDBModalFooter>
                                                             <div style={{margin:"auto", textAlign:"center"}}>
@@ -127,7 +139,6 @@ class Card extends Component {
                                         Set
                                     </MDBBtn>
                                     </MDBCol >
-
 
                                 </MDBRow>
 

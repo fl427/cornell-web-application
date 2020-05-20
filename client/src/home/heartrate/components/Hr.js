@@ -82,6 +82,7 @@ export class HR extends React.Component {
         });
     }
 
+
     componentDidMount() {
         // for (var i = 0; i < 1000; i++) {
         //     data.push(this.randomData());
