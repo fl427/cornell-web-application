@@ -42,14 +42,23 @@ const Temp = require('../models/vitals/temp');
 //         );
 //         return next(error);
 //     }
-//
 //     res.json({ vital: vital.toObject({ getters: true })});
 // }
 
 const getVital = async (req, res, next) => {
-    let vital;
-    try {
-        vital = await Vital.findOne().sort({ createdAt: -1 }).limit(1); // vital.target, vital.duration
+    let awrr;
+    let etco;
+    let heartRate;
+    let nibp;
+    let spo2;
+    let temp;
+    try {// vital.target, vital.duration
+        awrr = await Awrr.findOne().sort({createdAt: -1}).limit(1);
+        etco = await Etco.findOne().sort({createdAt: -1}).limit(1);
+        heartRate = await HeartRate.findOne().sort({createdAt: -1}).limit(1);
+        nibp = await Nibp.findOne().sort({createdAt: -1}).limit(1);
+        spo2 = await Spo2.findOne().sort({createdAt: -1}).limit(1);
+        temp = await Temp.findOne().sort({createdAt: -1}).limit(1);
     } catch (err) {
         const error = new HttpError(
             'Fetching vitals failed, please try again later',
@@ -57,18 +66,54 @@ const getVital = async (req, res, next) => {
         );
         return next(error);
     }
-    console.log(vital)
-    if (!vital || vital.length === 0) {
+
+    if (!awrr || awrr.length === 0) {
         console.log("There is No Vital")
     }
 
-    if (vital.previous === vital.target) {
-        vital.previous = vital.target;
+    if (awrr.previous === awrr.target) {
+        awrr.previous = awrr.target;
     } else {
-        vital.previous = vital.previous + vital.slope * 0.1;
+        awrr.previous = awrr.previous + awrr.slope * 0.1;
     }
+
+    if (etco.previous === etco.target) {
+        etco.previous = etco.target;
+    } else {
+        etco.previous = etco.previous + etco.slope * 0.1;
+    }
+
+    if (heartRate.previous === heartRate.target) {
+        heartRate.previous = heartRate.target;
+    } else {
+        heartRate.previous = heartRate.previous + heartRate.slope * 0.1;
+    }
+
+    if (nibp.previous === nibp.target) {
+        nibp.previous = nibp.target;
+    } else {
+        nibp.previous = nibp.previous + nibp.slope * 0.1;
+    }
+
+    if (spo2.previous === spo2.target) {
+        spo2.previous = spo2.target;
+    } else {
+        spo2.previous = spo2.previous + spo2.slope * 0.1;
+    }
+
+    if (temp.previous === temp.target) {
+        temp.previous = temp.target;
+    } else {
+        temp.previous = temp.previous + temp.slope * 0.1;
+    }
+
     try {
-        vital.save();
+        awrr.save();
+        etco.save();
+        heartRate.save();
+        nibp.save();
+        spo2.save();
+        temp.save();
     } catch (err) {
         const error = new HttpError(
             'Creating vital failed, try again.',
@@ -77,7 +122,17 @@ const getVital = async (req, res, next) => {
         return next(error);
     }
 
-    res.json({ vital: vital.toObject({ getters: true })});
+    let vital;
+    vital = {
+        'awrr': awrr.previous,
+        'etco': etco.previous,
+        'heartRate': heartRate.previous,
+        'nibp': nibp.previous,
+        'spo2': spo2.previous,
+        'temp': temp.previous,
+    }
+    console.log(vital)
+    res.json({ vital: vital});
 }
 
 const createVital = async (req, res, next) => {
@@ -97,37 +152,43 @@ const createVital = async (req, res, next) => {
         case 'awrr':
             createdVital = new Awrr({
                 target,
-                duration
+                duration,
+                slope: (target - 0) / duration
             });
             break;
-        case 'etco2':
+        case 'etco':
             createdVital = new Etco({
                 target,
-                duration
+                duration,
+                slope: (target - 0) / duration
             });
             break;
         case 'heartRate':
             createdVital = new HeartRate({
                 target,
-                duration
+                duration,
+                slope: (target - 0) / duration
             });
             break;
         case 'nibp':
             createdVital = new Nibp({
                 target,
-                duration
+                duration,
+                slope: (target - 0) / duration
             });
             break;
         case 'spo2':
             createdVital = new Spo2({
                 target,
-                duration
+                duration,
+                slope: (target - 0) / duration
             });
             break;
         case 'temp':
             createdVital = new Temp({
                 target,
-                duration
+                duration,
+                slope: (target - 0) / duration
             });
             break;
         default:
