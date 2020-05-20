@@ -2,7 +2,7 @@
 * Card:
 * Card component for vital panels.*/
 
-import React, {Component} from "react";
+import React, {Component, useContext} from "react";
 import {
     MDBRow,
     MDBCol,

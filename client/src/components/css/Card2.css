@@ -4,9 +4,10 @@
 }
 
 .card2-mode-text{
-    margin-top: 2.5rem;
+    margin-top: 1.8rem;
     margin-left: 1rem;
     text-align: left;
+    margin-bottom: -0.4rem;
 }
 
 .card2-dropdown{
@@ -24,5 +25,5 @@
 }
 
 .card2-btn{
-    margin: 0rem 0rem 0 0rem;
+    margin: 0 0 0 0;
 }

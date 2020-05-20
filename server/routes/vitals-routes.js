@@ -11,9 +11,10 @@ router.post(
     vitalsControllers.createVital
 );
 
+router.get("/sounds", vitalsControllers.getVitalSounds);
 router.post(
-    "/card2",
-    vitalsControllers.createVitalCard2
+    "/sounds",
+    vitalsControllers.createVitalSounds
 );
 
 

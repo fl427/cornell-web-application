@@ -70,9 +70,9 @@ class Card2 extends Component {
                         <MDBRow style={{marginTop:"0.1rem",marginBottom:"-4rem", height:"7.5rem"}}>
 
                             <MDBCol size="10">
-                                <h2 className="mb-5 grey-text d-flex" style={{margin:"auto",textAlign:"left"}}>
+                                <h3 className="mb-5 grey-text d-flex" style={{margin:"auto",textAlign:"left"}}>
                                     <strong>{this.props.sound}&nbsp;&nbsp;&nbsp;&nbsp;</strong>
-                                </h2>
+                                </h3>
                             </MDBCol>
                             <MDBCol size="0"></MDBCol>
                         </MDBRow>
