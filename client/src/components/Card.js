@@ -85,7 +85,7 @@ class Card extends Component {
                                                                 History of {this.props.vital}
                                                         </MDBModalHeader>
                                                         <MDBModalBody>
-                                                            <HR/>
+                                                            <HR />
                                                         </MDBModalBody>
                                                         <MDBModalFooter>
                                                             <div style={{margin:"auto", textAlign:"center"}}>

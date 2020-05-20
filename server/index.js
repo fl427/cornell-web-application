@@ -12,6 +12,7 @@ const usersRoutes = require('./routes/users-routes');
 const logsRoutes = require('./routes/logs-routes');
 const commandsRoutes = require('./routes/commands-routes');
 const logcommentsRoutes = require('./routes/Logcomments-routes');
+const vitalsRoutes = require('./routes/vitals-routes');
 
 const HttpError = require('./models/http-error');
 
@@ -30,6 +31,7 @@ app.use(bodyParser.json());
 app.use('/api/logs', logsRoutes)
 app.use('/api/commands', commandsRoutes)
 app.use('/api/logcomments', logcommentsRoutes)
+app.use('/api/vitals', vitalsRoutes)
 
 app.use('/uploads/images', express.static(path.join('uploads', 'images')));
 
