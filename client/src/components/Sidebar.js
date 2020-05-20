@@ -24,6 +24,31 @@ class Sidebar extends Component {
     }
 
     render() {
+        let vitalList = ["Heart Rate", "ETCO2", "AWRR", "SPO2", "TEMP", "NIBP"];
+        let soundList = ["Simulated Vocalizations", "Heart Sounds", "Left Lung Sounds", "Right Lung Sounds"];
+        let vitalElements = new Array();
+        let soundElements = new Array();
+
+        for(let i in vitalList){
+            if(vitalList[i]==="ETCO2"){
+                vitalElements.push((<MDBRow><a className="toggle subtoggle" href="#!" onClick={this.props.clickFunc.bind(this,vitalList[i])}>ETCO<sub>2</sub></a></MDBRow>));
+                continue
+            }
+
+            if(vitalList[i]==="SPO2"){
+                vitalElements.push((<MDBRow><a className="toggle subtoggle" href="#!" onClick={this.props.clickFunc.bind(this,vitalList[i])}>SpO<sub>2</sub></a></MDBRow>));
+                continue
+            }
+
+            vitalElements.push((<MDBRow><a className="toggle subtoggle" href="#!" onClick={this.props.clickFunc.bind(this,vitalList[i])}>{vitalList[i]}</a></MDBRow>));
+        }
+
+        for(let i in soundList){
+            soundElements.push((<MDBRow><a className="toggle subtoggle" href="#!" onClick={this.props.clickFunc.bind(this,soundList[i])}>{soundList[i]}</a></MDBRow>));
+        }
+
+
+
         return (
             <MDBCol className="rounded mb-0" style={{margin:"auto",textAlign:"center"}}>
                 {/* User Profile */}
@@ -47,24 +72,7 @@ class Sidebar extends Component {
                         <MDBRow>
                             <MDBCollapse className="flex-d flex-column subtoggle-group" id="collapse" isOpen={this.state.collapseID} >
                                 <MDBCol>
-                                    <MDBRow>
-                                        <a className="toggle subtoggle" href="#!" onClick={this.props.clickFunc.bind(this,'Heart Rate')}>Heart Rate</a>
-                                    </MDBRow>
-                                    <MDBRow>
-                                        <a className="toggle subtoggle" href="#!" onClick={this.props.clickFunc.bind(this,'ETCO2')}>ETCO<sub>2</sub></a>
-                                    </MDBRow>
-                                    <MDBRow>
-                                        <a className="toggle subtoggle" href="#!" onClick={this.props.clickFunc.bind(this,'AWRR')}>AWRR</a>
-                                    </MDBRow>
-                                    <MDBRow>
-                                        <a className="toggle subtoggle" href="#!" onClick={this.props.clickFunc.bind(this,'SPO2')}>SpO<sub>2</sub></a>
-                                    </MDBRow>
-                                    <MDBRow>
-                                        <a className="toggle subtoggle" href="#!" onClick={this.props.clickFunc.bind(this,'TEMP')}>Temp</a>
-                                    </MDBRow>
-                                    <MDBRow>
-                                        <a className="toggle subtoggle" href="#!" onClick={this.props.clickFunc.bind(this,'NIBP')}>NIBP</a>
-                                    </MDBRow>
+                                    {vitalElements}
                                     <MDBRow>
                                         <a className="toggle subtoggle operate-all" href="#!"
                                            onClick={this.props.visibleAllFunc.bind(this,['Heart Rate', 'ETCO2', 'AWRR', 'SPO2', 'TEMP', 'NIBP'])}
@@ -92,33 +100,7 @@ class Sidebar extends Component {
                         <MDBRow>
                             <MDBCollapse className="flex-d flex-column subtoggle-group" id="collapse2" isOpen={this.state.collapseID}>
                                 <MDBCol>
-                                    <MDBRow>
-                                        <a className="toggle subtoggle" href="#!">Vocalizations</a>
-                                    </MDBRow>
-                                    <MDBRow>
-                                        <a className="toggle subtoggle" href="#!">Right Lung Sounds</a>
-                                    </MDBRow>
-                                    <MDBRow>
-                                        <a className="toggle subtoggle" href="#!">Left Lung Sounds</a>
-                                    </MDBRow>
-                                    <MDBRow>
-                                        <a className="toggle subtoggle" href="#!">Chest Movement</a>
-                                    </MDBRow>
-                                    <MDBRow>
-                                        <a className="toggle subtoggle" href="#!">Heart Sounds</a>
-                                    </MDBRow>
-                                    <MDBRow>
-                                        <a className="toggle subtoggle" href="#!">Left Femoral Pulse</a>
-                                    </MDBRow>
-                                    <MDBRow>
-                                        <a className="toggle subtoggle" href="#!">Right Femoral Pulse</a>
-                                    </MDBRow>
-                                    <MDBRow>
-                                        <a className="toggle subtoggle" href="#!">Left Dorsal Pulse</a>
-                                    </MDBRow>
-                                    <MDBRow>
-                                        <a className="toggle subtoggle" href="#!">Right Dorsal Pulse</a>
-                                    </MDBRow>
+                                    {soundElements}
                                 </MDBCol>
                             </MDBCollapse>
                         </MDBRow>

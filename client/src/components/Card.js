@@ -40,6 +40,18 @@ class Card extends Component {
         });
     };
 
+    componentDidMount() {
+        let step = 1;
+        this.timer = setInterval(() => {
+            if(this.state.currentValue>=120||this.state.currentValue<=80){
+                step=-step;
+                }
+            this.setState({currentValue: this.state["currentValue"]+step});
+
+        }, 1000);
+    }
+
+
     render() {
         return (
             <MDBCol md="12"  lg="4" style={{marginBottom: "2rem"}} >
@@ -90,7 +102,7 @@ class Card extends Component {
                                         <MDBRow style={{margin:"-0.6rem -0.2rem -4.7rem -0.4rem"}}>
                                             <MDBInput
                                                 size="sm"
-                                                label="Target Value"
+                                                label={this.state.currentValue}
                                                 group
                                                 type="number"
                                                 validate
@@ -127,7 +139,6 @@ class Card extends Component {
                                         Set
                                     </MDBBtn>
                                     </MDBCol >
-
 
                                 </MDBRow>
 

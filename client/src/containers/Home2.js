@@ -1,14 +1,14 @@
 import React, {useState,useEffect} from 'react';
-import {MDBContainer, MDBRow, MDBCol, MDBMask, MDBView} from "mdbreact";
+import {MDBContainer, MDBRow, MDBCol, MDBMask, MDBView, MDBDropdownItem, MDBDropdownMenu} from "mdbreact";
 import Sidebar from "../components/Sidebar";
 import Card from "../components/Card";
 import Card2 from "../components/Card2";
 
-import bg from '../bg2.png';
 
 function Home2() {
     const [visible,setVisible] = useState({'Heart Rate':true, 'ETCO2':true, 'AWRR':true, 'SPO2':true, 'TEMP':true,
-        'NIBP':true,});
+        'NIBP':true, 'Simulated Vocalizations': true, 'Heart Sounds': true, 'Left Lung Sounds': true, 'Right Lung Sounds': true});
+
     const clickToggle = (vitalLabel)=>{
         let temp = JSON.parse(JSON.stringify(visible));
         temp[vitalLabel] =! temp[vitalLabel];
@@ -29,22 +29,19 @@ function Home2() {
         setVisible(temp);
     }
 
+    let vocalItems = ["Dog Bark Growl", "Dog big Bark", "Dog Bark Snarl"];
+    let lungItems = ["Normal","Coarse Crakeless","Fine Crakeless","Whezzes","Stridor","stertor", "Same As Right Lung"];
+    let heartItems = ["Normal","Systolic Murmur","Pansystolic Murmur","Poloystolic Murmur","Continuous Murmur",
+    "Diastolic Murmur","Gallop"];
+
 
     return (
-        <div>
-            <MDBView>
-                <img
-                    src={bg}
-                    className="img-fluid"
-                    alt=""
-                    style={{width:"calc(100vw)",height:"1500px"}}
-                />
-                <MDBMask className="text-black text-center" style={{top:"5rem",left:"-3.1rem"}}>
-                    <MDBContainer>
+            <div style={{marginLeft:"-4.8rem"}}>
+                    <MDBContainer >
                         <MDBRow>
-                            <MDBCol lg="3" md="6"><Sidebar clickFunc={clickToggle} visibleAllFunc={visibleAll}/></MDBCol>
+                            <MDBCol lg="3" md="6" ><Sidebar clickFunc={clickToggle} visibleAllFunc={visibleAll}/></MDBCol>
                             <MDBCol lg="9" md="6">
-                                <MDBRow style={{marginRight:"-60px"}}>
+                                <MDBRow style={{marginRight:"-6rem"}}>
                                     {visible['Heart Rate']===true?(<Card vital="Heart Rate" unit="bpm" hideFunc={hideCard}/>):null}
 
                                     {visible['ETCO2']===true?(<Card vital="ETCO2" unit="mmHg" hideFunc={hideCard}/>):null}
@@ -57,17 +54,22 @@ function Home2() {
 
                                     {visible['NIBP']===true?(<Card vital="NIBP" unit="mmHg" hideFunc={hideCard}/>):null}
 
-                                    <Card2 sound="Left Lung Sound" unit="mmHg" hideFunc={hideCard}/>
+                                    {visible['Simulated Vocalizations']===true?(<Card2 sound="Simulated Vocalizations" items={vocalItems} hideFunc={hideCard}/>):null}
+
+                                    {visible['Heart Sounds']===true?(<Card2 sound="Heart Sounds" items={heartItems} hideFunc={hideCard}/>):null}
+
+                                    {visible['Left Lung Sounds']===true?(<Card2 sound="Left Lung Sounds" items={lungItems} hideFunc={hideCard}/>):null}
+
+                                    {visible['Right Lung Sounds']===true?(<Card2 sound="Right Lung Sounds" items={lungItems} hideFunc={hideCard}/>):null}
+
+
                                 </MDBRow>
                             </MDBCol>
                         </MDBRow>
                     </MDBContainer>
-
-                </MDBMask>
-            </MDBView>
+            </div>
 
 
-        </div>
     );
 }
 
