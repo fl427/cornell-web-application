@@ -11,14 +11,4 @@ router.post(
     vitalsControllers.createVital
 );
 
-router.post(
-    "/simulatedVocalization",
-    vitalsControllers.createSimulatedVocalization
-);
-
-router.post(
-    "/",
-    vitalsControllers.createSimulatedVocalization
-);
-
 module.exports = router;
