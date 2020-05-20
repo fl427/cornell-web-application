@@ -83,40 +83,52 @@ const getVital = async (req, res, next) => {
         console.log("There is No Vital")
     }
 
-    if (awrr.slope > 0 && awrr.previous >= awrr.target) {
+    if (awrr.slope >= 0 && awrr.previous >= awrr.target) {
+        awrr.previous = awrr.target;
+    } else if (awrr.slope < 0 && awrr.previous <= awrr.target) {
         awrr.previous = awrr.target;
     } else {
         awrr.previous = (awrr.previous + awrr.slope * 0.1).toFixed(2);
     }
 
-    if (etco2.previous === etco2.target) {
+    if (etco2.slope >= 0 && etco2.previous >= etco2.target) {
+        etco2.previous = etco2.target;
+    } else if (etco2.slope < 0 && etco2.previous <= etco2.target) {
         etco2.previous = etco2.target;
     } else {
-        etco2.previous = etco2.previous + etco2.slope * 0.1;
+        etco2.previous = (etco2.previous + etco2.slope * 0.1).toFixed(2);
     }
 
-    if (heartRate.previous === heartRate.target) {
+    if (heartRate.slope >= 0 && heartRate.previous >= heartRate.target) {
+        heartRate.previous = heartRate.target;
+    } else if (heartRate.slope < 0 && heartRate.previous <= heartRate.target) {
         heartRate.previous = heartRate.target;
     } else {
-        heartRate.previous = heartRate.previous + heartRate.slope * 0.1;
+        heartRate.previous = (heartRate.previous + heartRate.slope * 0.1).toFixed(2);
     }
 
-    if (systolicNIBP.previous === systolicNIBP.target) {
+    if (systolicNIBP.slope >= 0 && systolicNIBP.previous >= systolicNIBP.target) {
+        systolicNIBP.previous = systolicNIBP.target;
+    } else if (systolicNIBP.slope < 0 && systolicNIBP.previous <= systolicNIBP.target) {
         systolicNIBP.previous = systolicNIBP.target;
     } else {
-        systolicNIBP.previous = systolicNIBP.previous + systolicNIBP.slope * 0.1;
+        systolicNIBP.previous = (systolicNIBP.previous + systolicNIBP.slope * 0.1).toFixed(2);
     }
 
-    if (diastolicNIBP.previous === diastolicNIBP.target) {
+    if (diastolicNIBP.slope >= 0 && diastolicNIBP.previous >= diastolicNIBP.target) {
+        diastolicNIBP.previous = diastolicNIBP.target;
+    } else if (diastolicNIBP.slope < 0 && diastolicNIBP.previous <= diastolicNIBP.target) {
         diastolicNIBP.previous = diastolicNIBP.target;
     } else {
-        diastolicNIBP.previous = diastolicNIBP.previous + diastolicNIBP.slope * 0.1;
+        diastolicNIBP.previous = (diastolicNIBP.previous + diastolicNIBP.slope * 0.1).toFixed(2);
     }
 
-    if (nbpHR.previous === nbpHR.target) {
+    if (nbpHR.slope >= 0 && nbpHR.previous >= nbpHR.target) {
+        nbpHR.previous = nbpHR.target;
+    } else if (nbpHR.slope < 0 && nbpHR.previous <= nbpHR.target) {
         nbpHR.previous = nbpHR.target;
     } else {
-        nbpHR.previous = nbpHR.previous + nbpHR.slope * 0.1;
+        nbpHR.previous = (nbpHR.previous + nbpHR.slope * 0.1).toFixed(2);
     }
 
     if (spo2.previous === spo2.target) {
@@ -125,10 +137,20 @@ const getVital = async (req, res, next) => {
         spo2.previous = spo2.previous + spo2.slope * 0.1;
     }
 
-    if (temp.previous === temp.target) {
+    if (nbpHR.slope >= 0 && nbpHR.previous >= nbpHR.target) {
+        nbpHR.previous = nbpHR.target;
+    } else if (nbpHR.slope < 0 && nbpHR.previous <= nbpHR.target) {
+        nbpHR.previous = nbpHR.target;
+    } else {
+        nbpHR.previous = (nbpHR.previous + nbpHR.slope * 0.1).toFixed(2);
+    }
+
+    if (temp.slope >= 0 && temp.previous >= temp.target) {
+        temp.previous = temp.target;
+    } else if (temp.slope < 0 && temp.previous <= temp.target) {
         temp.previous = temp.target;
     } else {
-        temp.previous = temp.previous + temp.slope * 0.1;
+        temp.previous = (temp.previous + temp.slope * 0.1).toFixed(2);
     }
 
     try {
@@ -175,82 +197,138 @@ const createVital = async (req, res, next) => {
     const { target, duration, vital } = req.body;
     console.log(req.body)
 
-    let createdVital;
+    let latestVital;
     switch (vital) {
         case 'awrr':
-            createdVital = new Awrr({
-                target,
-                duration,
-                slope: (target - 0) / duration
-            });
+            latestVital = await Awrr.findOne().sort({createdAt: -1}).limit(1);
+            if (!latestVital) {
+                latestVital = new Awrr({
+                    target,
+                    duration,
+                    slope: (target - 0) / duration
+                });
+            } else {
+                latestVital.target = target;
+                latestVital.duration = duration;
+                latestVital.slope = (target - latestVital.previous) / duration
+            }
             break;
         case 'etco2':
-            createdVital = new Etco2({
-                target,
-                duration,
-                slope: (target - 0) / duration
-            });
+            latestVital = await Etco2.findOne().sort({createdAt: -1}).limit(1);
+            if (!latestVital) {
+                latestVital = new Etco2({
+                    target,
+                    duration,
+                    slope: (target - 0) / duration
+                });
+            } else {
+                latestVital.target = target;
+                latestVital.duration = duration;
+                latestVital.slope = (target - latestVital.previous) / duration
+            }
             break;
         case 'heartRate':
-            createdVital = new HeartRate({
-                target,
-                duration,
-                slope: (target - 0) / duration
-            });
-            break;
-        case 'nibp':
-            createdVital = new Nibp({
-                target,
-                duration,
-                slope: (target - 0) / duration
-            });
+            latestVital = await HeartRate.findOne().sort({createdAt: -1}).limit(1);
+            if (!latestVital) {
+                latestVital = new HeartRate({
+                    target,
+                    duration,
+                    slope: (target - 0) / duration
+                });
+            } else {
+                latestVital.target = target;
+                latestVital.duration = duration;
+                latestVital.slope = (target - latestVital.previous) / duration
+            }
             break;
         case 'spo2':
-            createdVital = new Spo2({
-                target,
-                duration,
-                slope: (target - 0) / duration
-            });
+            latestVital = await Spo2.findOne().sort({createdAt: -1}).limit(1);
+            if (!latestVital) {
+                latestVital = new Spo2({
+                    target,
+                    duration,
+                    slope: (target - 0) / duration
+                });
+            } else {
+                latestVital.target = target;
+                latestVital.duration = duration;
+                latestVital.slope = (target - latestVital.previous) / duration
+            }
             break;
         case 'temp':
-            createdVital = new Temp({
-                target,
-                duration,
-                slope: (target - 0) / duration
-            });
+            latestVital = await Temp.findOne().sort({createdAt: -1}).limit(1);
+            if (!latestVital) {
+                latestVital = new Temp({
+                    target,
+                    duration,
+                    slope: (target - 0) / duration
+                });
+            } else {
+                latestVital.target = target;
+                latestVital.duration = duration;
+                latestVital.slope = (target - latestVital.previous) / duration
+            }
             break;
         case 'systolicNIBP':
-            createdVital = new SystolicNIBP({
-                target,
-                duration,
-                slope: (target - 0) / duration
-            });
+            latestVital = await SystolicNIBP.findOne().sort({createdAt: -1}).limit(1);
+            if (!latestVital) {
+                latestVital = new SystolicNIBP({
+                    target,
+                    duration,
+                    slope: (target - 0) / duration
+                });
+            } else {
+                latestVital.target = target;
+                latestVital.duration = duration;
+                latestVital.slope = (target - latestVital.previous) / duration
+            }
             break;
         case 'diastolicNIBP':
-            createdVital = new DiastolicNIBP({
-                target,
-                duration,
-                slope: (target - 0) / duration
-            });
+            latestVital = await DiastolicNIBP.findOne().sort({createdAt: -1}).limit(1);
+            if (!latestVital) {
+                latestVital = new DiastolicNIBP({
+                    target,
+                    duration,
+                    slope: (target - 0) / duration
+                });
+            } else {
+                latestVital.target = target;
+                latestVital.duration = duration;
+                latestVital.slope = (target - latestVital.previous) / duration
+            }
             break;
         case 'nbpHR':
-            createdVital = new NbpHR({
-                target,
-                duration,
-                slope: (target - 0) / duration
-            });
+            latestVital = await NbpHR.findOne().sort({createdAt: -1}).limit(1);
+            if (!latestVital) {
+                latestVital = new NbpHR({
+                    target,
+                    duration,
+                    slope: (target - 0) / duration
+                });
+            } else {
+                latestVital.target = target;
+                latestVital.duration = duration;
+                latestVital.slope = (target - latestVital.previous) / duration
+            }
             break;
         default:
-            createdVital = new Vital({
-                target,
-                duration,
-                slope: (target - 0) / duration
-            });
+            latestVital = await Vital.findOne().sort({createdAt: -1}).limit(1);
+            if (!latestVital) {
+                latestVital = new Vital({
+                    target,
+                    duration,
+                    slope: (target - 0) / duration
+                });
+            } else {
+                latestVital.target = target;
+                latestVital.duration = duration;
+                latestVital.slope = (target - latestVital.previous) / duration
+            }
             break;
     }
 
     try {
-        createdVital.save();
+        latestVital.save();
     } catch (err) {
         const error = new HttpError(
             'Creating vital failed, try again.',
@@ -259,7 +337,7 @@ const createVital = async (req, res, next) => {
         return next(error);
     }
 
-    res.status(201).json({vital: createdVital});
+    res.status(201).json({vital: latestVital});
 };
 
 const getVitalSounds = async (req, res, next) => {
