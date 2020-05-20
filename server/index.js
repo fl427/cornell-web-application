@@ -35,6 +35,7 @@ app.use('/api/vitals', vitalsRoutes)
 
 app.use('/uploads/images', express.static(path.join('uploads', 'images')));
 
+
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader(

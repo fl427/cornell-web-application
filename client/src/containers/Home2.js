@@ -1,9 +1,11 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {MDBContainer, MDBRow, MDBCol} from "mdbreact";
 import Sidebar from "../components/Sidebar";
 import Card from "../components/Card";
 import Card2 from "../components/Card2";
 import {fetchValue, postValue} from "../request/fetch";
+import {useHttpClient} from "../shared/hooks/http-hook";
+import {AuthContext} from "../shared/context/auth-context";
 
 
 
@@ -34,9 +36,12 @@ function Home2() {
     let vitalElements = new Array();
     let soundElements = new Array();
 
+    const { isLoading, error, sendRequest, clearError } = useHttpClient();
+    const auth = useContext(AuthContext);
+
 
     useEffect(() => {
-        //postValue("http://localhost:5000/",{vital:"heartRate",target:20,duration:10});
+        // postValue("http://localhost:5000/api/vitals",{vital:"heartRate",target:20,duration:10});
 
         setTimeout(async() => {
             let temp = JSON.parse(JSON.stringify(values));
@@ -57,9 +62,7 @@ function Home2() {
 
             setValues(temp);
         }, 1000);
-
-
-    });
+    }, [sendRequest]);
 
     const clickToggle = (vitalLabel)=>{
         let temp = JSON.parse(JSON.stringify(visible));

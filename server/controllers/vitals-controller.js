@@ -83,10 +83,10 @@ const getVital = async (req, res, next) => {
         console.log("There is No Vital")
     }
 
-    if (awrr.previous === awrr.target) {
+    if (awrr.slope > 0 && awrr.previous >= awrr.target) {
         awrr.previous = awrr.target;
     } else {
-        awrr.previous = awrr.previous + awrr.slope * 0.1;
+        awrr.previous = (awrr.previous + awrr.slope * 0.1).toFixed(2);
     }
 
     if (etco2.previous === etco2.target) {
