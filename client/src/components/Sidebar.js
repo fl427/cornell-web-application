@@ -91,7 +91,7 @@ class Sidebar extends Component {
                                 onClick={this.toggleCollapse("collapse2")}
                             >
                                 <Toggle
-                                    icon="eye"
+                                    icon="bell"
                                     text="Sounds"
                                 />
                             </a>
@@ -111,7 +111,7 @@ class Sidebar extends Component {
                                 onClick={this.toggleCollapse("collapse3")}
                             >
                                 <Toggle
-                                    icon="eye"
+                                    icon="dot-circle"
                                     text="Probes"
                                 />
                             </a>
@@ -126,7 +126,7 @@ class Sidebar extends Component {
                             >
                                 <Toggle
                                     style={{ marginBottom: "1rem" }}
-                                    icon="eye"
+                                    icon="video"
                                     text="Video"
                                 />
                             </a>

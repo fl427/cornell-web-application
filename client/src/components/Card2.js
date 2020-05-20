@@ -26,6 +26,7 @@ class Card2 extends Component {
     };
 
     static propTypes = {
+        currentMode: PropTypes.string.isRequired,
         sound: PropTypes.string.isRequired,
         hideFunc: PropTypes.func.isRequired,
         items: PropTypes.array.isRequired,
