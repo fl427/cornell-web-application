@@ -13,7 +13,8 @@ class Sidebar extends Component {
     }
 
     state = {
-        collapseID: ""
+        collapseID: "",
+        probeStatus:{"ECG": true, "ETCO2": true, "SPO2": true, "TEMP": true, "Cuff": true},
     }
 
     toggleCollapse = collapseID => () => {
@@ -26,8 +27,10 @@ class Sidebar extends Component {
     render() {
         let vitalList = ["Heart Rate", "ETCO2", "AWRR", "SPO2", "TEMP", "NIBP"];
         let soundList = ["Simulated Vocalizations", "Heart Sounds", "Left Lung Sounds", "Right Lung Sounds"];
+        let probeList = ["ECG", "ETCO2", "SPO2", "TEMP", "Cuff"];
         let vitalElements = new Array();
         let soundElements = new Array();
+        let probeElements = new Array();
 
         for(let i in vitalList){
             if(vitalList[i]==="ETCO2"){
@@ -45,6 +48,10 @@ class Sidebar extends Component {
 
         for(let i in soundList){
             soundElements.push((<MDBRow><a className="toggle subtoggle" href="#!" onClick={this.props.clickFunc.bind(this,soundList[i])}>{soundList[i]}</a></MDBRow>));
+        }
+
+        for(let i in probeList){
+            probeElements.push((<MDBRow><a className="toggle subtoggle" href="#!" >{probeList[i]}</a></MDBRow>));
         }
 
 
@@ -115,6 +122,14 @@ class Sidebar extends Component {
                                     text="Probes"
                                 />
                             </a>
+                        </MDBRow>
+
+                        <MDBRow>
+                            <MDBCollapse className="flex-d flex-column subtoggle-group" id="collapse3" isOpen={this.state.collapseID}>
+                                <MDBCol>
+                                    {probeElements}
+                                </MDBCol>
+                            </MDBCollapse>
                         </MDBRow>
 
                         <MDBRow>

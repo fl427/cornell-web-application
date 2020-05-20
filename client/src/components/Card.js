@@ -17,14 +17,17 @@ import {
 import PropTypes from "prop-types";
 //import HR from "../home/heartrate/components/Hr";
 import "./css/Card.css";
-import History from "./History";
 import History2 from "./History2";
+import { postValue} from "../request/fetch";
+
 
 const arrLength = 60;
 const timeInterval = 5;
 
 class Card extends Component {
     state = {
+        inputValue: 0,
+        inputDuration: 0,
         targetValue: 0,
         duration: 0,
         modal0: false,
@@ -35,8 +38,7 @@ class Card extends Component {
 
     componentWillReceiveProps(nextProps) {
         if(this.state.slot===0) {
-            console.log("array:");
-            console.log(this.state.historyValues);
+
             let temp = JSON.parse(JSON.stringify(this.state.historyValues));
             if (temp.length<arrLength){
                 temp.push(nextProps.currentValue);
@@ -69,17 +71,20 @@ class Card extends Component {
         });
     };
 
-    setVital = async function (a,b,c) {
-        await console.log(a);
-        await console.log(b);
-        await console.log(c);
-        let modalNumber = 'modal' + a;
-        this.setState({
-            [modalNumber]: !this.state[modalNumber]
-        });
+
+    handleChangeValue = (e)=>{
+        this.setState({inputValue:e.target.value});
+    };
+
+    handleChangeDuration =(e)=> {
+        this.setState({inputDuration:e.target.value});
     };
 
 
+
+    handlePost = async()=>{
+        await postValue("/api/vitals",{vital:"heartRate",target:60,duration:5});
+    };
 
     render() {
         return (
@@ -138,7 +143,9 @@ class Card extends Component {
                                                 validate
                                                 error="wrong"
                                                 success="right"
+                                                onChange={this.handleChangeValue}
                                             />
+
                                         </MDBRow>
                                         <MDBRow style={{margin:"-4.7rem -0.2rem -0.6rem -0.4rem"}}>
                                             <MDBInput
@@ -148,6 +155,7 @@ class Card extends Component {
                                                 type="number"
                                                 validate
                                                 containerClass="mb-0"
+                                                onChange={this.handleChangeDuration.bind(this)}
                                             />
                                         </MDBRow>
 
@@ -165,7 +173,7 @@ class Card extends Component {
                                         gradient="peach"
                                         rounded
                                         className="btn-block z-depth-1a"
-                                        onClick={this.setVital.bind(this,"0","1","2")}
+                                        onClick={this.handlePost}
                                     >
                                         Set
                                     </MDBBtn>

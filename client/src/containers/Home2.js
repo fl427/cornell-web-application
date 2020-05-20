@@ -3,14 +3,16 @@ import {MDBContainer, MDBRow, MDBCol} from "mdbreact";
 import Sidebar from "../components/Sidebar";
 import Card from "../components/Card";
 import Card2 from "../components/Card2";
-import {fetchValue, postValue} from "../request/fetch";
+import Card3 from "../components/Card3";
+import {fetchValue} from "../request/fetch";
 
 
 
 
 function Home2() {
     const [visible,setVisible] = useState({'Heart Rate':true, 'ETCO2':true, 'AWRR':true, 'SPO2':true, 'TEMP':true,
-        'NIBP':true, 'Simulated Vocalizations': true, 'Heart Sounds': true, 'Left Lung Sounds': true, 'Right Lung Sounds': true});
+        'NIBP':true, 'Simulated Vocalizations': true, 'Heart Sounds': true, 'Left Lung Sounds': true, 'Right Lung Sounds': true,
+        'Left Femoral Pulse': true, 'Right Femoral Pulse': true, 'Left Dorsal Pulse': true, 'Right Dorsal Pulse': true});
 
     const [values,setValues] = useState({'Heart Rate':90, 'ETCO2':32, 'AWRR':6, 'SPO2':95, 'TEMP':102,
         'NIBP':50, 'Simulated Vocalizations': ["Dog Bark Growl",3], 'Heart Sounds': ["Normal",8], 'Left Lung Sounds': ["Normal",6],
@@ -105,7 +107,7 @@ function Home2() {
 
                                     {visible['Right Lung Sounds']===true?(<Card2 sound="Right Lung Sounds" items={lungItems} hideFunc={hideCard}/>):null}
 
-
+                                    {visible['Left Femoral Pulse']===true?(<Card3 pulse="Left Femoral Pulse" items={lungItems} hideFunc={hideCard}/>):null}
                                 </MDBRow>
                             </MDBCol>
                         </MDBRow>

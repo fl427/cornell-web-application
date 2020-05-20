@@ -1,25 +1,24 @@
-/*
-* Card2:
-* Card component for sound panels.*/
-
 import React, {Component} from "react";
 import {
     MDBRow,
     MDBCol,
     MDBCard,
     MDBCardBody,
-    MDBInput,
     MDBBtn,
     MDBDropdown,
     MDBDropdownToggle,
     MDBDropdownMenu,
     MDBDropdownItem,
+    MDBContainer,
+    MDBInput
 } from 'mdbreact';
 import PropTypes from "prop-types";
-import "./css/Card2.css";
+import "./css/Card3.css";
 
-class Card2 extends Component {
+class Card3 extends React.Component {
+
     state = {
+        radio: 2,
         inputMode: "s",
         inputVolume: 0,
         currentVolume: 5,
@@ -29,7 +28,7 @@ class Card2 extends Component {
 
     static propTypes = {
         currentMode: PropTypes.string.isRequired,
-        sound: PropTypes.string.isRequired,
+        pulse: PropTypes.string.isRequired,
         hideFunc: PropTypes.func.isRequired,
         items: PropTypes.array.isRequired,
     };
@@ -46,6 +45,11 @@ class Card2 extends Component {
         await console.log(this.state.inputMode,this.state.inputVolume);
     };
 
+    onClick = (nr) => () => {
+        this.setState({
+            radio: nr
+        });
+    };
 
     render() {
         let elements = new Array();
@@ -62,7 +66,7 @@ class Card2 extends Component {
                             <MDBCol size="10"></MDBCol>
                             <MDBCol size="2" style={{textAlign: "right"}}>
                                 <p className="dark-grey-text d-flex justify-content-end">
-                                    <i className="far fa-times-circle" onClick={this.props.hideFunc.bind(this,this.props.sound)}></i>
+                                    <i className="far fa-times-circle" onClick={this.props.hideFunc.bind(this,this.props.pulse)}></i>
                                 </p>
                             </MDBCol>
 
@@ -71,7 +75,7 @@ class Card2 extends Component {
 
                             <MDBCol size="10">
                                 <h2 className="mb-5 grey-text d-flex" style={{margin:"auto",textAlign:"left"}}>
-                                    <strong>{this.props.sound}&nbsp;&nbsp;&nbsp;&nbsp;</strong>
+                                    <strong>{this.props.pulse}&nbsp;&nbsp;&nbsp;&nbsp;</strong>
                                 </h2>
                             </MDBCol>
                             <MDBCol size="0"></MDBCol>
@@ -91,17 +95,28 @@ class Card2 extends Component {
 
                             <MDBCol size="10">
                                 <div className="card2-input">
-                                <MDBInput
-                                    label="Volume (0-10)"
-                                    group
-                                    type="number"
-                                    validate
-                                    error="wrong"
-                                    success="right"
-                                    onChange={this.handleChangeVolume}
-                                />
+                                    <MDBInput
+                                        label="Volume (0-10)"
+                                        group
+                                        type="number"
+                                        validate
+                                        error="wrong"
+                                        success="right"
+                                        onChange={this.handleChangeVolume}
+                                    />
                                 </div>
                             </MDBCol>
+
+                            <MDBContainer className="mt-5">
+                                <MDBInput gap onClick={this.onClick(1)} checked={this.state.radio===1 ? true : false} label="None" type="radio"
+                                          id="radio1" />
+                                <MDBInput gap onClick={this.onClick(2)} checked={this.state.radio===2 ? true : false} label="Weak" type="radio"
+                                          id="radio2" />
+                                <MDBInput gap onClick={this.onClick(3)} checked={this.state.radio===3 ? true : false} label="Medium"
+                                          type="radio" id="radio3" />
+                                <MDBInput gap onClick={this.onClick(4)} checked={this.state.radio===4 ? true : false} label="Strong"
+                                          type="radio" id="radio4" />
+                            </MDBContainer>
                         </MDBRow>
 
                         <MDBRow className="text-center mb-3 card2-btn">
@@ -115,6 +130,8 @@ class Card2 extends Component {
                                     </MDBDropdownMenu>
                                 </MDBDropdown>
                             </MDBCol>
+
+
                             <MDBCol size="8">
                                 <MDBBtn
                                     outline
@@ -136,4 +153,7 @@ class Card2 extends Component {
         );
     };
 }
-export default Card2;
+
+
+
+export default Card3;

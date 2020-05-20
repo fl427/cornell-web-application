@@ -19,7 +19,7 @@ export const fetchValue = async (url) => {
 
 export const postValue = async (url, data) => {
     try {
-        const response = await axios.post(url, JSON.stringify(data));
+        const response = await $axios.post(url, JSON.stringify(data),{"Content-Type": "application/json"});
         console.log(response);
     } catch (error) {
         console.error(error);
