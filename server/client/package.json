@@ -17,7 +17,7 @@
     "echarts": "^4.7.0",
     "echarts-for-react": "^2.0.16",
     "echarts-gl": "^1.1.1",
-    "jquery": "3.4.1",
+    "jquery": "3.5.0",
     "material-ui": "^0.20.2",
     "mdbreact": "^4.26.1",
     "popper.js": "^1.16.1",
