@@ -23,6 +23,8 @@ import "./css/Signin.css";
 
 import {BrowserRouter, useHistory} from "react-router-dom";
 
+var urls = require('../URLs');
+
 const Signin = () => {
     const auth = useContext(AuthContext);
     const history = useHistory();
@@ -77,7 +79,7 @@ const Signin = () => {
         if (isLoginMode) {
             try {
                 const responseData = await sendRequest(
-                    'http://localhost:5000/api/users/login',
+                    urls.baseURL + '/api/users/login',
                     'POST',
                     JSON.stringify({
                         email: formState.inputs.email.value,
@@ -97,7 +99,7 @@ const Signin = () => {
                 formData.append('password', formState.inputs.password.value);
                 formData.append('image', formState.inputs.image.value);
                 const responseData = await sendRequest(
-                    'http://localhost:5000/api/users/signup',
+                    urls.baseURL + '/api/users/signup',
                     'POST',
                     formData
                 );

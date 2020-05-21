@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import UsersList from "../components/UsersList";
 import { useHttpClient } from '../../shared/hooks/http-hook';
 
+var urls = require('../../URLs');
+
 const Users = () => {
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
     const [loadedUsers, setLoadedUsers] = useState();
@@ -11,7 +13,7 @@ const Users = () => {
         const fetchUsers = async () => {
             try {
                 const responseData = await sendRequest(
-                    'http://localhost:5000/api/users'
+                    urls.baseURL + '/api/users'
                 );
                 setLoadedUsers(responseData.users);
             } catch (err) {}

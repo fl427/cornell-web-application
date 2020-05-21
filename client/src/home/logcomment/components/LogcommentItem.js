@@ -8,6 +8,8 @@ import { AuthContext } from '../../../shared/context/auth-context';
 import { useHttpClient } from '../../../shared/hooks/http-hook';
 import "./LogcommentItem.css";
 
+var urls = require('../../../URLs');
+
 const LogcommentItem = props => {
     const auth = useContext(AuthContext);
 
@@ -17,7 +19,7 @@ const LogcommentItem = props => {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api/users/${props.creatorId}`, {
+                const response = await fetch(urls.baseURL + `/api/users/${props.creatorId}`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",

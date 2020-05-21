@@ -8,6 +8,9 @@ import { AuthContext } from '../../shared/context/auth-context';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import "./DogDetail.css";
 
+
+var urls = require('../../URLs');
+
 const DogDetail = props => {
     const auth = useContext(AuthContext);
     const [loadedDog, setLoadedDog] = useState();
@@ -18,7 +21,7 @@ const DogDetail = props => {
     useEffect(() => {
         const fetchDog = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api/dogs/${dogId}`, {
+                const response = await fetch(urls.baseURL + `/api/dogs/${dogId}`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -44,7 +47,7 @@ const DogDetail = props => {
                 <div>
                     <Card className="dog-item__content">
                         <div className="dog-item__image">
-                            <img src={`http://localhost:5000/${loadedDog.image}`} alt={loadedDog.name}/>
+                            <img src={urls.baseURL + `/${loadedDog.image}`} alt={loadedDog.name}/>
                         </div>
                         <div className="dog-item__info">
                             <h2>{loadedDog.name}</h2>

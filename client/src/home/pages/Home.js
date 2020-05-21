@@ -9,6 +9,8 @@ import NewLogcomment from "../logcomment/pages/NewLogcomment";
 
 import { useHttpClient } from '../../shared/hooks/http-hook';
 
+var urls = require('../../URLs');
+
 const Home = props => {
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
     const [loadedDogs, setLoadedDogs] = useState();
@@ -17,7 +19,7 @@ const Home = props => {
         const fetchDogs = async () => {
             try {
                 const responseData = await sendRequest(
-                    'http://localhost:5000/api/dogs'
+                    urls.baseURL + '/api/dogs'
                 );
 
                 setLoadedDogs(responseData.dogs);

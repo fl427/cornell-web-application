@@ -12,6 +12,7 @@ import {useHttpClient} from '../../../shared/hooks/http-hook';
 import { useForm } from '../../../shared/hooks/form-hook';
 import './Monitor.css';
 
+var urls = require('../../../URLs');
 const Monitor = props => {
     const auth = useContext(AuthContext);
     const {isLoading, error, sendRequest, clearError} = useHttpClient();
@@ -44,7 +45,7 @@ const Monitor = props => {
         console.log(part2)
         try {
             const responseData = await sendRequest(
-                'http://localhost:5000/api/commands',
+                urls.baseURL + '/api/commands',
                 'POST',
                 JSON.stringify({
                     content: name + "&" + part1 + "&" + part2,

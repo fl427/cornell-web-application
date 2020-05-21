@@ -14,6 +14,7 @@ import {
 import './NewLogcomment.css';
 import {AuthContext} from "../../../shared/context/auth-context";
 
+var urls = require('../../../URLs');
 
 const NewLogcomment = () => {
     const auth = useContext(AuthContext);
@@ -36,7 +37,7 @@ const NewLogcomment = () => {
 
         try {
             const responseData = await sendRequest(
-                'http://localhost:5000/api/logcomments',
+                urls.baseURL + '/api/logcomments',
                 'POST',
                 JSON.stringify({
                     content: formState.inputs.logcomment.value,

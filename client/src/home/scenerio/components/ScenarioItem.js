@@ -18,6 +18,8 @@ import {VALIDATOR_MINLENGTH, VALIDATOR_REQUIRE} from "../../../shared/util/valid
 import ImageUpload from "../../../shared/components/FormElements/ImageUpload";
 import {useForm} from "../../../shared/hooks/form-hook";
 
+var urls = require('../../../URLs');
+
 const ScenarioItem = props => {
     const auth = useContext(AuthContext);
     const [showScenerio, setShowScenerio] = useState(false);
@@ -91,9 +93,9 @@ const ScenarioItem = props => {
             </Modal>
 
             {/*<Button inverse onClick={openScenerioHandler}>VIEW Scenerio</Button>*/}
-            <img className="icon-dog" src={`http://localhost:5000/${props.image}` } alt={props.name} onClick={openScenerioHandler}/>
+            <img className="icon-dog" src={urls.baseURL + `/${props.image}` } alt={props.name} onClick={openScenerioHandler}/>
             {/*<Link to={`/dogs/${props.id}`}>*/}
-            {/*<img className="icon-dog" src={`http://localhost:5000/${props.image}` } alt={props.name} onClick={openScenerioHandler}/>*/}
+            {/*<img className="icon-dog" src={urls.baseURL + `/${props.image}` } alt={props.name} onClick={openScenerioHandler}/>*/}
             {/*</Link>*/}
         </React.Fragment>
     );

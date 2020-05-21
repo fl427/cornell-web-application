@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import DogList from "../components/DogList";
 import { useHttpClient } from '../../shared/hooks/http-hook';
 
+var urls = require('../../URLs');
+
 const Dogs = () => {
 
     const [loadedDogs, setLoadedDogs] = useState();
@@ -10,7 +12,7 @@ const Dogs = () => {
     useEffect(() => {
         const fetchDogs = async () => {
             try {
-                const response = await fetch("http://localhost:5000/api/dogs", {
+                const response = await fetch(urls.baseURL + "/api/dogs", {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",

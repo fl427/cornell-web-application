@@ -15,6 +15,8 @@ import { useHttpClient } from '../../shared/hooks/http-hook';
 import { AuthContext } from '../../shared/context/auth-context';
 import './DogForm.css';
 
+var urls = require('../../URLs');
+
 const UpdateDog = () => {
     const auth = useContext(AuthContext);
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -40,7 +42,7 @@ const UpdateDog = () => {
         const fetchDog = async () => {
             try {
                 const responseData = await sendRequest(
-                    `http://localhost:5000/api/dogs/${dogId}`
+                    urls.baseURL + `/api/dogs/${dogId}`
                 );
                 setLoadedDog(responseData.dog);
                 setFormData(
@@ -66,7 +68,7 @@ const UpdateDog = () => {
         event.preventDefault();
         try {
             await sendRequest(
-                `http://localhost:5000/api/dogs/${dogId}`,
+                urls.baseURL + `/api/dogs/${dogId}`,
                 'PATCH',
                 JSON.stringify({
                     name: formState.inputs.name.value,

@@ -14,6 +14,7 @@ import {
 import './NewLog.css';
 import {AuthContext} from "../../../shared/context/auth-context";
 
+var urls = require('../../../URLs');
 
 const NewLog = () => {
     const auth = useContext(AuthContext);
@@ -36,7 +37,7 @@ const NewLog = () => {
 
         try {
             const responseData = await sendRequest(
-                'http://localhost:5000/api/logs',
+                urls.baseURL + '/api/logs',
                 'POST',
                 JSON.stringify({
                     log: formState.inputs.log.value,
