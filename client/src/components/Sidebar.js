@@ -179,7 +179,7 @@ class Sidebar extends Component {
                                     <MDBModalBody>
                                         <div className="embed-responsive embed-responsive-21by9">
                                             <iframe title="Embeds Page" className="embed-responsive-item"
-                                                    src="https://www.youtube.com/embed/fUwCSmBlJRg"
+                                                    src="https://www.youtube.com/embed/GuM8vTq0jd4"
 
                                                     allowFullScreen></iframe>
                                             {/*https://www.youtube.com/embed/GuM8vTq0jd4*/}
