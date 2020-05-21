@@ -17,6 +17,8 @@ import Input from "../../../shared/components/FormElements/Input";
 import {VALIDATOR_MINLENGTH, VALIDATOR_REQUIRE} from "../../../shared/util/validator";
 import ImageUpload from "../../../shared/components/FormElements/ImageUpload";
 import {useForm} from "../../../shared/hooks/form-hook";
+import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput, MDBBtn, MDBIcon, MDBModalFooter } from 'mdbreact';
+
 
 const ScenarioItem = props => {
     const auth = useContext(AuthContext);
