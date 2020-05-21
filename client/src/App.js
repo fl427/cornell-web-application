@@ -4,8 +4,8 @@ import React, { useState } from "react";
 import {BrowserRouter, Route, Switch, Redirect, Link} from "react-router-dom";
 import {MDBContainer, MDBRow, MDBCol, MDBMask, MDBView} from "mdbreact";
 import bg from './bg2.png';
+import bg3 from './bg3.jpg';
 // Home
-import Home from "./home/pages/Home";
 import Home2 from "./containers/Home2";
 
 // User
@@ -16,8 +16,6 @@ import { useAuth } from "./shared/hooks/auth-hook";
 import Signin from "./containers/Signin";
 
 // Navigation
-import Sidebar from "./shared/components/Sidebar/Sidebar";
-import Navigator from "./shared/components/Navigator/Navigator";
 import Navibar2 from "./shared/components/Navigator/Navibar2";
 
 // Dog
@@ -206,15 +204,7 @@ const App = () => {
                 <Route path="/" exact>
                     <Home2/>
                 </Route>
-                <Route path="/users" exact>
-                    <Users/>
-                </Route>
-                <Route path="/dogs" exact>
-                    <Dogs/>
-                </Route>
-                <Route path="/auth" exact>
-                    <Signin/>
-                </Route>
+
                 <Route path="/error">
                     <Errorpage />
                 </Route>
@@ -241,7 +231,7 @@ const App = () => {
                         alt=""
                         style={{width: "calc(100vw)", height: "calc(100vh)", position: "fixed", zIndex: "-999"}}
                     />
-                    <Navibar2/>
+                    <Navibar2 isLogin={false}/>
                     <div className="App">
                         <div style={{height: "5rem", width: "calc(100vw)"}}></div>
                         <Auth/>
@@ -268,7 +258,7 @@ const App = () => {
                         alt=""
                         style={{width: "calc(100vw)", height: "calc(100vh)", position: "fixed", zIndex: "-999"}}
                     />
-                    <Navibar2/>
+                    <Navibar2 isLogin={true}/>
                     <div className="App">
 
                         <div style={{height: "5rem", width: "calc(100vw)"}}></div>

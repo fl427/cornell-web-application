@@ -21,8 +21,9 @@ const Users = () => {
 
     return (
         <React.Fragment>
-            <div className="container-fluid">
-                <h1 className="mt-4">Users Header</h1>
+            <div className="container-fluid" style={{marginTop:"-1.5rem"}}>
+                <h1 className="mt-4" style={{textAlign:"left"}}>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adminstrator List </h1>
                 {loadedUsers && <UsersList items={loadedUsers} />}
             </div>
         </React.Fragment>

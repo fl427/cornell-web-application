@@ -7,7 +7,7 @@ import {useHttpClient} from "../../hooks/http-hook";
 import "./Navigator.css";
 
 const Navibar2 = props => {
-    const {isToggled, onToggle} = props;
+    const {isToggled, onToggle,isLogin} = props;
     const auth = useContext(AuthContext);
     const [loadedUser, setLoadedUser] = useState();
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -30,34 +30,42 @@ const Navibar2 = props => {
                             </MDBNavbarBrand>
                             <MDBNavbarToggler onClick={clickToggle} />
                             <MDBCollapse isOpen={collapse} navbar>
-                                <MDBNavbarNav right>
-                                    <MDBNavItem>
-                                        <MDBNavLink to="/">Dashboard </MDBNavLink>
-                                    </MDBNavItem>
-                                    <MDBNavItem>
-                                        <MDBNavLink to="/users">Admins</MDBNavLink>
-                                    </MDBNavItem>
-                                    <MDBNavItem>
-                                        <MDBNavLink to="/dogs">Scenarios</MDBNavLink>
-                                    </MDBNavItem>
-                                    <MDBNavItem>
-                                        <MDBNavLink to={`/${auth.userId}/dogs`}>My repo</MDBNavLink>
-                                    </MDBNavItem>
-                                    <MDBNavItem>
-                                        <MDBNavLink to="/dogs/new">New scenario</MDBNavLink>
-                                    </MDBNavItem>
-                                    {!auth.isLoggedIn && (
-                                    <MDBNavItem>
-                                        <MDBNavLink to="/auth" onClick={auth.logout}>Sign in</MDBNavLink>
-                                    </MDBNavItem>
-                                    )}
-                                    {auth.isLoggedIn && (
-                                    <MDBNavItem>
-                                        <MDBNavLink to="#!" onClick={auth.logout}>Log out</MDBNavLink>
-                                    </MDBNavItem>
-                                    )}
+                                {isLogin===false?
+                                    (<MDBNavbarNav right>
+                                        <MDBNavItem>
+                                            <MDBNavLink to="/auth">Sign in / up </MDBNavLink>
+                                        </MDBNavItem>
+                                    </MDBNavbarNav>)
+                                    :
+                                    (<MDBNavbarNav right>
+                                        <MDBNavItem>
+                                            <MDBNavLink to="/">Dashboard </MDBNavLink>
+                                        </MDBNavItem>
+                                        <MDBNavItem>
+                                            <MDBNavLink to="/users">Admins</MDBNavLink>
+                                        </MDBNavItem>
+                                        <MDBNavItem>
+                                            <MDBNavLink to="/dogs">Scenarios</MDBNavLink>
+                                        </MDBNavItem>
+                                        <MDBNavItem>
+                                            <MDBNavLink to={`/${auth.userId}/dogs`}>My repo</MDBNavLink>
+                                        </MDBNavItem>
+                                        <MDBNavItem>
+                                            <MDBNavLink to="/dogs/new">New scenario</MDBNavLink>
+                                        </MDBNavItem>
+                                        {!auth.isLoggedIn && (
+                                            <MDBNavItem>
+                                                <MDBNavLink to="/auth" onClick={auth.logout}>Sign in</MDBNavLink>
+                                            </MDBNavItem>
+                                        )}
+                                        {auth.isLoggedIn && (
+                                            <MDBNavItem>
+                                                <MDBNavLink to="#!" onClick={auth.logout}>Log out</MDBNavLink>
+                                            </MDBNavItem>
+                                        )}
 
-                                </MDBNavbarNav>
+                                    </MDBNavbarNav>)
+                                }
                             </MDBCollapse>
                         </MDBContainer>
                     </MDBNavbar>

@@ -20,6 +20,7 @@ class Navibar extends React.Component {
     }
 
     render() {
+
         return (
             <div>
                 <header>
@@ -31,17 +32,23 @@ class Navibar extends React.Component {
                                 </MDBNavbarBrand>
                                 <MDBNavbarToggler onClick={this.onClick} />
                                 <MDBCollapse isOpen={this.state.collapse} navbar>
-                                    <MDBNavbarNav right>
-                                        <MDBNavItem>
-                                            <MDBNavLink to="#">Home</MDBNavLink>
-                                        </MDBNavItem>
-                                        <MDBNavItem>
-                                            <MDBNavLink to="#">Scenarios</MDBNavLink>
-                                        </MDBNavItem>
-                                        <MDBNavItem>
+
+                                        {this.props.isLogin===false?
+                                            (<MDBNavbarNav right> <MDBNavItem>
+                                                <MDBNavLink to="#">Sign in/up</MDBNavLink>
+                                            </MDBNavItem></MDBNavbarNav>)
+                                            :( <MDBNavbarNav right><MDBNavItem>
+                                                    <MDBNavLink to="#">Home</MDBNavLink>
+                                                </MDBNavItem>
+                                                <MDBNavItem>
+                                                <MDBNavLink to="#">Scenarios</MDBNavLink>
+                                            </MDBNavItem>
+                                            <MDBNavItem>
                                             <MDBNavLink to="#">Sign in</MDBNavLink>
-                                        </MDBNavItem>
-                                    </MDBNavbarNav>
+                                            </MDBNavItem> </MDBNavbarNav>)
+                                        }
+
+
                                 </MDBCollapse>
                             </MDBContainer>
                         </MDBNavbar>
