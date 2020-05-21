@@ -18,7 +18,7 @@ const Logs = props => {
     useEffect(() => {
         const fetchLogs = async () => {
             try {
-                const response = await fetch("http://cornell-vet.herokuapp.com//api/logs", {
+                const response = await fetch("https://cornell-vet.herokuapp.com//api/logs", {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",

@@ -44,7 +44,7 @@ const Monitor = props => {
         console.log(part2)
         try {
             const responseData = await sendRequest(
-                'http://cornell-vet.herokuapp.com//api/commands',
+                'https://cornell-vet.herokuapp.com//api/commands',
                 'POST',
                 JSON.stringify({
                     content: name + "&" + part1 + "&" + part2,

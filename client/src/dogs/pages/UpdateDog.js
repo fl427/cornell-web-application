@@ -40,7 +40,7 @@ const UpdateDog = () => {
         const fetchDog = async () => {
             try {
                 const responseData = await sendRequest(
-                    `http://cornell-vet.herokuapp.com//api/dogs/${dogId}`
+                    `https://cornell-vet.herokuapp.com//api/dogs/${dogId}`
                 );
                 setLoadedDog(responseData.dog);
                 setFormData(
@@ -66,7 +66,7 @@ const UpdateDog = () => {
         event.preventDefault();
         try {
             await sendRequest(
-                `http://cornell-vet.herokuapp.com//api/dogs/${dogId}`,
+                `https://cornell-vet.herokuapp.com//api/dogs/${dogId}`,
                 'PATCH',
                 JSON.stringify({
                     name: formState.inputs.name.value,

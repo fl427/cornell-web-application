@@ -17,7 +17,7 @@ const Home = props => {
         const fetchDogs = async () => {
             try {
                 const responseData = await sendRequest(
-                    'http://cornell-vet.herokuapp.com//api/dogs'
+                    'https://cornell-vet.herokuapp.com//api/dogs'
                 );
 
                 setLoadedDogs(responseData.dogs);

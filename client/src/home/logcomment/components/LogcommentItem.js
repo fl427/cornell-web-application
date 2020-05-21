@@ -17,7 +17,7 @@ const LogcommentItem = props => {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const response = await fetch(`http://cornell-vet.herokuapp.com//api/users/${props.creatorId}`, {
+                const response = await fetch(`https://cornell-vet.herokuapp.com//api/users/${props.creatorId}`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",

@@ -11,7 +11,7 @@ const UserItem = props => {
             <Card className="user-item__content">
                 <Link to={`/${props.id}/dogs`}>
                     <div className="user-item__image">
-                        <Avatar image={`http://cornell-vet.herokuapp.com//${props.image}`} alt={props.name} className="user-item__image"/>
+                        <Avatar image={`https://cornell-vet.herokuapp.com//${props.image}`} alt={props.name} className="user-item__image"/>
                     </div>
                     <div className="user-item__info">
                         <h2>{props.name}</h2>
