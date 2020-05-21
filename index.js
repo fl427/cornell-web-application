@@ -52,23 +52,36 @@ app.use('/api/dogs', dogsRoutes);
 app.use('/api/users', usersRoutes);
 
 
-app.use((req, res, next) => {
-  const error = new HttpError('Could not find this route.', 404);
-  throw error;
-})
+if (process.env.NODE_ENV == "production") {
+  // Express will serve up production assets like our 'main.js' file
+  // If any route comes in and we do not understand,
+  // then look into 'client/build' and see if there is a file that matches the route.
+  app.use(express.static("client/build"));
+  // Express will server up the './client/build/index.html' file if it doesn't recognize the route
+  const path = require("path");
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
 
-app.use((error, req, res, next) => {
-  if (req.file) {
-    fs.unlink(req.file.path, (err) => {
-      console.log(err);
-    });
-  }
-  if (res.headerSent) {
-    return next(error);
-  }
-  res.status(error.code || 500);
-  res.json({ message: error.message || 'An unknown error occurred!' });
-});
+
+// app.use((req, res, next) => {
+//   const error = new HttpError('Could not find this route.', 404);
+//   throw error;
+// })
+
+// app.use((error, req, res, next) => {
+//   if (req.file) {
+//     fs.unlink(req.file.path, (err) => {
+//       console.log(err);
+//     });
+//   }
+//   if (res.headerSent) {
+//     return next(error);
+//   }
+//   res.status(error.code || 500);
+//   res.json({ message: error.message || 'An unknown error occurred!' });
+// });
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
