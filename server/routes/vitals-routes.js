@@ -11,6 +11,18 @@ router.post(
     vitalsControllers.createVital
 );
 
+router.post(
+    "/scenario",
+    [check("scenario").not().isEmpty()],
+    vitalsControllers.setScenario
+);
+
+router.post(
+    "/",
+    [check("target").not().isEmpty(), check("duration").not().isEmpty()],
+    vitalsControllers.createVital
+);
+
 router.get("/sounds", vitalsControllers.getVitalSounds);
 router.post(
     "/sounds",
