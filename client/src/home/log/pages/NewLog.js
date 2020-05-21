@@ -36,7 +36,7 @@ const NewLog = () => {
 
         try {
             const responseData = await sendRequest(
-                'https://cornell-vet.herokuapp.com//api/logs',
+                'https://cornell-vet.herokuapp.com/api/logs',
                 'POST',
                 JSON.stringify({
                     log: formState.inputs.log.value,

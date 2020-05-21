@@ -47,7 +47,7 @@ const NewDog = () => {
             formData.append('name', formState.inputs.name.value);
             formData.append('description', formState.inputs.description.value);
             formData.append('image', formState.inputs.image.value);
-            const responseData = await sendRequest('https://cornell-vet.herokuapp.com//api/dogs', 'POST', formData, {
+            const responseData = await sendRequest('https://cornell-vet.herokuapp.com/api/dogs', 'POST', formData, {
                 Authorization: 'Bearer ' + auth.token
             });
 

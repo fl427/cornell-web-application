@@ -10,7 +10,7 @@ const Logcomments = () => {
     useEffect(() => {
         const fetchLogcomments = async () => {
             try {
-                const response = await fetch("https://cornell-vet.herokuapp.com//api/logcomments", {
+                const response = await fetch("https://cornell-vet.herokuapp.com/api/logcomments", {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",

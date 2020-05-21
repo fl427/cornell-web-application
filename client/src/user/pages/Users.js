@@ -11,7 +11,7 @@ const Users = () => {
         const fetchUsers = async () => {
             try {
                 const responseData = await sendRequest(
-                    'https://cornell-vet.herokuapp.com//api/users'
+                    'https://cornell-vet.herokuapp.com/api/users'
                 );
                 setLoadedUsers(responseData.users);
             } catch (err) {}

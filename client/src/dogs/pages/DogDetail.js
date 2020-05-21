@@ -18,7 +18,7 @@ const DogDetail = props => {
     useEffect(() => {
         const fetchDog = async () => {
             try {
-                const response = await fetch(`https://cornell-vet.herokuapp.com//api/dogs/${dogId}`, {
+                const response = await fetch(`https://cornell-vet.herokuapp.com/api/dogs/${dogId}`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -44,7 +44,7 @@ const DogDetail = props => {
                 <div>
                     <Card className="dog-item__content">
                         <div className="dog-item__image">
-                            <img src={`https://cornell-vet.herokuapp.com//${loadedDog.image}`} alt={loadedDog.name}/>
+                            <img src={`https://cornell-vet.herokuapp.com/${loadedDog.image}`} alt={loadedDog.name}/>
                         </div>
                         <div className="dog-item__info">
                             <h2>{loadedDog.name}</h2>

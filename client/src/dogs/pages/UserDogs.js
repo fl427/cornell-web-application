@@ -13,7 +13,7 @@ const UserDogs = () => {
     useEffect(() => {
         const fetchDogs = async () => {
             try {
-                const response = await fetch(`https://cornell-vet.herokuapp.com//api/dogs/user/${userId}`, {
+                const response = await fetch(`https://cornell-vet.herokuapp.com/api/dogs/user/${userId}`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",

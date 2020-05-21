@@ -10,7 +10,7 @@ const Dogs = () => {
     useEffect(() => {
         const fetchDogs = async () => {
             try {
-                const response = await fetch("https://cornell-vet.herokuapp.com//api/dogs", {
+                const response = await fetch("https://cornell-vet.herokuapp.com/api/dogs", {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",

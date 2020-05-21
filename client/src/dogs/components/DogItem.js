@@ -57,7 +57,7 @@ const DogItem = props => {
                 }
                 <Card className="dog-item__content">
                     <div className="dog-item__image">
-                        <img src={`https://cornell-vet.herokuapp.com//${props.image}`} alt={props.name} />
+                        <img src={`https://cornell-vet.herokuapp.com/${props.image}`} alt={props.name} />
                     </div>
                     <div className="dog-item__info">
                         <h2>{props.name}</h2>

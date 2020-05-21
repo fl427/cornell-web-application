@@ -1,7 +1,7 @@
 import axios from "axios";
 
 let $axios = axios.create({
-    baseURL: "https://cornell-vet.herokuapp.com/",
+    baseURL: "https://cornell-vet.herokuapp.com",
     timeout: 5000,
     headers: {"Content-Type": "application/json"}
 });

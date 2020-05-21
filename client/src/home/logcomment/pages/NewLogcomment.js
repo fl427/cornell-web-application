@@ -36,7 +36,7 @@ const NewLogcomment = () => {
 
         try {
             const responseData = await sendRequest(
-                'https://cornell-vet.herokuapp.com//api/logcomments',
+                'https://cornell-vet.herokuapp.com/api/logcomments',
                 'POST',
                 JSON.stringify({
                     content: formState.inputs.logcomment.value,

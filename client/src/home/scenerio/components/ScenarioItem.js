@@ -100,10 +100,10 @@ const ScenarioItem = props => {
 
             {/*<Button inverse onClick={openScenerioHandler}>VIEW Scenerio</Button>*/}
 
-            <img className="icon-dog" src={`https://cornell-vet.herokuapp.com//${props.image}` } alt={props.name} onClick={openScenerioHandler}/>
+            <img className="icon-dog" src={`https://cornell-vet.herokuapp.com/${props.image}` } alt={props.name} onClick={openScenerioHandler}/>
 
             {/*<Link to={`/dogs/${props.id}`}>*/}
-            {/*<img className="icon-dog" src={`https://cornell-vet.herokuapp.com//${props.image}` } alt={props.name} onClick={openScenerioHandler}/>*/}
+            {/*<img className="icon-dog" src={`https://cornell-vet.herokuapp.com/${props.image}` } alt={props.name} onClick={openScenerioHandler}/>*/}
             {/*</Link>*/}
         </React.Fragment>
     );
