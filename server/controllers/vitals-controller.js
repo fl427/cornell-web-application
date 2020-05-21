@@ -41,249 +41,249 @@ const SCENARIOS = {
             "previous": 60,
             "target": 70,
             "duration": 10,
-            "slope": 2
+            "slope": 1
         },
         "etco2": {
-            "previous": 60,
-            "target": 80,
-            "duration": 10,
-            "slope": 2
+            "previous": 10,
+            "target": 50,
+            "duration": 80,
+            "slope":0.5  
         },
         "heartRate": {
-            "previous": 0,
-            "target": 10,
+            "previous": 90,
+            "target": 100,
             "duration": 10,
             "slope": 1
         },
         "spo2": {
-            "previous": 0,
-            "target": 10,
-            "duration": 10,
-            "slope": 1
+            "previous": 55,
+            "target": 65,
+            "duration": 2,
+            "slope": 5
         },
         "temp": {
-            "previous": 0,
-            "target": 10,
-            "duration": 10,
-            "slope": 1
+            "previous": 37,
+            "target": 43,
+            "duration": 12,
+            "slope": 0.5
         },
         "systolicNIBP": {
             "previous": 112,
-            "target": 122,
-            "duration": 10,
-            "slope": 1
+            "target": 156,
+            "duration": 22,
+            "slope": 2
         },
         "diastolicNIBP": {
-            "previous": 88,
-            "target": 98,
+            "previous": 98,
+            "target": 128,
             "duration": 10,
-            "slope": 1
+            "slope": 3
         },
         "nbpHR": {
             "previous": 0,
-            "target": 10,
-            "duration": 10,
+            "target": 5,
+            "duration": 5,
             "slope": 1
         },
     },
     "2": {
         "awrr": {
-            "previous": 0,
-            "target": 20,
-            "duration": 20,
+            "previous":25,
+            "target": 28,
+            "duration": 3,
             "slope": 1
         },
         "etco2": {
-            "previous": 0,
-            "target": 20,
-            "duration": 20,
-            "slope": 1
+            "previous": 24,
+            "target": 0,
+            "duration": 6,
+            "slope": -4
         },
         "heartRate": {
-            "previous": 0,
-            "target": 50,
-            "duration": 50,
-            "slope": 1
+            "previous": 50,
+            "target": 20,
+            "duration": 6,
+            "slope": -5
         },
         "spo2": {
-            "previous": 0,
-            "target": 50,
-            "duration": 50,
+            "previous": 120,
+            "target": 160,
+            "duration": 40,
             "slope": 1
         },
         "temp": {
-            "previous": 0,
-            "target": 50,
-            "duration": 50,
+            "previous": 32,
+            "target": 39,
+            "duration": 7,
             "slope": 1
         },
         "systolicNIBP": {
-            "previous": 0,
-            "target": 90,
-            "duration": 90,
-            "slope": 1
+            "previous": 100,
+            "target": 91,
+            "duration": 30,
+            "slope": 0.3
         },
         "diastolicNIBP": {
-            "previous": 0,
-            "target": 78,
-            "duration": 10,
-            "slope": 1
+            "previous": 21,
+            "target": 98,
+            "duration": 7,
+            "slope": 11
         },
         "nbpHR": {
-            "previous": 0,
-            "target": 50,
-            "duration": 50,
-            "slope": 1
+            "previous": -3,
+            "target": 9,
+            "duration": 2,
+            "slope": 6
         },
     },
     "3": {
         "awrr": {
-            "previous": 10,
-            "target": 30,
-            "duration": 30,
-            "slope": 1
+            "previous": -1,
+            "target": -5,
+            "duration": 8,
+            "slope": -0.5
         },
         "etco2": {
             "previous": 0,
-            "target": 30,
-            "duration": 30,
+            "target": 25,
+            "duration": 25,
             "slope": 1
         },
         "heartRate": {
-            "previous": 0,
-            "target": 50,
-            "duration": 50,
-            "slope": 1
+            "previous": 97,
+            "target": 127,
+            "duration": 5,
+            "slope": 6
         },
         "spo2": {
-            "previous": 0,
-            "target": 50,
+            "previous": -2,
+            "target": 98,
             "duration": 50,
-            "slope": 1
+            "slope": 2
         },
         "temp": {
-            "previous": 0,
-            "target": 50,
-            "duration": 50,
-            "slope": 1
+            "previous": 3,
+            "target": -27,
+            "duration": 15,
+            "slope": -2
         },
         "systolicNIBP": {
-            "previous": 0,
-            "target": 50,
-            "duration": 50,
-            "slope": 1
+            "previous": -2,
+            "target": 23,
+            "duration": 100,
+            "slope": 0.25
         },
         "diastolicNIBP": {
-            "previous": 0,
+            "previous": -5,
             "target": 50,
-            "duration": 50,
-            "slope": 1
+            "duration": 110,
+            "slope": 0.5
         },
         "nbpHR": {
-            "previous": 0,
-            "target": 50,
-            "duration": 50,
-            "slope": 1
+            "previous": 38,
+            "target": 8,
+            "duration": 15,
+            "slope": -2
         },
     },
     "4": {
         "awrr": {
-            "previous": 0,
+            "previous": 80,
             "target": 40,
             "duration": 40,
-            "slope": 1
+            "slope": -1
         },
         "etco2": {
-            "previous": 0,
-            "target": 40,
-            "duration": 40,
-            "slope": 1
+            "previous": 7,
+            "target": -7,
+            "duration": 28,
+            "slope": -0.5
         },
         "heartRate": {
-            "previous": 0,
+            "previous": 34,
             "target": 50,
-            "duration": 50,
-            "slope": 1
+            "duration": 32,
+            "slope": 0.5
         },
         "spo2": {
-            "previous": 0,
-            "target": 50,
-            "duration": 50,
-            "slope": 1
+            "previous": 40,
+            "target": 56,
+            "duration": 20,
+            "slope": 0.8
         },
         "temp": {
-            "previous": 0,
-            "target": 50,
-            "duration": 50,
-            "slope": 1
+            "previous": 117,
+            "target": 110,
+            "duration": 10,
+            "slope": -0.7
         },
         "systolicNIBP": {
-            "previous": 0,
-            "target": 50,
-            "duration": 50,
-            "slope": 1
+            "previous": -119,
+            "target": -79,
+            "duration": 80,
+            "slope": 0.5
         },
         "diastolicNIBP": {
-            "previous": 0,
-            "target": 50,
-            "duration": 50,
-            "slope": 1
+            "previous": 32,
+            "target": 86,
+            "duration": 9,
+            "slope": 6
         },
         "nbpHR": {
-            "previous": 0,
+            "previous": 150,
             "target": 50,
             "duration": 50,
-            "slope": 1
+            "slope": -2
         },
     },
     "5": {
         "awrr": {
-            "previous": 0,
-            "target": 50,
-            "duration": 50,
-            "slope": 1
+            "previous": 198,
+            "target": 98,
+            "duration": 100,
+            "slope": -1
         },
         "etco2": {
-            "previous": 0,
-            "target": 50,
-            "duration": 50,
-            "slope": 1
+            "previous": 62,
+            "target": 94,
+            "duration": 16,
+            "slope": 2
         },
         "heartRate": {
-            "previous": 0,
-            "target": 50,
-            "duration": 50,
-            "slope": 1
+            "previous": 13,
+            "target": -6,
+            "duration": 19,
+            "slope": -1
         },
         "spo2": {
-            "previous": 0,
-            "target": 50,
-            "duration": 50,
-            "slope": 1
+            "previous": 82,
+            "target": 2,
+            "duration": 160,
+            "slope": -2
         },
         "temp": {
-            "previous": 0,
-            "target": 50,
-            "duration": 50,
-            "slope": 1
+            "previous": 7,
+            "target": 0,
+            "duration": 10,
+            "slope": -0.7
         },
         "systolicNIBP": {
-            "previous": 0,
-            "target": 50,
-            "duration": 50,
-            "slope": 1
+            "previous": 120,
+            "target": 240,
+            "duration": 100,
+            "slope": 1.2
         },
         "diastolicNIBP": {
-            "previous": 0,
-            "target": 50,
-            "duration": 50,
-            "slope": 1
+            "previous": -3,
+            "target": -14,
+            "duration": 10,
+            "slope": -1.1
         },
         "nbpHR": {
-            "previous": 0,
-            "target": 50,
-            "duration": 50,
-            "slope": 1
+            "previous": 33,
+            "target": 30,
+            "duration": 30,
+            "slope": -0.1
         },
     },
 }
