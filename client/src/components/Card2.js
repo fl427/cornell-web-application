@@ -22,13 +22,11 @@ class Card2 extends Component {
     state = {
         inputMode: "s",
         inputVolume: 0,
-        currentVolume: 5,
         targetVolume: 0,
-        duration: 0,
     };
 
     static propTypes = {
-        currentMode: PropTypes.string.isRequired,
+        currentValues: PropTypes.string.isRequired,
         sound: PropTypes.string.isRequired,
         hideFunc: PropTypes.func.isRequired,
         items: PropTypes.array.isRequired,
@@ -45,6 +43,8 @@ class Card2 extends Component {
     handlePost = async()=>{
         await console.log(this.state.inputMode,this.state.inputVolume);
     };
+
+
 
 
     render() {
@@ -81,7 +81,7 @@ class Card2 extends Component {
                             <h6 className="dark-grey-text card2-mode-text">
                                 <p className="grey-text">Volume & Mode:</p>
                                 <p style={{marginTop: "-0.5rem", fontWeight: "bold"}}>
-                                    {this.state.currentVolume}&nbsp;&nbsp;|&nbsp;&nbsp;Fine Crakeless
+                                    {this.props.currentValues[1]}&nbsp;&nbsp;|&nbsp;&nbsp;{this.props.items[this.props.currentValues[0]]}
                                 </p>
                             </h6>
                         </MDBRow>

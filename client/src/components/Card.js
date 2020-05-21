@@ -36,7 +36,6 @@ class Card extends Component {
         inputValue: 0,
         inputDuration: 0,
         targetValue: 0,
-        duration: 0,
         modal0: false,
         historyValues: [],
         //pointer: 0,
