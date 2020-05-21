@@ -49,6 +49,8 @@ function Home2() {
 
             let vitalValues = await fetchValue("/api/vitals");
 
+            console.log(vitalValues);
+
             if (vitalValues === undefined){
                 for(let i in vitalList){
                     temp[vitalList[i]] =  "--";
@@ -56,8 +58,11 @@ function Home2() {
             }else{
                 for(let i in vitalList){
                     const name = vitalList[i];
+
                     const value = vitalValues.data.vital[convertName(name)];
+
                     temp[name] = value!==undefined ? value : "--";
+
                 }
             }
 
