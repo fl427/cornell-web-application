@@ -747,22 +747,22 @@ const createSoundPulse = async (req, res, next) => {
             });
             break;
         case 'leftDorsalPulse':
-            createdPulse = new LeftDorsalPulse({
+            createdVitalSound = new LeftDorsalPulse({
                 content: arr,
             });
             break;
         case 'leftFemoralPulse':
-            createdPulse = new LeftFemoralPulse({
+            createdVitalSound = new LeftFemoralPulse({
                 content: arr,
             });
             break;
         case 'rightDorsalPulse':
-            createdPulse = new RightDorsalPulse({
+            createdVitalSound = new RightDorsalPulse({
                 content: arr,
             });
             break;
         case 'rightFemoralPulse':
-            createdPulse = new RightFemoralPulse({
+            createdVitalSound = new RightFemoralPulse({
                 content: arr,
             });
             break;
