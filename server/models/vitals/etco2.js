@@ -9,4 +9,4 @@ const etcoSchema = mongoose.Schema({
     timestamps: { createdAt: true, updatedAt: false }
 });
 
-module.exports = mongoose.model("Etco", etcoSchema);
+module.exports = mongoose.model("Etco2", etcoSchema);

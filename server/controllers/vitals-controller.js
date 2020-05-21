@@ -35,38 +35,218 @@ const ETCO2Probe = require('../models/probe/etco2Probe');
 const CUFFProbe = require('../models/probe/cuffProbe');
 const ChestMovement = require('../models/probe/chestMovement');
 
-// const getVital = async (req, res, next) => {
-//     let vital;
-//     try {
-//         vital = await Vital.findOne().sort({ createdAt: -1 }).limit(1); // vital.target, vital.duration
-//     } catch (err) {
-//         const error = new HttpError(
-//             'Fetching vitals failed, please try again later',
-//             500
-//         );
-//         return next(error);
-//     }
-//     console.log(vital)
-//     if (!vital || vital.length === 0) {
-//         console.log("There is No Vital")
-//     }
-//
-//     if (vital.previous === vital.target) {
-//         vital.previous = vital.target;
-//     } else {
-//         vital.previous = vital.previous + vital.slope * 0.1;
-//     }
-//     try {
-//         vital.save();
-//     } catch (err) {
-//         const error = new HttpError(
-//             'Creating vital failed, try again.',
-//             500
-//         );
-//         return next(error);
-//     }
-//     res.json({ vital: vital.toObject({ getters: true })});
-// }
+const SCENARIOS = {
+    "1": {
+        "awrr": {
+            "target": 10,
+            "duration": 10,
+            "slope": 1
+        },
+        "etco2": {
+            "target": 10,
+            "duration": 10,
+            "slope": 1
+        },
+        "heartRate": {
+            "target": 10,
+            "duration": 10,
+            "slope": 1
+        },
+        "spo2": {
+            "target": 10,
+            "duration": 10,
+            "slope": 1
+        },
+        "temp": {
+            "target": 10,
+            "duration": 10,
+            "slope": 1
+        },
+        "systolicNIBP": {
+            "target": 10,
+            "duration": 10,
+            "slope": 1
+        },
+        "diastolicNIBP": {
+            "target": 10,
+            "duration": 10,
+            "slope": 1
+        },
+        "nbpHR": {
+            "target": 10,
+            "duration": 10,
+            "slope": 1
+        },
+    },
+    "2": {
+        "awrr": {
+            "target": 20,
+            "duration": 20,
+            "slope": 1
+        },
+        "etco2": {
+            "target": 20,
+            "duration": 20,
+            "slope": 1
+        },
+        "heartRate": {
+            "target": 50,
+            "duration": 50,
+            "slope": 1
+        },
+        "spo2": {
+            "target": 50,
+            "duration": 50,
+            "slope": 1
+        },
+        "temp": {
+            "target": 50,
+            "duration": 50,
+            "slope": 1
+        },
+        "systolicNIBP": {
+            "target": 50,
+            "duration": 50,
+            "slope": 1
+        },
+        "diastolicNIBP": {
+            "target": 50,
+            "duration": 50,
+            "slope": 1
+        },
+        "nbpHR": {
+            "target": 50,
+            "duration": 50,
+            "slope": 1
+        },
+    },
+    "3": {
+        "awrr": {
+            "target": 30,
+            "duration": 30,
+            "slope": 1
+        },
+        "etco2": {
+            "target": 30,
+            "duration": 30,
+            "slope": 1
+        },
+        "heartRate": {
+            "target": 50,
+            "duration": 50,
+            "slope": 1
+        },
+        "spo2": {
+            "target": 50,
+            "duration": 50,
+            "slope": 1
+        },
+        "temp": {
+            "target": 50,
+            "duration": 50,
+            "slope": 1
+        },
+        "systolicNIBP": {
+            "target": 50,
+            "duration": 50,
+            "slope": 1
+        },
+        "diastolicNIBP": {
+            "target": 50,
+            "duration": 50,
+            "slope": 1
+        },
+        "nbpHR": {
+            "target": 50,
+            "duration": 50,
+            "slope": 1
+        },
+    },
+    "4": {
+        "awrr": {
+            "target": 40,
+            "duration": 40,
+            "slope": 1
+        },
+        "etco2": {
+            "target": 40,
+            "duration": 40,
+            "slope": 1
+        },
+        "heartRate": {
+            "target": 50,
+            "duration": 50,
+            "slope": 1
+        },
+        "spo2": {
+            "target": 50,
+            "duration": 50,
+            "slope": 1
+        },
+        "temp": {
+            "target": 50,
+            "duration": 50,
+            "slope": 1
+        },
+        "systolicNIBP": {
+            "target": 50,
+            "duration": 50,
+            "slope": 1
+        },
+        "diastolicNIBP": {
+            "target": 50,
+            "duration": 50,
+            "slope": 1
+        },
+        "nbpHR": {
+            "target": 50,
+            "duration": 50,
+            "slope": 1
+        },
+    },
+    "5": {
+        "awrr": {
+            "target": 50,
+            "duration": 50,
+            "slope": 1
+        },
+        "etco2": {
+            "target": 50,
+            "duration": 50,
+            "slope": 1
+        },
+        "heartRate": {
+            "target": 50,
+            "duration": 50,
+            "slope": 1
+        },
+        "spo2": {
+            "target": 50,
+            "duration": 50,
+            "slope": 1
+        },
+        "temp": {
+            "target": 50,
+            "duration": 50,
+            "slope": 1
+        },
+        "systolicNIBP": {
+            "target": 50,
+            "duration": 50,
+            "slope": 1
+        },
+        "diastolicNIBP": {
+            "target": 50,
+            "duration": 50,
+            "slope": 1
+        },
+        "nbpHR": {
+            "target": 50,
+            "duration": 50,
+            "slope": 1
+        },
+    },
+}
 
 const getVital = async (req, res, next) => {
     // 这段代码等有空时重写成函数，太冗长了，现在先不管
@@ -105,7 +285,7 @@ const getVital = async (req, res, next) => {
     } else if (awrr.slope < 0 && awrr.previous <= awrr.target) {
         awrr.previous = awrr.target;
     } else {
-        awrr.previous = (awrr.previous + awrr.slope * 0.1).toFixed(2);
+        awrr.previous = (awrr.previous + awrr.slope).toFixed(2);
     }
 
     if (etco2.slope >= 0 && etco2.previous >= etco2.target) {
@@ -161,7 +341,7 @@ const getVital = async (req, res, next) => {
     } else if (temp.slope < 0 && temp.previous <= temp.target) {
         temp.previous = temp.target;
     } else {
-        temp.previous = (temp.previous + temp.slope * 0.1).toFixed(2);
+        temp.previous = (temp.previous + temp.slope).toFixed(2);
     }
 
     try {
@@ -193,7 +373,21 @@ const getVital = async (req, res, next) => {
         'temp': temp.previous,
     }
     console.log(vital)
-    res.json({ vital: vital});
+
+    let sounds = await getVitalSounds()
+    let pulse = await getVitalPulse()
+    let probe = await getVitalProbe()
+    let soundpulse = {
+        ...sounds,
+        ...pulse,
+    }
+    let values;
+    values = {
+        'vital': vital,
+        'soundpulse': soundpulse,
+        'probe': probe
+    }
+    res.json({ values: values});
 }
 
 const createVital = async (req, res, next) => {
@@ -337,7 +531,6 @@ const createVital = async (req, res, next) => {
             }
             break;
     }
-
     try {
         latestVital.save();
     } catch (err) {
@@ -347,8 +540,89 @@ const createVital = async (req, res, next) => {
         );
         return next(error);
     }
-
     res.status(201).json({vital: latestVital});
+
+};
+
+const setScenario = async (req, res, next) => {
+    const errors = validationResult(req);
+    console.log(errors);
+    if (!errors.isEmpty()) {
+        return next (
+            new HttpError('Invalid inputs passed, please check your data.', 422)
+        );
+    }
+
+    const { scenario } = req.body;
+    console.log(req.body)
+
+    let initialAwrr;
+    let initialEtco2;
+    let initialHeartRate;
+    let initialSpo2;
+    let initialTemp;
+    let initialSystolicNIBP;
+    let initialDiastolicNIBP;
+    let initialNbpHR;
+
+    initialAwrr = new Awrr({
+        target: SCENARIOS[scenario]['awrr']['target'],
+        duration: SCENARIOS[scenario]['awrr']['duration'],
+        slope: SCENARIOS[scenario]['awrr']['slope']
+    })
+    initialEtco2 = new Etco2({
+        target: SCENARIOS[scenario]['etco2']['target'],
+        duration: SCENARIOS[scenario]['etco2']['duration'],
+        slope: SCENARIOS[scenario]['etco2']['slope'],
+    })
+    initialHeartRate = new HeartRate({
+        target: SCENARIOS[scenario]['heartRate']['target'],
+        duration: SCENARIOS[scenario]['heartRate']['duration'],
+        slope: SCENARIOS[scenario]['heartRate']['slope'],
+    })
+    initialSpo2 = new Spo2({
+        target: SCENARIOS[scenario]['spo2']['target'],
+        duration: SCENARIOS[scenario]['spo2']['duration'],
+        slope: SCENARIOS[scenario]['spo2']['slope'],
+    })
+    initialTemp = new Temp({
+        target: SCENARIOS[scenario]['temp']['target'],
+        duration: SCENARIOS[scenario]['temp']['duration'],
+        slope: SCENARIOS[scenario]['temp']['slope'],
+    })
+    initialSystolicNIBP = new SystolicNIBP({
+        target: SCENARIOS[scenario]['systolicNIBP']['target'],
+        duration: SCENARIOS[scenario]['systolicNIBP']['duration'],
+        slope: SCENARIOS[scenario]['systolicNIBP']['slope'],
+    })
+    initialDiastolicNIBP = new DiastolicNIBP({
+        target: SCENARIOS[scenario]['diastolicNIBP']['target'],
+        duration: SCENARIOS[scenario]['diastolicNIBP']['duration'],
+        slope: SCENARIOS[scenario]['diastolicNIBP']['slope'],
+    })
+    initialNbpHR = new NbpHR({
+        target: SCENARIOS[scenario]['nbpHR']['target'],
+        duration: SCENARIOS[scenario]['nbpHR']['duration'],
+        slope: SCENARIOS[scenario]['nbpHR']['slope'],
+    })
+
+    try {
+        initialAwrr.save();
+        initialEtco2.save();
+        initialHeartRate.save();
+        initialSpo2.save();
+        initialTemp.save();
+        initialSystolicNIBP.save();
+        initialDiastolicNIBP.save();
+        initialNbpHR.save();
+    } catch (err) {
+        const error = new HttpError(
+            'Creating vital failed, try again.',
+            500
+        );
+        return next(error);
+    }
+    res.status(201).json({initialAwrr: initialAwrr});
 };
 
 const getVitalSounds = async (req, res, next) => {
@@ -380,8 +654,9 @@ const getVitalSounds = async (req, res, next) => {
         'rightLungSound': rightLungSound.content,
     }
     console.log(vitalSounds)
-    res.json({ vitalSounds: vitalSounds});
+    return vitalSounds
 }
+
 const createVitalSounds = async (req, res, next) => {
     const errors = validationResult(req);
     console.log(errors);
@@ -463,7 +738,7 @@ const getVitalPulse = async (req, res, next) => {
         'rightFemoralPulse': rightFemoralPulse.content,
     }
     console.log(pulse)
-    res.json({ pulse: pulse});
+    return pulse
 }
 
 const createVitalPulse = async (req, res, next) => {
@@ -554,7 +829,7 @@ const getVitalProbe = async (req, res, next) => {
         'tempProbe': tempProbe.content,
     }
     console.log(probe)
-    res.json({ probe: probe});
+    return probe
 }
 
 const createVitalProbe = async (req, res, next) => {
@@ -621,6 +896,7 @@ const createVitalProbe = async (req, res, next) => {
 
 exports.getVital = getVital;
 exports.createVital = createVital;
+exports.setScenario = setScenario;
 exports.getVitalSounds = getVitalSounds;
 exports.createVitalSounds = createVitalSounds;
 exports.getVitalPulse = getVitalPulse;
