@@ -38,8 +38,8 @@ const ChestMovement = require('../models/probe/chestMovement');
 const SCENARIOS = {
     "1": {
         "awrr": {
-            "previous": 0,
-            "target": 10,
+            "previous": 20,
+            "target": 30,
             "duration": 10,
             "slope": 1
         },
@@ -595,6 +595,7 @@ const setScenario = async (req, res, next) => {
     const { scenario } = req.body;
     console.log(req.body)
 
+    console.log("repeat this scenario")
     let initialAwrr;
     let initialEtco2;
     let initialHeartRate;
@@ -671,7 +672,13 @@ const setScenario = async (req, res, next) => {
         );
         return next(error);
     }
-    res.status(201).json({initialAwrr: initialAwrr});
+    console.log("current scenario ends")
+
+    // function repeat() {
+    //     console.log("current repeat");
+    // }
+    // setInterval(repeat, 1500);
+    res.status(201).json({"Set?":"YES"});
 };
 
 const getVitalSounds = async (req, res, next) => {
@@ -705,7 +712,7 @@ const getVitalSounds = async (req, res, next) => {
     return vitalSounds
 }
 
-const createVitalSounds = async (req, res, next) => {
+const createSoundPulse = async (req, res, next) => {
     const errors = validationResult(req);
     console.log(errors);
     if (!errors.isEmpty()) {
@@ -739,6 +746,26 @@ const createVitalSounds = async (req, res, next) => {
                 content: arr,
             });
             break;
+        case 'leftDorsalPulse':
+            createdPulse = new LeftDorsalPulse({
+                content: arr,
+            });
+            break;
+        case 'leftFemoralPulse':
+            createdPulse = new LeftFemoralPulse({
+                content: arr,
+            });
+            break;
+        case 'rightDorsalPulse':
+            createdPulse = new RightDorsalPulse({
+                content: arr,
+            });
+            break;
+        case 'rightFemoralPulse':
+            createdPulse = new RightFemoralPulse({
+                content: arr,
+            });
+            break;
         default:
             console.log("Not one of sounds")
             break;
@@ -754,7 +781,7 @@ const createVitalSounds = async (req, res, next) => {
         return next(error);
     }
 
-    res.status(201).json({sound: createdVitalSound});
+    res.status(201).json({soundpulse: createdVitalSound});
 };
 
 const getVitalPulse = async (req, res, next) => {
@@ -944,7 +971,9 @@ exports.getVital = getVital;
 exports.createVital = createVital;
 exports.setScenario = setScenario;
 exports.getVitalSounds = getVitalSounds;
-exports.createVitalSounds = createVitalSounds;
+
+exports.createSoundPulse = createSoundPulse;
+
 exports.getVitalPulse = getVitalPulse;
 exports.createVitalPulse = createVitalPulse;
 exports.getVitalProbe = getVitalProbe;
