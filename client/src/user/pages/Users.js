@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import UsersList from "../components/UsersList";
 import { useHttpClient } from '../../shared/hooks/http-hook';
 
-var urls = require('../../URLs');
-
 const Users = () => {
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
     const [loadedUsers, setLoadedUsers] = useState();
@@ -13,7 +11,7 @@ const Users = () => {
         const fetchUsers = async () => {
             try {
                 const responseData = await sendRequest(
-                    urls.baseURL + '/api/users'
+                    'http://cornell-vet.herokuapp.com//api/users'
                 );
                 setLoadedUsers(responseData.users);
             } catch (err) {}

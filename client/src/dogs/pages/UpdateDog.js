@@ -15,8 +15,6 @@ import { useHttpClient } from '../../shared/hooks/http-hook';
 import { AuthContext } from '../../shared/context/auth-context';
 import './DogForm.css';
 
-var urls = require('../../URLs');
-
 const UpdateDog = () => {
     const auth = useContext(AuthContext);
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -42,7 +40,7 @@ const UpdateDog = () => {
         const fetchDog = async () => {
             try {
                 const responseData = await sendRequest(
-                    urls.baseURL + `/api/dogs/${dogId}`
+                    `http://cornell-vet.herokuapp.com//api/dogs/${dogId}`
                 );
                 setLoadedDog(responseData.dog);
                 setFormData(
@@ -68,7 +66,7 @@ const UpdateDog = () => {
         event.preventDefault();
         try {
             await sendRequest(
-                urls.baseURL + `/api/dogs/${dogId}`,
+                `http://cornell-vet.herokuapp.com//api/dogs/${dogId}`,
                 'PATCH',
                 JSON.stringify({
                     name: formState.inputs.name.value,

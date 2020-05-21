@@ -3,8 +3,6 @@ import React, { useState, useEffect } from 'react';
 import LogcommentList from "../components/LogcommentList";
 import { useHttpClient } from '../../../shared/hooks/http-hook';
 
-var urls = require('../../../URLs');
-
 const Logcomments = () => {
 
     const [loadedLogcomments, setLoadedLogcomments] = useState();
@@ -12,7 +10,7 @@ const Logcomments = () => {
     useEffect(() => {
         const fetchLogcomments = async () => {
             try {
-                const response = await fetch(urls.baseURL + "/api/logcomments", {
+                const response = await fetch("http://cornell-vet.herokuapp.com//api/logcomments", {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",

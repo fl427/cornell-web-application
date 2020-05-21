@@ -1,7 +1,7 @@
 import axios from "axios";
 
 let $axios = axios.create({
-    baseURL: "https://cornell-vet.herokuapp.com",
+    baseURL: "http://cornell-vet.herokuapp.com/",
     timeout: 5000,
     headers: {"Content-Type": "application/json"}
 });
@@ -21,7 +21,9 @@ export const postValue = async (url, data) => {
     try {
         const response = await $axios.post(url, JSON.stringify(data),{"Content-Type": "application/json"});
         console.log(response);
+        return response;
     } catch (error) {
         console.error(error);
+        return undefined;
     }
 };

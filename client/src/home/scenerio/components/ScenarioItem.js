@@ -17,8 +17,8 @@ import Input from "../../../shared/components/FormElements/Input";
 import {VALIDATOR_MINLENGTH, VALIDATOR_REQUIRE} from "../../../shared/util/validator";
 import ImageUpload from "../../../shared/components/FormElements/ImageUpload";
 import {useForm} from "../../../shared/hooks/form-hook";
+import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput, MDBBtn, MDBIcon, MDBModalFooter } from 'mdbreact';
 
-var urls = require('../../../URLs');
 
 const ScenarioItem = props => {
     const auth = useContext(AuthContext);
@@ -78,9 +78,15 @@ const ScenarioItem = props => {
                                 />
                             </li>
                             <li>
-                                <Button type="submit" disabled={!formState.isValid}>
-                                    ADD DOG
-                                </Button>
+
+                                <MDBBtn type="submit" disabled={!formState.isValid}
+                                        gradient="blue"
+                                        rounded
+                                        className="btn-block z-depth-1a"
+                                        style={{marginTop: "2rem"}}
+                                >
+                                    ADD Scenario
+                                </MDBBtn>
                             </li>
                         </ul>
                     </form>
@@ -93,9 +99,11 @@ const ScenarioItem = props => {
             </Modal>
 
             {/*<Button inverse onClick={openScenerioHandler}>VIEW Scenerio</Button>*/}
-            <img className="icon-dog" src={urls.baseURL + `/${props.image}` } alt={props.name} onClick={openScenerioHandler}/>
+
+            <img className="icon-dog" src={`http://cornell-vet.herokuapp.com//${props.image}` } alt={props.name} onClick={openScenerioHandler}/>
+
             {/*<Link to={`/dogs/${props.id}`}>*/}
-            {/*<img className="icon-dog" src={urls.baseURL + `/${props.image}` } alt={props.name} onClick={openScenerioHandler}/>*/}
+            {/*<img className="icon-dog" src={`http://cornell-vet.herokuapp.com//${props.image}` } alt={props.name} onClick={openScenerioHandler}/>*/}
             {/*</Link>*/}
         </React.Fragment>
     );

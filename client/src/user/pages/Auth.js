@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 
 import Card from "../../shared/components/UIElements/Card";
 import Input from "../../shared/components/FormElements/Input";
-import Button from "../../shared/components/FormElements/Button";
+
 // import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 // import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import ImageUpload from "../../shared/components/FormElements/ImageUpload";
@@ -16,9 +16,7 @@ import { useForm } from "../../shared/hooks/form-hook";
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import { AuthContext } from "../../shared/context/auth-context";
 import "./Auth.css";
-import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput, MDBBtn, MDBIcon, MDBModalFooter } from 'mdbreact';
-
-var urls = require('../../URLs');
+import {  MDBBtn } from 'mdbreact';
 
 const Auth = () => {
     const auth = useContext(AuthContext);
@@ -73,7 +71,7 @@ const Auth = () => {
         if (isLoginMode) {
             try {
                 const responseData = await sendRequest(
-                    urls.baseURL + '/api/users/login',
+                    'http://cornell-vet.herokuapp.com//api/users/login',
                     'POST',
                     JSON.stringify({
                         email: formState.inputs.email.value,
@@ -93,7 +91,7 @@ const Auth = () => {
                 formData.append('password', formState.inputs.password.value);
                 formData.append('image', formState.inputs.image.value);
                 const responseData = await sendRequest(
-                    urls.baseURL + '/api/users/signup',
+                    'http://cornell-vet.herokuapp.com//api/users/signup',
                     'POST',
                     formData
                 );

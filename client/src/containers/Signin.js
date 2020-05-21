@@ -23,8 +23,6 @@ import "./css/Signin.css";
 
 import {BrowserRouter, useHistory} from "react-router-dom";
 
-var urls = require('../URLs');
-
 const Signin = () => {
     const auth = useContext(AuthContext);
     const history = useHistory();
@@ -79,7 +77,7 @@ const Signin = () => {
         if (isLoginMode) {
             try {
                 const responseData = await sendRequest(
-                    urls.baseURL + '/api/users/login',
+                    'http://cornell-vet.herokuapp.com//api/users/login',
                     'POST',
                     JSON.stringify({
                         email: formState.inputs.email.value,
@@ -99,7 +97,7 @@ const Signin = () => {
                 formData.append('password', formState.inputs.password.value);
                 formData.append('image', formState.inputs.image.value);
                 const responseData = await sendRequest(
-                    urls.baseURL + '/api/users/signup',
+                    'http://cornell-vet.herokuapp.com//api/users/signup',
                     'POST',
                     formData
                 );

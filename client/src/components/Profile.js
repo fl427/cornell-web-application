@@ -8,8 +8,6 @@ import {AuthContext} from "../shared/context/auth-context";
 import {useHttpClient} from "../shared/hooks/http-hook";
 import {useHistory, useParams} from "react-router-dom";
 
-var urls = require('../URLs');
-
 const Profile = () => {
     const auth = useContext(AuthContext);
     const userId = auth.userId
@@ -22,7 +20,7 @@ const Profile = () => {
         const fetchUser = async () => {
             try {
                 const responseData = await sendRequest(
-                    urls.baseURL + `/api/users/${userId}`
+                    `http://cornell-vet.herokuapp.com//api/users/${userId}`
                 );
                 setLoadedUser(responseData.user);
             } catch (err) {}
@@ -46,7 +44,7 @@ const Profile = () => {
                     <MDBRow className="avatar-box">
                         <div style={{height:"5.9rem",width:"5.9rem",backgroundColor:"white"}} className="rounded-circle move">
                             {loadedUser && (
-                            <img className="avatar rounded-circle" src={urls.baseURL + `/${loadedUser.image}`} alt="Avatar"/>
+                            <img className="avatar rounded-circle" src={`http://cornell-vet.herokuapp.com//${loadedUser.image}`} alt="Avatar"/>
                             )}
                         </div>
                     </MDBRow>
