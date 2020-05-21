@@ -44,9 +44,10 @@ class Sidebar extends Component {
     };
 
     render() {
-        let vitalList = ["Heart Rate", "ETCO2", "AWRR", "SPO2", "TEMP", "NIBP"];
-        let soundList = ["Simulated Vocalizations", "Heart Sounds", "Left Lung Sounds", "Right Lung Sounds"];
-        let probeList = ["ECG", "ETCO2", "SPO2", "TEMP", "Cuff"];
+        const vitalList = ["Heart Rate", "ETCO2", "AWRR", "SPO2", "TEMP", "NIBP"];
+        const soundList = ["Simulated Vocalizations", "Heart Sounds", "Left Lung Sounds", "Right Lung Sounds",
+            "Left Femoral Pulse", "Right Femoral Pulse", "Left Dorsal Pulse", "Right Dorsal Pulse"];
+        const probeList = ["ECG", "ETCO2", "SPO2", "TEMP", "Cuff"];
         let vitalElements = new Array();
         let soundElements = new Array();
         let probeElements = new Array();

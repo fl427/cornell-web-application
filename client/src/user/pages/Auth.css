@@ -21,7 +21,7 @@
     margin: 10px auto;
     box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);
     border-radius: 10px;
-    border: 6px solid #305A72;
+    border: 4.5px solid #464646;
 }
 
 .auth-form ul{
@@ -45,25 +45,34 @@
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
+    border-radius: 6px;
     padding: 8px;
     outline: none;
-    border: 1px solid #B0CFE0;
+    border: 1px solid #BCDAEB;
     -webkit-transition: all 0.30s ease-in-out;
     -moz-transition: all 0.30s ease-in-out;
     -ms-transition: all 0.30s ease-in-out;
     -o-transition: all 0.30s ease-in-out;
 
-    /*铺满*/
     width: 100%;
 }
 
-.auth-form ul li  .field-style--invalid label,
+
 .auth-form ul li  .field-style--invalid p {
-    color: red;
+    color: #CB2242;
 }
 
+
+.switch-text{
+
+    margin-right:3rem;
+}
+/*
 .auth-form ul li  .field-style--invalid input,
 .auth-form ul li  .field-style--invalid textarea {
     border-color: red;
     background: #ffd1d1;
 }
+
+
+ */

@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 
 import Button from './Button';
 import './ImageUpload.css';
+import { MDBBtn, MDBIcon } from "mdbreact";
 
 const ImageUpload = props => {
     const [file, setFile] = useState();
@@ -56,9 +57,10 @@ const ImageUpload = props => {
                     {previewUrl && <img src={previewUrl} alt="Preview" />}
                     {!previewUrl && <p>Please pick an image.</p>}
                 </div>
-                <Button type="button" onClick={pickImageHandler}>
-                    PICK IMAGE
-                </Button>
+
+                <MDBBtn size="sm" outline color="info" type="button" onClick={pickImageHandler} style={{padding:"6px 4px 6px 4px", borderRadius: "25px",opacity:"85%"}}>
+                    <MDBIcon size="lg" icon="camera"  className="mr-1"/> Upload
+                </MDBBtn>
             </div>
             {!isValid && <p>{props.errorText}</p>}
         </div>

@@ -12,6 +12,7 @@ import {
     MDBBtn,
     MDBModalHeader,
     MDBModalBody, MDBModalFooter, MDBModal,
+    MDBDropdownItem, MDBDropdownToggle, MDBDropdownMenu, MDBDropdown,
 
 } from 'mdbreact';
 import PropTypes from "prop-types";
@@ -40,6 +41,8 @@ class Card extends Component {
         historyValues: [],
         //pointer: 0,
         slot: 0,
+        radio: 1,
+        bp: true,
     };
 
     componentWillReceiveProps(nextProps) {
@@ -70,6 +73,8 @@ class Card extends Component {
         hideFunc: PropTypes.func.isRequired,
     };
 
+
+
     toggle = nr => () => {
         let modalNumber = 'modal' + nr;
         this.setState({
@@ -86,15 +91,33 @@ class Card extends Component {
         this.setState({inputDuration:e.target.value});
     };
 
+    handleSelectMode (n){
+        if(n===0){
+            this.setState({bp: true});
+        }else{
+            this.setState({bp: false});
+        }
+    };
 
 
     handlePost = async()=>{
-        await postValue("/api/vitals",{vital:convertName(this.props.vital), target:this.state.inputValue, duration:this.state.inputDuration});
+        if(this.props.vital!=="NIBP"){
+            await postValue("/api/vitals",{vital:convertName(this.props.vital), target:this.state.inputValue, duration:this.state.inputDuration});
+        }else if(this.state.bp){
+            await postValue("/api/vitals",{vital:"systolicNIBP", target:this.state.inputValue, duration:this.state.inputDuration});
+            console.log(this.state.inputValue);
+        }else{
+            await postValue("/api/vitals",{vital:"diastolicNIBP", target:this.state.inputValue, duration:this.state.inputDuration});
+            console.log(this.state.inputValue);
+        }
+
     };
 
     render() {
         return (
+
             <MDBCol md="12"  lg="4" style={{marginBottom: "2rem"}} >
+
                         <MDBCard>
                             <MDBCardBody className="mx-1" style={{marginBottom:"-0.7rem"}}>
                                 <MDBRow style={{marginTop: "-0.6rem"}}>
@@ -106,12 +129,34 @@ class Card extends Component {
                                                 : (<strong style={{whiteSpace: "nowrap"}}>{this.props.vital}&nbsp;&nbsp;&nbsp;&nbsp;</strong>)}
                                         </h4>
                                         </MDBRow>
-                                        <MDBRow style={{margin:"-0.4rem 0rem -1.9rem -1.3rem"}}>
-                                            <p className="text-monospace card-value">{this.props.currentValue}
-                                                {this.props.unit.length<=2 ? (<p className="length-less-than-2 text-muted grey-text card-unit">{this.props.unit}</p>)
-                                                : (<p className="length-more-than-2 text-muted grey-text card-unit">{this.props.unit}</p>)}
-                                            </p>
+                                        <MDBRow style={{margin:"-0.4rem 0rem -0.8rem -1.3rem"}}>
+                                            {this.props.vital!=="NIBP"?
+                                                <p className="text-monospace card-value">{this.props.currentValue}
+                                                    {this.props.unit.length<=2 ? (<p className="length-less-than-2 text-muted grey-text card-unit">{this.props.unit}</p>)
+                                                        : (<p className="length-more-than-2 text-muted grey-text card-unit">{this.props.unit}</p>)}
+                                                </p>
+                                                :
+                                                <p className="text-monospace card-value-nibp">{this.props.currentValue}
+                                                    {this.props.unit.length<=2 ? (<p className="length-less-than-2 text-muted grey-text card-unit">{this.props.unit}</p>)
+                                                        : (<p className="length-more-than-2 text-muted grey-text card-unit">{this.props.unit}</p>)}
+                                                </p>
+                                            }
+
                                         </MDBRow>
+                                        {this.props.vital!=="NIBP" ? null:
+                                            <MDBRow style={{margin:"1.6rem 0rem -3rem 4.1rem"}}>
+                                                <MDBDropdown dropup size="sm" className="card2-dropdown">
+                                                    <MDBDropdownToggle style={{marginTop: "0.4rem",marginLeft:"0.7rem",zIndex:"999"}} caret color="ins" >&nbsp;</MDBDropdownToggle>
+                                                    <MDBDropdownMenu>
+                                                        <MDBDropdownItem onClick={this.handleSelectMode.bind(this,0)}>Systolic</MDBDropdownItem>
+                                                        <MDBDropdownItem onClick={this.handleSelectMode.bind(this,1)}>Diastolic</MDBDropdownItem>
+                                                    </MDBDropdownMenu>
+                                                </MDBDropdown>
+                                            </MDBRow>
+                                        }
+
+
+
 
                                     </MDBCol>
                                     <MDBCol size="6">

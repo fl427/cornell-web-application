@@ -6,6 +6,7 @@ import Button from "../../shared/components/FormElements/Button";
 // import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 // import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import ImageUpload from "../../shared/components/FormElements/ImageUpload";
+import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput, MDBBtn, MDBIcon, MDBModalFooter } from 'mdbreact';
 
 import {
     VALIDATOR_EMAIL,
@@ -16,9 +17,8 @@ import { useForm } from "../../shared/hooks/form-hook";
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import { AuthContext } from "../../shared/context/auth-context";
 import "./Auth.css";
-import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput, MDBBtn, MDBIcon, MDBModalFooter } from 'mdbreact';
 
-const Auth = () => {
+const Auth2 = () => {
     const auth = useContext(AuthContext);
     const [isLoginMode, setIsLoginMode] = useState(true);
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -103,20 +103,19 @@ const Auth = () => {
 
 
     return (
-            <Card style={{marginTop:"-0.6rem"}} className="authentication">
-                <h2 className="dark-grey-text mb-5">
-                    <strong>Sign in</strong>
-                </h2>
-                <hr style={{marginTop:"-1.5rem",marginBot:"-1.2rem"}}/>
+        <React.Fragment>
+            <Card className="authentication">
+                <h2>Login Required</h2>
+                <hr />
                 <form className="auth-form" onSubmit={authSubmitHandler}>
-                    <ul style={{marginTop:"-1.5rem"}}>
+                    <ul>
                         <li>
                             {!isLoginMode && (
                                 <Input
                                     element="input"
                                     id="name"
                                     type="text"
-                                    label="Username"
+                                    label="Your Name"
                                     validators={[VALIDATOR_REQUIRE()]}
                                     errorText="Please enter a name."
                                     onInput={inputHandler}
@@ -124,14 +123,14 @@ const Auth = () => {
                             )}
                         </li>
 
-                        <li >
+                        <li>
                             <Input
                                 element="input"
                                 id="email"
                                 type="email"
-                                label="Email"
+                                label="E-Mail"
                                 validators={[VALIDATOR_EMAIL()]}
-                                errorText="Incorrect Email Format!"
+                                errorText="Please enter a valid email address."
                                 onInput={inputHandler}
                             />
                         </li>
@@ -142,52 +141,34 @@ const Auth = () => {
                                 type="password"
                                 label="Password"
                                 validators={[VALIDATOR_MINLENGTH(6)]}
-                                errorText="At least 6 characters!"
+                                errorText="Please enter a valid password, at least 6 characters."
                                 onInput={inputHandler}
                             />
                         </li>
-                        {!isLoginMode && (
-                        <li style={{margin:"auto", textAlign:"right"}}>
+                        <li>
+                            {!isLoginMode && (
                                 <ImageUpload
-                                    right
+                                    center
                                     id="image"
                                     onInput={inputHandler}
-                                    errorText="Please upload an image!"
+                                    errorText="Please provide an image."
                                 />
+                            )}
                         </li>
-                        )}
                         <li>
-                            <MDBBtn type="submit" disabled={!formState.isValid}
-                                gradient="blue"
-                                rounded
-                                className="btn-block z-depth-1a"
-                                    style={{marginTop: "2rem"}}
-                            >
-                                {isLoginMode ? 'Sign in' : 'Sign up'}
-                            </MDBBtn>
+                            <Button type="submit" disabled={!formState.isValid}>
+                                {isLoginMode ? 'LOGIN' : 'SIGNUP'}
+                            </Button>
                         </li>
                     </ul>
                 </form>
+                <Button inverse onClick={switchModeHandler}>
+                    SWITCH TO {isLoginMode ? 'SIGNUP' : 'LOGIN'}
+                </Button>
 
-                <div className="switch-text">
-                {isLoginMode ?
-                    (<p className="font-small grey-text d-flex justify-content-end">
-                        Not a member?
-                        <a href="#!" className="blue-text ml-1" onClick={switchModeHandler}>
-                            Sign up
-                        </a>
-                    </p>) : (
-                        <p className="font-small grey-text d-flex justify-content-end">
-                            Have an account?
-                            <a href="#!" className="blue-text ml-1" onClick={switchModeHandler}>
-                                Sign in
-                            </a>
-                        </p>
-                        )
-                }
-                </div>
             </Card>
+        </React.Fragment>
     );
 };
 
-export default Auth;
+export default Auth2;

@@ -17,10 +17,20 @@ import {
 } from 'mdbreact';
 import PropTypes from "prop-types";
 import "./css/Card2.css";
+import {postValue} from "../request/fetch";
+
+const convertDict = { "Simulated Vocalizations": "simulatedVocalization",  "Heart Sounds": "heartSound", "Left Lung Sounds": "leftLungSound",
+    "Right Lung Sounds":"rightLungSound", "Left Femoral Pulse":"leftFemoralPulse", "Right Femoral Pulse": "rightFemoralPulse",
+    "Left Dorsal Pulse":"leftDorsalPulse", "Right Dorsal Pulse":"rightDorsalPulse"};
+
+const convertName = (frontendName) => {
+    return convertDict[frontendName];
+};
 
 class Card2 extends Component {
     state = {
-        inputMode: "s",
+        inputMode: "",
+        inputModeNum: 0,
         inputVolume: 0,
         targetVolume: 0,
     };
@@ -34,6 +44,8 @@ class Card2 extends Component {
 
     handleSelectMode (n){
         this.setState({inputMode:this.props.items[n]});
+        this.setState({inputModeNum:n});
+
     };
 
     handleChangeVolume =(e)=> {
@@ -41,7 +53,7 @@ class Card2 extends Component {
     };
 
     handlePost = async()=>{
-        await console.log(this.state.inputMode,this.state.inputVolume);
+        await postValue("/api/vitals/sounds",{category: convertName(this.props.sound), arr:[this.state.inputModeNum,this.state.inputVolume]});
     };
 
 
@@ -81,7 +93,10 @@ class Card2 extends Component {
                             <h6 className="dark-grey-text card2-mode-text">
                                 <p className="grey-text">Volume & Mode:</p>
                                 <p style={{marginTop: "-0.5rem", fontWeight: "bold"}}>
-                                    {this.props.currentValues[1]}&nbsp;&nbsp;|&nbsp;&nbsp;{this.props.items[this.props.currentValues[0]]}
+                                    {this.props.currentValues[1]}
+                                    &nbsp;|&nbsp;&nbsp;
+                                    {this.props.currentValues[0]<this.props.items.length ?
+                                        this.props.items[this.props.currentValues[0]] : this.props.items[this.props.items.length-1]}
                                 </p>
                             </h6>
                         </MDBRow>
@@ -107,9 +122,9 @@ class Card2 extends Component {
                         <MDBRow className="text-center mb-3 card2-btn">
 
                             <MDBCol size="2">
-                                <MDBDropdown dropup size="sm" className="card2-dropdown" onChange={this.handleChangeMode}>
-                                    <MDBDropdownToggle caret color="ins" style={{marginLeft:"0.7rem"}} onChange={this.handleChangeMode}></MDBDropdownToggle>
-                                    <MDBDropdownMenu onChange={this.handleChangeMode}>
+                                <MDBDropdown dropup size="sm" className="card2-dropdown">
+                                    <MDBDropdownToggle caret color="ins" style={{marginLeft:"0.7rem"}} ></MDBDropdownToggle>
+                                    <MDBDropdownMenu>
                                         {elements}
 
                                     </MDBDropdownMenu>
