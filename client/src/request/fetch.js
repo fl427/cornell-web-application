@@ -21,7 +21,9 @@ export const postValue = async (url, data) => {
     try {
         const response = await $axios.post(url, JSON.stringify(data),{"Content-Type": "application/json"});
         console.log(response);
+        return response;
     } catch (error) {
         console.error(error);
+        return undefined;
     }
 };

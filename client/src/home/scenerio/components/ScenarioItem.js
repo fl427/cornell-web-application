@@ -78,9 +78,15 @@ const ScenarioItem = props => {
                                 />
                             </li>
                             <li>
-                                <Button type="submit" disabled={!formState.isValid}>
-                                    ADD DOG
-                                </Button>
+
+                                <MDBBtn type="submit" disabled={!formState.isValid}
+                                        gradient="blue"
+                                        rounded
+                                        className="btn-block z-depth-1a"
+                                        style={{marginTop: "2rem"}}
+                                >
+                                    ADD Scenario
+                                </MDBBtn>
                             </li>
                         </ul>
                     </form>
@@ -93,7 +99,9 @@ const ScenarioItem = props => {
             </Modal>
 
             {/*<Button inverse onClick={openScenerioHandler}>VIEW Scenerio</Button>*/}
+
             <img className="icon-dog" src={`http://localhost:5000/${props.image}` } alt={props.name} onClick={openScenerioHandler}/>
+
             {/*<Link to={`/dogs/${props.id}`}>*/}
             {/*<img className="icon-dog" src={`http://localhost:5000/${props.image}` } alt={props.name} onClick={openScenerioHandler}/>*/}
             {/*</Link>*/}

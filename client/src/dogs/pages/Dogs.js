@@ -19,6 +19,7 @@ const Dogs = () => {
 
                 const responseData = await response.json();
                 setLoadedDogs(responseData.dogs);
+                console.log(responseData);
                 if (!response.ok) {
                     console.log(responseData.message);
                 }
