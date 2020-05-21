@@ -38,16 +38,16 @@ const ChestMovement = require('../models/probe/chestMovement');
 const SCENARIOS = {
     "1": {
         "awrr": {
-            "previous": 20,
-            "target": 30,
+            "previous": 60,
+            "target": 70,
             "duration": 10,
-            "slope": 1
+            "slope": 2
         },
         "etco2": {
-            "previous": 0,
-            "target": 10,
+            "previous": 60,
+            "target": 80,
             "duration": 10,
-            "slope": 1
+            "slope": 2
         },
         "heartRate": {
             "previous": 0,
@@ -674,10 +674,6 @@ const setScenario = async (req, res, next) => {
     }
     console.log("current scenario ends")
 
-    // function repeat() {
-    //     console.log("current repeat");
-    // }
-    // setInterval(repeat, 1500);
     res.status(201).json({"Set?":"YES"});
 };
 
