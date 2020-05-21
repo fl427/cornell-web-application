@@ -11,12 +11,11 @@ router.post(
     vitalsControllers.createVital
 );
 
-router.post(
-    "/scenario",
-    [check("scenario").not().isEmpty()],
-    vitalsControllers.setScenario
-);
-
+// router.post(
+//     "/scenario",
+//     [check("scenario").not().isEmpty()],
+//     vitalsControllers.setScenario
+// );
 
 router.post(
     "/",
