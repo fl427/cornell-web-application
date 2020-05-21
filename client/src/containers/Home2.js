@@ -56,7 +56,7 @@ function Home2() {
             }else{
                 for(let i in vitalList){
                     const name = vitalList[i];
-                    const value = vitalValues.data.vital[convertName(name)];
+                    const value = vitalValues.data.values.vital[convertName(name)];
                     temp[name] = value!==undefined ? value : "--";
                 }
             }

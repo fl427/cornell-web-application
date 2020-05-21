@@ -38,41 +38,49 @@ const ChestMovement = require('../models/probe/chestMovement');
 const SCENARIOS = {
     "1": {
         "awrr": {
+            "previous": 0,
             "target": 10,
             "duration": 10,
             "slope": 1
         },
         "etco2": {
+            "previous": 0,
             "target": 10,
             "duration": 10,
             "slope": 1
         },
         "heartRate": {
+            "previous": 0,
             "target": 10,
             "duration": 10,
             "slope": 1
         },
         "spo2": {
+            "previous": 0,
             "target": 10,
             "duration": 10,
             "slope": 1
         },
         "temp": {
+            "previous": 0,
             "target": 10,
             "duration": 10,
             "slope": 1
         },
         "systolicNIBP": {
-            "target": 10,
+            "previous": 112,
+            "target": 122,
             "duration": 10,
             "slope": 1
         },
         "diastolicNIBP": {
-            "target": 10,
+            "previous": 88,
+            "target": 98,
             "duration": 10,
             "slope": 1
         },
         "nbpHR": {
+            "previous": 0,
             "target": 10,
             "duration": 10,
             "slope": 1
@@ -80,41 +88,49 @@ const SCENARIOS = {
     },
     "2": {
         "awrr": {
+            "previous": 0,
             "target": 20,
             "duration": 20,
             "slope": 1
         },
         "etco2": {
+            "previous": 0,
             "target": 20,
             "duration": 20,
             "slope": 1
         },
         "heartRate": {
+            "previous": 0,
             "target": 50,
             "duration": 50,
             "slope": 1
         },
         "spo2": {
+            "previous": 0,
             "target": 50,
             "duration": 50,
             "slope": 1
         },
         "temp": {
+            "previous": 0,
             "target": 50,
             "duration": 50,
             "slope": 1
         },
         "systolicNIBP": {
-            "target": 50,
-            "duration": 50,
+            "previous": 0,
+            "target": 90,
+            "duration": 90,
             "slope": 1
         },
         "diastolicNIBP": {
-            "target": 50,
-            "duration": 50,
+            "previous": 0,
+            "target": 78,
+            "duration": 10,
             "slope": 1
         },
         "nbpHR": {
+            "previous": 0,
             "target": 50,
             "duration": 50,
             "slope": 1
@@ -122,41 +138,49 @@ const SCENARIOS = {
     },
     "3": {
         "awrr": {
+            "previous": 10,
             "target": 30,
             "duration": 30,
             "slope": 1
         },
         "etco2": {
+            "previous": 0,
             "target": 30,
             "duration": 30,
             "slope": 1
         },
         "heartRate": {
+            "previous": 0,
             "target": 50,
             "duration": 50,
             "slope": 1
         },
         "spo2": {
+            "previous": 0,
             "target": 50,
             "duration": 50,
             "slope": 1
         },
         "temp": {
+            "previous": 0,
             "target": 50,
             "duration": 50,
             "slope": 1
         },
         "systolicNIBP": {
+            "previous": 0,
             "target": 50,
             "duration": 50,
             "slope": 1
         },
         "diastolicNIBP": {
+            "previous": 0,
             "target": 50,
             "duration": 50,
             "slope": 1
         },
         "nbpHR": {
+            "previous": 0,
             "target": 50,
             "duration": 50,
             "slope": 1
@@ -164,41 +188,49 @@ const SCENARIOS = {
     },
     "4": {
         "awrr": {
+            "previous": 0,
             "target": 40,
             "duration": 40,
             "slope": 1
         },
         "etco2": {
+            "previous": 0,
             "target": 40,
             "duration": 40,
             "slope": 1
         },
         "heartRate": {
+            "previous": 0,
             "target": 50,
             "duration": 50,
             "slope": 1
         },
         "spo2": {
+            "previous": 0,
             "target": 50,
             "duration": 50,
             "slope": 1
         },
         "temp": {
+            "previous": 0,
             "target": 50,
             "duration": 50,
             "slope": 1
         },
         "systolicNIBP": {
+            "previous": 0,
             "target": 50,
             "duration": 50,
             "slope": 1
         },
         "diastolicNIBP": {
+            "previous": 0,
             "target": 50,
             "duration": 50,
             "slope": 1
         },
         "nbpHR": {
+            "previous": 0,
             "target": 50,
             "duration": 50,
             "slope": 1
@@ -206,41 +238,49 @@ const SCENARIOS = {
     },
     "5": {
         "awrr": {
+            "previous": 0,
             "target": 50,
             "duration": 50,
             "slope": 1
         },
         "etco2": {
+            "previous": 0,
             "target": 50,
             "duration": 50,
             "slope": 1
         },
         "heartRate": {
+            "previous": 0,
             "target": 50,
             "duration": 50,
             "slope": 1
         },
         "spo2": {
+            "previous": 0,
             "target": 50,
             "duration": 50,
             "slope": 1
         },
         "temp": {
+            "previous": 0,
             "target": 50,
             "duration": 50,
             "slope": 1
         },
         "systolicNIBP": {
+            "previous": 0,
             "target": 50,
             "duration": 50,
             "slope": 1
         },
         "diastolicNIBP": {
+            "previous": 0,
             "target": 50,
             "duration": 50,
             "slope": 1
         },
         "nbpHR": {
+            "previous": 0,
             "target": 50,
             "duration": 50,
             "slope": 1
@@ -285,7 +325,7 @@ const getVital = async (req, res, next) => {
     } else if (awrr.slope < 0 && awrr.previous <= awrr.target) {
         awrr.previous = awrr.target;
     } else {
-        awrr.previous = (awrr.previous + awrr.slope).toFixed(2);
+        awrr.previous = (awrr.previous + awrr.slope).toFixed(1);
     }
 
     if (etco2.slope >= 0 && etco2.previous >= etco2.target) {
@@ -293,7 +333,7 @@ const getVital = async (req, res, next) => {
     } else if (etco2.slope < 0 && etco2.previous <= etco2.target) {
         etco2.previous = etco2.target;
     } else {
-        etco2.previous = (etco2.previous + etco2.slope).toFixed(2);
+        etco2.previous = (etco2.previous + etco2.slope).toFixed(1);
     }
 
     if (heartRate.slope >= 0 && heartRate.previous >= heartRate.target) {
@@ -301,7 +341,7 @@ const getVital = async (req, res, next) => {
     } else if (heartRate.slope < 0 && heartRate.previous <= heartRate.target) {
         heartRate.previous = heartRate.target;
     } else {
-        heartRate.previous = (heartRate.previous + heartRate.slope).toFixed(2);
+        heartRate.previous = (heartRate.previous + heartRate.slope).toFixed(1);
     }
 
     if (systolicNIBP.slope >= 0 && systolicNIBP.previous >= systolicNIBP.target) {
@@ -309,7 +349,7 @@ const getVital = async (req, res, next) => {
     } else if (systolicNIBP.slope < 0 && systolicNIBP.previous <= systolicNIBP.target) {
         systolicNIBP.previous = systolicNIBP.target;
     } else {
-        systolicNIBP.previous = (systolicNIBP.previous + systolicNIBP.slope).toFixed(2);
+        systolicNIBP.previous = (systolicNIBP.previous + systolicNIBP.slope).toFixed(1);
     }
 
     if (diastolicNIBP.slope >= 0 && diastolicNIBP.previous >= diastolicNIBP.target) {
@@ -317,7 +357,7 @@ const getVital = async (req, res, next) => {
     } else if (diastolicNIBP.slope < 0 && diastolicNIBP.previous <= diastolicNIBP.target) {
         diastolicNIBP.previous = diastolicNIBP.target;
     } else {
-        diastolicNIBP.previous = (diastolicNIBP.previous + diastolicNIBP.slope).toFixed(2);
+        diastolicNIBP.previous = (diastolicNIBP.previous + diastolicNIBP.slope).toFixed(1);
     }
 
     if (nbpHR.slope >= 0 && nbpHR.previous >= nbpHR.target) {
@@ -325,7 +365,7 @@ const getVital = async (req, res, next) => {
     } else if (nbpHR.slope < 0 && nbpHR.previous <= nbpHR.target) {
         nbpHR.previous = nbpHR.target;
     } else {
-        nbpHR.previous = (nbpHR.previous + nbpHR.slope).toFixed(2);
+        nbpHR.previous = (nbpHR.previous + nbpHR.slope).toFixed(1);
     }
 
     if (spo2.slope >= 0 && spo2.previous >= spo2.target) {
@@ -333,7 +373,7 @@ const getVital = async (req, res, next) => {
     } else if (spo2.slope < 0 && spo2.previous <= spo2.target) {
         spo2.previous = spo2.target;
     } else {
-        spo2.previous = (spo2.previous + spo2.slope).toFixed(2);
+        spo2.previous = (spo2.previous + spo2.slope).toFixed(1);
     }
 
     if (temp.slope >= 0 && temp.previous >= temp.target) {
@@ -341,7 +381,7 @@ const getVital = async (req, res, next) => {
     } else if (temp.slope < 0 && temp.previous <= temp.target) {
         temp.previous = temp.target;
     } else {
-        temp.previous = (temp.previous + temp.slope).toFixed(2);
+        temp.previous = (temp.previous + temp.slope).toFixed(1);
     }
 
     try {
@@ -372,7 +412,6 @@ const getVital = async (req, res, next) => {
         'spo2': spo2.previous,
         'temp': temp.previous,
     }
-    console.log(vital)
 
     let sounds = await getVitalSounds()
     let pulse = await getVitalPulse()
@@ -566,41 +605,51 @@ const setScenario = async (req, res, next) => {
     let initialNbpHR;
 
     initialAwrr = new Awrr({
+        previous: SCENARIOS[scenario]['awrr']['previous'],
         target: SCENARIOS[scenario]['awrr']['target'],
         duration: SCENARIOS[scenario]['awrr']['duration'],
         slope: SCENARIOS[scenario]['awrr']['slope']
     })
     initialEtco2 = new Etco2({
+        previous: SCENARIOS[scenario]['awrr']['previous'],
         target: SCENARIOS[scenario]['etco2']['target'],
         duration: SCENARIOS[scenario]['etco2']['duration'],
         slope: SCENARIOS[scenario]['etco2']['slope'],
     })
     initialHeartRate = new HeartRate({
+        previous: SCENARIOS[scenario]['awrr']['previous'],
         target: SCENARIOS[scenario]['heartRate']['target'],
         duration: SCENARIOS[scenario]['heartRate']['duration'],
         slope: SCENARIOS[scenario]['heartRate']['slope'],
     })
     initialSpo2 = new Spo2({
+        previous: SCENARIOS[scenario]['awrr']['previous'],
         target: SCENARIOS[scenario]['spo2']['target'],
         duration: SCENARIOS[scenario]['spo2']['duration'],
         slope: SCENARIOS[scenario]['spo2']['slope'],
     })
     initialTemp = new Temp({
+        previous: SCENARIOS[scenario]['awrr']['previous'],
         target: SCENARIOS[scenario]['temp']['target'],
         duration: SCENARIOS[scenario]['temp']['duration'],
         slope: SCENARIOS[scenario]['temp']['slope'],
     })
+    // 收缩压，高于舒张压
     initialSystolicNIBP = new SystolicNIBP({
+        previous: SCENARIOS[scenario]['awrr']['previous'],
         target: SCENARIOS[scenario]['systolicNIBP']['target'],
         duration: SCENARIOS[scenario]['systolicNIBP']['duration'],
         slope: SCENARIOS[scenario]['systolicNIBP']['slope'],
     })
+    // 舒张压，低于收缩压
     initialDiastolicNIBP = new DiastolicNIBP({
+        previous: SCENARIOS[scenario]['awrr']['previous'],
         target: SCENARIOS[scenario]['diastolicNIBP']['target'],
         duration: SCENARIOS[scenario]['diastolicNIBP']['duration'],
         slope: SCENARIOS[scenario]['diastolicNIBP']['slope'],
     })
     initialNbpHR = new NbpHR({
+        previous: SCENARIOS[scenario]['awrr']['previous'],
         target: SCENARIOS[scenario]['nbpHR']['target'],
         duration: SCENARIOS[scenario]['nbpHR']['duration'],
         slope: SCENARIOS[scenario]['nbpHR']['slope'],
@@ -653,7 +702,6 @@ const getVitalSounds = async (req, res, next) => {
         'leftLungSound': leftLungSound.content,
         'rightLungSound': rightLungSound.content,
     }
-    console.log(vitalSounds)
     return vitalSounds
 }
 
@@ -737,7 +785,6 @@ const getVitalPulse = async (req, res, next) => {
         'rightDorsalPulse': rightDorsalPulse.content,
         'rightFemoralPulse': rightFemoralPulse.content,
     }
-    console.log(pulse)
     return pulse
 }
 
@@ -828,7 +875,6 @@ const getVitalProbe = async (req, res, next) => {
         'spo2Probe': spo2Probe.content,
         'tempProbe': tempProbe.content,
     }
-    console.log(probe)
     return probe
 }
 
