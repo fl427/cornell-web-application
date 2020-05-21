@@ -11,7 +11,7 @@ const dogsRoutes = require('./routes/dogs-routes');
 const usersRoutes = require('./routes/users-routes');
 const logsRoutes = require('./routes/logs-routes');
 const commandsRoutes = require('./routes/commands-routes');
-const logcommentsRoutes = require('./routes/Logcomments-routes');
+const logcommentsRoutes = require('./routes/logcomments-routes');
 const vitalsRoutes = require('./routes/vitals-routes');
 
 const HttpError = require('./models/http-error');
