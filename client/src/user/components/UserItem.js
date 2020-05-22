@@ -5,15 +5,13 @@ import Avatar from "../../shared/components/UIElements/Avatar";
 import Card from "../../shared/components/UIElements/Card";
 import './UserItem.css';
 
-var urls = require('../../URLs');
-
 const UserItem = props => {
     return (
         <li className="user-item">
             <Card className="user-item__content">
                 <Link to={`/${props.id}/dogs`}>
                     <div className="user-item__image">
-                        <Avatar image={urls.baseURL + `/${props.image}`} alt={props.name} className="user-item__image"/>
+                        <Avatar image={`https://cornell-vet.herokuapp.com/${props.image}`} alt={props.name} className="user-item__image"/>
                     </div>
                     <div className="user-item__info">
                         <h2>{props.name}</h2>

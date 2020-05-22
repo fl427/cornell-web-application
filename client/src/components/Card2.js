@@ -123,7 +123,7 @@ class Card2 extends Component {
 
                             <MDBCol size="2">
                                 <MDBDropdown dropup size="sm" className="card2-dropdown">
-                                    <MDBDropdownToggle caret color="ins" style={{marginLeft:"0.7rem"}} ></MDBDropdownToggle>
+                                    <MDBDropdownToggle caret color="ins" style={{marginLeft:"-1.3rem"}} ></MDBDropdownToggle>
                                     <MDBDropdownMenu>
                                         {elements}
 

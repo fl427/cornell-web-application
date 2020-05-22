@@ -4,8 +4,6 @@ import { useParams } from 'react-router-dom';
 import DogList from "../components/DogList";
 import { useHttpClient } from '../../shared/hooks/http-hook';
 
-var urls = require('../../URLs');
-
 const UserDogs = () => {
 
     const [loadedDogs, setLoadedDogs] = useState();
@@ -15,7 +13,7 @@ const UserDogs = () => {
     useEffect(() => {
         const fetchDogs = async () => {
             try {
-                const response = await fetch(urls.baseURL + `/api/dogs/user/${userId}`, {
+                const response = await fetch(`https://cornell-vet.herokuapp.com/api/dogs/user/${userId}`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",

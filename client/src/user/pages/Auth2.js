@@ -18,8 +18,6 @@ import { useHttpClient } from '../../shared/hooks/http-hook';
 import { AuthContext } from "../../shared/context/auth-context";
 import "./Auth.css";
 
-var urls = require('../../URLs');
-
 const Auth2 = () => {
     const auth = useContext(AuthContext);
     const [isLoginMode, setIsLoginMode] = useState(true);
@@ -73,7 +71,7 @@ const Auth2 = () => {
         if (isLoginMode) {
             try {
                 const responseData = await sendRequest(
-                    urls.baseURL + '/api/users/login',
+                    'https://cornell-vet.herokuapp.com/api/users/login',
                     'POST',
                     JSON.stringify({
                         email: formState.inputs.email.value,
@@ -93,7 +91,7 @@ const Auth2 = () => {
                 formData.append('password', formState.inputs.password.value);
                 formData.append('image', formState.inputs.image.value);
                 const responseData = await sendRequest(
-                    urls.baseURL + '/api/users/signup',
+                    'https://cornell-vet.herokuapp.com/api/users/signup',
                     'POST',
                     formData
                 );

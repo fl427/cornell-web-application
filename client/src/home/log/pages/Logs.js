@@ -11,8 +11,6 @@ import { useHttpClient } from '../../../shared/hooks/http-hook';
 import "./Logs.css";
 import LogList from "../components/LogList";
 
-var urls = require('../../../URLs');
-
 const Logs = props => {
     const auth = useContext(AuthContext);
     const [loadedLogs, setLoadedLogs] = useState();
@@ -20,7 +18,7 @@ const Logs = props => {
     useEffect(() => {
         const fetchLogs = async () => {
             try {
-                const response = await fetch(urls.baseURL + "/api/logs", {
+                const response = await fetch("https://cornell-vet.herokuapp.com/api/logs", {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",

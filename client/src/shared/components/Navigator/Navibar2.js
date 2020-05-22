@@ -47,9 +47,11 @@ const Navibar2 = props => {
                                         <MDBNavItem>
                                             <MDBNavLink to="/dogs">Scenarios</MDBNavLink>
                                         </MDBNavItem>
+                                        {/*
                                         <MDBNavItem>
                                             <MDBNavLink to={`/${auth.userId}/dogs`}>My repo</MDBNavLink>
                                         </MDBNavItem>
+                                        */}
                                         <MDBNavItem>
                                             <MDBNavLink to="/dogs/new">New scenario</MDBNavLink>
                                         </MDBNavItem>

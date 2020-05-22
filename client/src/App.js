@@ -178,7 +178,7 @@ const App = () => {
                 <Route path="/error">
                     <Errorpage />
                 </Route>
-                <Redirect to="/" />
+                <Redirect to="/error" />
             </Switch>
         )
     } else {

@@ -15,9 +15,6 @@ import { AuthContext } from '../../shared/context/auth-context';
 
 import './DogForm.css';
 
-
-var urls = require('../../URLs');
-
 const NewDog = () => {
     const auth = useContext(AuthContext);
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -50,7 +47,7 @@ const NewDog = () => {
             formData.append('name', formState.inputs.name.value);
             formData.append('description', formState.inputs.description.value);
             formData.append('image', formState.inputs.image.value);
-            const responseData = await sendRequest(urls.baseURL + '/api/dogs', 'POST', formData, {
+            const responseData = await sendRequest('https://cornell-vet.herokuapp.com/api/dogs', 'POST', formData, {
                 Authorization: 'Bearer ' + auth.token
             });
 

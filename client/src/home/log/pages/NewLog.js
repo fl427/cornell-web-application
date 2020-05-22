@@ -14,7 +14,6 @@ import {
 import './NewLog.css';
 import {AuthContext} from "../../../shared/context/auth-context";
 
-var urls = require('../../../URLs');
 
 const NewLog = () => {
     const auth = useContext(AuthContext);
@@ -37,7 +36,7 @@ const NewLog = () => {
 
         try {
             const responseData = await sendRequest(
-                urls.baseURL + '/api/logs',
+                'https://cornell-vet.herokuapp.com/api/logs',
                 'POST',
                 JSON.stringify({
                     log: formState.inputs.log.value,

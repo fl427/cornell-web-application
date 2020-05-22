@@ -3,8 +3,6 @@ import React, { useState, useEffect } from 'react';
 import DogList from "../components/DogList";
 import { useHttpClient } from '../../shared/hooks/http-hook';
 
-var urls = require('../../URLs');
-
 const Dogs = () => {
 
     const [loadedDogs, setLoadedDogs] = useState();
@@ -12,7 +10,7 @@ const Dogs = () => {
     useEffect(() => {
         const fetchDogs = async () => {
             try {
-                const response = await fetch(urls.baseURL + "/api/dogs", {
+                const response = await fetch("https://cornell-vet.herokuapp.com/api/dogs", {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -21,6 +19,7 @@ const Dogs = () => {
 
                 const responseData = await response.json();
                 setLoadedDogs(responseData.dogs);
+                console.log(responseData);
                 if (!response.ok) {
                     console.log(responseData.message);
                 }
