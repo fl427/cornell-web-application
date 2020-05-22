@@ -20,7 +20,7 @@ const app = express();
 app.use(cors()) // Use this after the variable declaration
 
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URI || `mongodb+srv://fan:lf9752915@cluster0-fqwuv.mongodb.net/vet?retryWrites=true&w=majority`);
+mongoose.connect(process.env.MONGODB_URI || `mongodb+srv://fan:cornell2020vet@cluster0-fqwuv.mongodb.net/vet?retryWrites=true&w=majority`);
 const connection = mongoose.connection;
 connection.once('open', () => {
     console.log("MongoDB database connection established successfully");
