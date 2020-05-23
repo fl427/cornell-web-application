@@ -144,7 +144,7 @@ class Card extends Component {
 
                                         </MDBRow>
                                         {this.props.vital!=="NIBP" ? null:
-                                            <MDBRow style={{margin:"1.6rem 0rem -3rem 2rem"}}>
+                                            <MDBRow style={{margin:"1.7rem 1.2rem -.1rem 2.5rem"}}>
                                                 <MDBDropdown dropup size="sm" className="card2-dropdown">
                                                     <MDBDropdownToggle style={{marginTop: "0.4rem",marginLeft:"0.7rem",zIndex:"999"}} caret color="ins" >&nbsp;</MDBDropdownToggle>
                                                     <MDBDropdownMenu>
