@@ -11,7 +11,7 @@ In terms of the architecture, this project is constructed based on a classic thr
   - [x] React
   - [x] npm
   - [x] Material Design for Bootstrap
-  - [ ] Axios
+  - [x] Axios
   - [x] **Heroku**
 - Back End:
   - [x] Express
