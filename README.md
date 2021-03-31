@@ -26,13 +26,23 @@ https://github.com/fl427/cornell-web-application/blob/master/ECE%20MEng%20Design
   - [x] npm
 
 ## Demo
+  Logging Page:
   ![image](https://github.com/fl427/cornell-web-application/blob/master/Demo/0.jpg)
+  Real-time Dashboard for Vital signs:
   ![image](https://github.com/fl427/cornell-web-application/blob/master/Demo/1.jpg)
   ![image](https://github.com/fl427/cornell-web-application/blob/master/Demo/2.jpg)
+  Flexible Designs:
+  ![image](https://github.com/fl427/cornell-web-application/blob/master/Demo/2-2.jpg)
+  ![image](https://github.com/fl427/cornell-web-application/blob/master/Demo/2-3.jpg)
+  Scenario Selector:
   ![image](https://github.com/fl427/cornell-web-application/blob/master/Demo/3.jpg)
+  Video Player:
   ![image](https://github.com/fl427/cornell-web-application/blob/master/Demo/4.jpg)
+  Error Page:
   ![image](https://github.com/fl427/cornell-web-application/blob/master/Demo/5.jpg)
+  History for a Specific Vital Sign:
   ![image](https://github.com/fl427/cornell-web-application/blob/master/Demo/6.jpg)
+  User Management System:
   ![image](https://github.com/fl427/cornell-web-application/blob/master/Demo/7.jpg)
 
 ## Reference Documents for Future Developers
