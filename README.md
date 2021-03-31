@@ -33,6 +33,7 @@ https://github.com/fl427/cornell-web-application/blob/master/ECE%20MEng%20Design
   ![image](https://github.com/fl427/cornell-web-application/blob/master/Demo/4.jpg)
   ![image](https://github.com/fl427/cornell-web-application/blob/master/Demo/5.jpg)
   ![image](https://github.com/fl427/cornell-web-application/blob/master/Demo/6.jpg)
+  ![image](https://github.com/fl427/cornell-web-application/blob/master/Demo/7.jpg)
 
 ## Reference Documents for Future Developers
 The reference documents for the framework, package, and database are listed below.  
