@@ -26,7 +26,7 @@ https://github.com/fl427/cornell-web-application/blob/master/ECE%20MEng%20Design
   - [x] npm
 
 ## Demo
-### Logging Page:
+### User Authentication:
   ![image](https://github.com/fl427/cornell-web-application/blob/master/Demo/0.jpg)
 ### Real-time Dashboard for Vital signs:
   ![image](https://github.com/fl427/cornell-web-application/blob/master/Demo/1.jpg)
