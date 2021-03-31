@@ -21,16 +21,15 @@ In terms of the architecture, this project is constructed based on a classic thr
   - [x] **Atlas**
 
 ## Reference Documents for Future Developers
-The reference documents for the framework, package, and database are listed below.
-React - frontend framework: https://reactjs.org/
-Bootstrap - classic CSS framework: https://getbootstrap.com/
-Material-UI: https://material-ui.com/
-MDBootstrap - frontend components package: https://mdbootstrap.com/docs/react/
-Express - backend framework: https://expressjs.com/
-MongoDB Atlas - cloud platform of MongoDB: https://www.mongodb.com/cloud/atlas
-Node.js - backend environment: https://nodejs.org/en/
-AWS Elastic Beanstalk - backend deployment: https://aws.amazon.com/elasticbeanstalk/
-AWS Simple Storage Service - static website deployment: https://aws.amazon.com/s3/
-Heroku - free cloud computing platform: https://www.heroku.com/
-
+The reference documents for the framework, package, and database are listed below.  
+React - frontend framework: https://reactjs.org/  
+Bootstrap - classic CSS framework: https://getbootstrap.com/  
+Material-UI: https://material-ui.com/  
+MDBootstrap - frontend components package: https://mdbootstrap.com/docs/react/  
+Express - backend framework: https://expressjs.com/  
+MongoDB Atlas - cloud platform of MongoDB: https://www.mongodb.com/cloud/atlas  
+Node.js - backend environment: https://nodejs.org/en/  
+AWS Elastic Beanstalk - backend deployment: https://aws.amazon.com/elasticbeanstalk/  
+AWS Simple Storage Service - static website deployment: https://aws.amazon.com/s3/  
+Heroku - free cloud computing platform: https://www.heroku.com/  
 
