@@ -5,7 +5,7 @@
 In terms of the architecture, this project is constructed based on a classic three-tier structure. The front end visually presents the user interface and reacts to operations from users. In detail, React is used for the logic implementation of the front end while Bootstrap and Material-UI are applied to the appearance designs. The communication between the frontend and backend utilizes HTTP requests when real-time data is required or forms are submitted by users. The backend works as the nerve center, which takes charge of the real-time data transmission and scenario running. The backend also manages a database (MongoDB), which stores scenarios, real-time vitals, hardware modes, and account information. Furthermore, integrated interfaces are also provided by the backend to interact with the hardware of the robot dog. 
 
 
-## Toolkit and Deployment
+## Toolkits and Deployment
 
 - Front End:
   - [x] React
