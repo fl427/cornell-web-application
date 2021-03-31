@@ -18,7 +18,7 @@ In terms of the architecture, this project is constructed based on a classic thr
   - [x] **Heroku**
 - DataBase:
   - [x] MongoDB
-  - [x] **Heroku**
+  - [x] **Atlas**
 
 ## Reference Documents for Future Developers
 The reference documents for the framework, package, and database are listed below.
