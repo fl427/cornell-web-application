@@ -31,7 +31,7 @@ https://github.com/fl427/cornell-web-application/blob/master/ECE%20MEng%20Design
 ### Real-time Dashboard for Vital signs:
   ![image](https://github.com/fl427/cornell-web-application/blob/master/Demo/1.jpg)
   ![image](https://github.com/fl427/cornell-web-application/blob/master/Demo/2.jpg)
-### Flexible Designs:
+### Flexible Designs for Different Window Sizes:
   ![image](https://github.com/fl427/cornell-web-application/blob/master/Demo/2-2.jpg)
   ![image](https://github.com/fl427/cornell-web-application/blob/master/Demo/2-3.jpg)
 ### Scenario Selector:
